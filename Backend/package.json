@@ -1,0 +1,52 @@
+{
+  "name": "horya-radio-backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "node build/index.js",
+    "dev": "nodemon --experimental-specifier-resolution=node --exec ts-node --esm ./src/index.ts",
+    "dev:init": "node --loader ts-node/esm ./src/generateInitData.ts",
+    "lint": "eslint src/**/*.ts",
+    "build": "npm run lint && tsc -p .",
+    "db:migrate": "npx prisma migrate dev --name init --skip-generate",
+    "db:generate": "npx prisma generate",
+    "db:browser": "npx prisma studio"
+  },
+  "keywords": [
+    "content-filteration",
+    "content-moderation",
+    "parents",
+    "children",
+    "kids",
+    "safe",
+    "safe-content",
+    "safe-content-filteration",
+    "safe-content-moderation"
+  ],
+  "author": "Ammar Yaser",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^4.15.0",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/multer": "^1.4.7",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "eslint": "^8.38.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7",
+    "prisma": "^4.15.0",
+    "ts-node": "^10.9.1"
+  }
+}

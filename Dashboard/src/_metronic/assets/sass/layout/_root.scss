@@ -1,0 +1,49 @@
+//
+// Root
+//
+
+// Light mode
+@include color-mode(light) {
+  // Header base
+  --#{$prefix}app-header-base-menu-link-bg-color-active: #{$app-header-base-menu-link-bg-color-active};
+
+  // Header light
+  --#{$prefix}app-header-light-separator-color: #{$app-header-light-separator-color};
+
+  // Sidebar base
+  --#{$prefix}app-sidebar-base-toggle-btn-box-shadow: #{$app-sidebar-base-toggle-btn-box-shadow};
+  --#{$prefix}app-sidebar-base-toggle-btn-bg-color: #{$app-sidebar-base-toggle-btn-bg-color};
+
+  // Sidebar light
+  --#{$prefix}app-sidebar-light-bg-color: #{$app-sidebar-light-bg-color};
+  --#{$prefix}app-sidebar-light-box-shadow: #{$app-sidebar-light-box-shadow};
+  --#{$prefix}app-sidebar-light-separator-color: #{$app-sidebar-light-separator-color};
+  --#{$prefix}app-sidebar-light-scrollbar-color: #{$app-sidebar-light-scrollbar-color};
+  --#{$prefix}app-sidebar-light-scrollbar-color-hover: #{$app-sidebar-light-scrollbar-color-hover};
+  --#{$prefix}app-sidebar-light-menu-heading-color: #{$app-sidebar-light-menu-heading-color};
+  --#{$prefix}app-sidebar-light-menu-link-bg-color-active: #{$app-sidebar-light-menu-link-bg-color-active};
+  --#{$prefix}app-sidebar-light-header-menu-link-bg-color-active: #{$app-sidebar-light-header-menu-link-bg-color-active};
+}
+
+// Dark mode
+@include color-mode(dark) {
+  // Header base
+  --#{$prefix}app-header-base-menu-link-bg-color-active: #{$app-header-base-menu-link-bg-color-active-dark};
+
+  // Header light
+  --#{$prefix}app-header-light-separator-color: #{$app-header-light-separator-color-dark};
+
+  // Sidebar base
+  --#{$prefix}app-sidebar-base-toggle-btn-box-shadow: #{$app-sidebar-base-toggle-btn-box-shadow-dark};
+  --#{$prefix}app-sidebar-base-toggle-btn-bg-color: #{$app-sidebar-base-toggle-btn-bg-color-dark};
+
+  // Sidebar light
+  --#{$prefix}app-sidebar-light-bg-color: #{$app-sidebar-light-bg-color-dark};
+  --#{$prefix}app-sidebar-light-box-shadow: #{$app-sidebar-light-box-shadow-dark};
+  --#{$prefix}app-sidebar-light-separator-color: #{$app-sidebar-light-separator-color-dark};
+  --#{$prefix}app-sidebar-light-scrollbar-color: #{$app-sidebar-light-scrollbar-color-dark};
+  --#{$prefix}app-sidebar-light-scrollbar-color-hover: #{$app-sidebar-light-scrollbar-color-hover-dark};
+  --#{$prefix}app-sidebar-light-menu-heading-color: #{$app-sidebar-light-menu-heading-color-dark};
+  --#{$prefix}app-sidebar-light-menu-link-bg-color-active: #{$app-sidebar-light-menu-link-bg-color-active-dark};
+  --#{$prefix}app-sidebar-light-header-menu-link-bg-color-active: #{$app-sidebar-light-header-menu-link-bg-color-active-dark};
+}
