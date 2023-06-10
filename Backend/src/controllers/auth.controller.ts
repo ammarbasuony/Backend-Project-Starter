@@ -6,7 +6,8 @@ const prisma = new PrismaClient();
 
 // Utils
 import { responseError } from '../utils/error-handler.utils';
-import createToken from '../utils/create-token.helper';
+import createToken from '../utils/create-token.util';
+import { isRecordExists } from '../utils/validators.util';
 
 export default {
   UserLogin: async (req: Request, res: Response) => {
@@ -17,6 +18,9 @@ export default {
       const user = await prisma.user.findUnique({
         where: {
           email,
+        },
+        include: {
+          role: true,
         },
       });
       if (!user) return res.status(404).json({ success: false, errors: ['User is not exists!'] });
@@ -30,6 +34,48 @@ export default {
       const { password, ...userData } = user;
 
       res.json({ success: true, data: { user: userData, token } });
+    } catch (err: any) {
+      responseError(res, err);
+    }
+  },
+
+  UserRegister: async (req: Request, res: Response) => {
+    // Get User Role
+    const role = await prisma.role.findFirst({
+      where: {
+        name: 'User',
+      },
+    });
+
+    if (!role)
+      return res
+        .status(404)
+        .json({ success: false, errors: ['Something went error!, please contact the adminstrator'] });
+
+    // Add role to request body
+    req.body.roleId = role.id;
+
+    // Check if user is exists
+    const isUserExists = await isRecordExists(prisma.user, {
+      email: req.body.email,
+    });
+
+    if (isUserExists) return res.status(400).json({ success: false, errors: ['User is already exists!'] });
+
+    // Hashing password
+    const salt = await bcrypt.genSalt();
+    req.body.password = await bcrypt.hash(req.body.password, salt);
+
+    try {
+      // Insert into DB
+      const user = await prisma.user.create({
+        data: req.body,
+      });
+
+      // Remove "password" from response body
+      const { password, ...userData } = user;
+
+      res.json({ success: true, data: userData });
     } catch (err: any) {
       responseError(res, err);
     }

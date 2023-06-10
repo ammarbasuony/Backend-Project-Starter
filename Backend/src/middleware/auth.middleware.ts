@@ -1,11 +1,8 @@
-import { NextFunction, Response, Request } from 'express';
-import jwt, { GetPublicKeyOrSecret, JwtPayload, Secret } from 'jsonwebtoken';
+import { NextFunction, Response } from 'express';
+import jwt, { GetPublicKeyOrSecret, Secret } from 'jsonwebtoken';
 
-interface AuthRequest extends Request {
-  user?: any;
-  type?: string;
-  token?: string;
-}
+// Types
+import { AuthRequest } from '../@types/auth.types';
 
 const auth = (req: AuthRequest, res: Response, next: NextFunction) => {
   const auth = req.header('Authorization');
@@ -22,7 +19,6 @@ const auth = (req: AuthRequest, res: Response, next: NextFunction) => {
     }
 
     req.user = decodedToken.data;
-    req.type = decodedToken.data.type;
     req.token = token;
 
     next();

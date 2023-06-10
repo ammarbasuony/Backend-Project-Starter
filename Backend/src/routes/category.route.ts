@@ -1,14 +1,20 @@
 import { Router } from 'express';
 const router = Router();
 
+// Utils
+import { Roles } from '../utils/constants.util';
+
+// Middlewares
+import checkRole from '../middleware/check-role.middleware';
+
 // Controllers
 import categoryController from '../controllers/category.controller';
 
 // Routes
-router.get('/', categoryController.getAll);
-router.get('/:id', categoryController.getOne);
-router.post('/', categoryController.createOne);
-router.put('/:id', categoryController.updateOne);
-router.delete('/:id', categoryController.deleteOne);
+router.get('/', checkRole([Roles.ALLOW_CATEGORIES_VIEW]), categoryController.getAll);
+router.get('/:id', checkRole([Roles.ALLOW_CATEGORIES_OPERATION]), categoryController.getOne);
+router.post('/', checkRole([Roles.ALLOW_CATEGORIES_OPERATION]), categoryController.createOne);
+router.put('/:id', checkRole([Roles.ALLOW_CATEGORIES_OPERATION]), categoryController.updateOne);
+router.delete('/:id', checkRole([Roles.ALLOW_CATEGORIES_OPERATION]), categoryController.deleteOne);
 
 export default router;

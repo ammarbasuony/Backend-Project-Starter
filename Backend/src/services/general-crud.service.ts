@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 // Utils
 import { responseError } from '../utils/error-handler.utils';
-import { isValidEmail } from '../utils/validators.utils';
+import { isValidEmail } from '../utils/validators.util';
 
 // Types
 import { Delegate, Model } from '../@types/general-crud.types';

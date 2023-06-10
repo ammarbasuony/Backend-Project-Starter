@@ -1,10 +1,10 @@
 import {
   // App Types
-  SET_USERNAME,
+  SET_USER,
 } from './types'
 
 // App Actions
-export const setUsername = (username: string) => ({
-  type: SET_USERNAME,
+export const setUser = (username: string) => ({
+  type: SET_USER,
   payload: username,
 })

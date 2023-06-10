@@ -29,6 +29,34 @@ const generateInitData = async () => {
     },
   });
 
+  await prisma.role.create({
+    data: {
+      name: 'Admin',
+      allow_roles_view: true,
+      allow_roles_operations: false,
+      allow_posts_view: true,
+      allow_posts_operations: true,
+      allow_users_view: true,
+      allow_users_operations: false,
+      allow_categories_view: true,
+      allow_categories_operations: true,
+    },
+  });
+
+ await prisma.role.create({
+    data: {
+      name: 'User',
+      allow_roles_view: false,
+      allow_roles_operations: false,
+      allow_posts_view: true,
+      allow_posts_operations: false,
+      allow_users_view: false,
+      allow_users_operations: false,
+      allow_categories_view: true,
+      allow_categories_operations: false,
+    },
+  });
+
   // Create Admin User
   await prisma.user.create({
     data: {

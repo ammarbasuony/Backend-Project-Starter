@@ -1,2 +1,2 @@
 // App Types
-export const SET_USERNAME = 'SET_USERNAME';
+export const SET_USER = 'SET_USER'

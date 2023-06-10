@@ -1,21 +1,23 @@
 import {
   // App Types
-  SET_USERNAME,
+  SET_USER,
 } from '../types'
 
 // Types
 import {IAction} from '../../types/reducer.types'
 
 const initialState = {
-  username: null,
+  user: {},
+  isAuthenticated: false,
 }
 
 const appReducer = (state = initialState, action: IAction) => {
   switch (action.type) {
-    case SET_USERNAME:
+    case SET_USER:
       return {
         ...state,
-        username: action.payload,
+        user: action.payload,
+        isAuthenticated: true,
       }
     default:
       return state

@@ -4,17 +4,19 @@ import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {Logout, AuthPage} from '../modules/auth'
 import {App} from '../App'
+import {useSelector} from 'react-redux'
 
 const {PUBLIC_URL} = process.env
 
 const AppRoutes: FC = () => {
+  const {isAuthenticated} = useSelector((state: any) => state.appReducer)
   return (
     <BrowserRouter basename={PUBLIC_URL}>
       <Routes>
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
           <Route path='logout' element={<Logout />} />
-          {true ? (
+          {isAuthenticated ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
               <Route index element={<Navigate to='/home' />} />

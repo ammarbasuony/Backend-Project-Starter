@@ -19,6 +19,10 @@ import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/plugins.scss'
 import './_metronic/assets/sass/style.react.scss'
 
+// React Toastify
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 // App layout
 import {AppRoutes} from './app/routing/AppRoutes'
 
@@ -27,10 +31,24 @@ Chart.register(...registerables)
 const container = document.getElementById('root')
 if (container) {
   createRoot(container).render(
-    <MetronicI18nProvider>
-      <Provider store={store}>
-        <AppRoutes />
-      </Provider>
-    </MetronicI18nProvider>
+    <>
+      <MetronicI18nProvider>
+        <Provider store={store}>
+          <AppRoutes />
+        </Provider>
+      </MetronicI18nProvider>
+      <ToastContainer
+        position='top-center'
+        autoClose={1500}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
+    </>
   )
 }
