@@ -65,8 +65,8 @@ export const responseError = (res: Response, err: Error, message = 'Server `Erro
   console.log(err);
   // If the error is not known
   if (err instanceof SyntaxError) {
-    return res.status(500).json({ success: false, data: message });
+    return res.status(500).json({ success: false, message: message });
   }
 
-  return res.status(400).json({ success: false, message: getErrorMessage(err.message) });
+  return res.status(400).json({ success: false, errors: getErrorMessage(err.message) });
 };

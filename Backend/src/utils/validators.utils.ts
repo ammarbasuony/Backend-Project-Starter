@@ -9,5 +9,6 @@ export const isValidPassword = (password: string) => {
 };
 
 export const isRecordExists = async (model: any, where: any) => {
-  return await model.findOne({ where });
+  const record = await model.findOne({ where });
+  return record ? true : false;
 };
