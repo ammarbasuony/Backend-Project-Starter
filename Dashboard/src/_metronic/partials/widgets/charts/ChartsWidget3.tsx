@@ -6,9 +6,24 @@ import {useThemeMode} from '../../layout/theme-mode/ThemeModeProvider'
 
 type Props = {
   className: string
+  title?: string
+  subtitle?: string
+  data?: ApexAxisChartSeries
+  xAxis?: number[] | string[]
 }
 
-const ChartsWidget3: React.FC<Props> = ({className}) => {
+const ChartsWidget3: React.FC<Props> = ({
+  className,
+  title = 'Recent Transactions',
+  subtitle = 'More than 1000 new records',
+  data = [
+    {
+      name: 'Net Profit',
+      data: [30, 40, 40, 90, 90, 70, 70],
+    },
+  ],
+  xAxis = ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+}) => {
   const chartRef = useRef<HTMLDivElement | null>(null)
   const {mode} = useThemeMode()
   const refreshMode = () => {
@@ -18,7 +33,7 @@ const ChartsWidget3: React.FC<Props> = ({className}) => {
 
     const height = parseInt(getCSS(chartRef.current, 'height'))
 
-    const chart = new ApexCharts(chartRef.current, getChartOptions(height))
+    const chart = new ApexCharts(chartRef.current, getChartOptions(height, data, xAxis))
     if (chart) {
       chart.render()
     }
@@ -41,9 +56,9 @@ const ChartsWidget3: React.FC<Props> = ({className}) => {
       {/* begin::Header */}
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Recent Transactions</span>
+          <span className='card-label fw-bold fs-3 mb-1'>{title}</span>
 
-          <span className='text-muted fw-semibold fs-7'>More than 1000 new records</span>
+          <span className='text-muted fw-semibold fs-7'>{subtitle}</span>
         </h3>
       </div>
       {/* end::Header */}
@@ -61,19 +76,14 @@ const ChartsWidget3: React.FC<Props> = ({className}) => {
 
 export {ChartsWidget3}
 
-function getChartOptions(height: number): ApexOptions {
+function getChartOptions(height: number, data: ApexAxisChartSeries, xAxis: number[] | string[]): ApexOptions {
   const labelColor = getCSSVariableValue('--bs-gray-500')
   const borderColor = getCSSVariableValue('--bs-gray-200')
   const baseColor = getCSSVariableValue('--bs-info')
   const lightColor = getCSSVariableValue('--bs-info-light')
 
   return {
-    series: [
-      {
-        name: 'Net Profit',
-        data: [30, 40, 40, 90, 90, 70, 70],
-      },
-    ],
+    series: data,
     chart: {
       fontFamily: 'inherit',
       type: 'area',
@@ -100,7 +110,7 @@ function getChartOptions(height: number): ApexOptions {
       colors: [baseColor],
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+      categories: xAxis,
       axisBorder: {
         show: false,
       },
