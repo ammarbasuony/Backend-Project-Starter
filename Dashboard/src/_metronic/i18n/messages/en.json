@@ -4,7 +4,6 @@
   "MENU.ACTIONS": "Actions",
   "MENU.CREATE_POST": "Create New Post",
   "MENU.PAGES": "Pages",
-  "MENU.HOME": "Home",
   "MENU.FEATURES": "Features",
   "MENU.APPS": "Apps",
   "MENU.DASHBOARD": "Dashboard",
@@ -66,5 +65,12 @@
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.TITLE": "Status has been updated for selected customers",
   "ECOMMERCE.CUSTOMERS.UPDATE_STATUS.MESSAGE": "Selected customers status have successfully been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
-  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created"
+  "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
+  "MENU.HOME": "Home",
+  "MENU.USERS": "Users",
+  "MENU.ALL_USERS": "All Users",
+  "MENU.ROLES": "Roles",
+  "MENU.POSTS": "Posts",
+  "MENU.ALL_POSTS": "All Posts",
+  "MENU.CATEGORIES": "Categories"
 }

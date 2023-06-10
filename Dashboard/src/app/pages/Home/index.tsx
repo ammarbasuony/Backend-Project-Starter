@@ -1,5 +1,7 @@
 import {FC} from 'react'
-import {StatisticsWidget5} from '../../../_metronic/partials/widgets'
+
+// Components
+import {ChartsWidget3, StatisticsWidget5} from '../../../_metronic/partials/widgets'
 
 const Home: FC = () => {
   return (
@@ -30,6 +32,14 @@ const Home: FC = () => {
             description='Users'
             descriptionColor='white'
           />
+        </div>
+      </div>
+      {/* end::Row */}
+
+      {/* begin::Row */}
+      <div className='row g-5 g-xl-8'>
+        <div className='col-xl-12'>
+          <ChartsWidget3 className='card-xl-stretch mb-xl-8' />
         </div>
       </div>
       {/* end::Row */}

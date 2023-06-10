@@ -16,26 +16,31 @@ const SidebarMenuMain = () => {
         </div>
       </div>
 
-      <SidebarMenuItem
-        to='/home'
-        icon='home'
-        title={intl.formatMessage({id: 'MENU.HOME'})}
-        fontIcon='bi-house'
-      />
-      
-      <SidebarMenuItem
-        to='/home'
-        icon='home'
-        title={intl.formatMessage({id: 'MENU.HOME'})}
-        fontIcon='bi-house'
-      />
-      
-      <SidebarMenuItemWithSub
-        to=''
-        title='Metronic'
-        fontIcon='bi-archive'
-        icon='gear'
-      >
+      <SidebarMenuItem to='/home' icon='home' title={intl.formatMessage({id: 'MENU.HOME'})} />
+
+      <SidebarMenuItemWithSub to='' title={intl.formatMessage({id: 'MENU.USERS'})} icon='user'>
+        <SidebarMenuItem
+          to='/users'
+          icon='user'
+          title={intl.formatMessage({id: 'MENU.ALL_USERS'})}
+        />
+        <SidebarMenuItem to='/roles' icon='lock' title={intl.formatMessage({id: 'MENU.ROLES'})} />
+      </SidebarMenuItemWithSub>
+
+      <SidebarMenuItemWithSub to='' title={intl.formatMessage({id: 'MENU.POSTS'})} icon='clipboard'>
+        <SidebarMenuItem
+          to='/posts'
+          icon='clipboard'
+          title={intl.formatMessage({id: 'MENU.ALL_POSTS'})}
+        />
+        <SidebarMenuItem
+          to='/categories'
+          icon='bookmark'
+          title={intl.formatMessage({id: 'MENU.CATEGORIES'})}
+        />
+      </SidebarMenuItemWithSub>
+
+      <SidebarMenuItemWithSub to='' title='Metronic' fontIcon='bi-archive' icon='gear'>
         <SidebarMenuItem
           to='/dashboard'
           icon='element-11'

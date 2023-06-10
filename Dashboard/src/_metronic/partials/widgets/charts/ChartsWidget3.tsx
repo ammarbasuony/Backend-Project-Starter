@@ -45,31 +45,6 @@ const ChartsWidget3: React.FC<Props> = ({className}) => {
 
           <span className='text-muted fw-semibold fs-7'>More than 1000 new records</span>
         </h3>
-
-        {/* begin::Toolbar */}
-        <div className='card-toolbar' data-kt-buttons='true'>
-          <a
-            className='btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1'
-            id='kt_charts_widget_3_year_btn'
-          >
-            Year
-          </a>
-
-          <a
-            className='btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1'
-            id='kt_charts_widget_3_month_btn'
-          >
-            Month
-          </a>
-
-          <a
-            className='btn btn-sm btn-color-muted btn-active btn-active-primary px-4'
-            id='kt_charts_widget_3_week_btn'
-          >
-            Week
-          </a>
-        </div>
-        {/* end::Toolbar */}
       </div>
       {/* end::Header */}
 
