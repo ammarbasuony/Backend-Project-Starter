@@ -1,6 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+import jwt, { Secret } from 'jsonwebtoken';
+
+// Types
+import { AuthRequest } from '../@types/auth.types';
 
 const prisma = new PrismaClient();
 
@@ -33,7 +37,7 @@ export default {
       // Remove password from the response
       const { password, ...userData } = user;
 
-      res.json({ success: true, data: { user: userData, token } });
+      res.json({ success: true, data: userData, token });
     } catch (err: any) {
       responseError(res, err);
     }
@@ -73,6 +77,31 @@ export default {
       });
 
       // Remove "password" from response body
+      const { password, ...userData } = user;
+
+      res.json({ success: true, data: userData });
+    } catch (err: any) {
+      responseError(res, err);
+    }
+  },
+  GetUserFromToken: async (req: AuthRequest, res: Response) => {
+    const token = req.token as string;
+
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_USER_SECRET as Secret);
+
+      const user = await prisma.user.findUnique({
+        where: {
+          id: (decoded as any).data.id,
+        },
+        include: {
+          role: true,
+        },
+      });
+
+      if (!user) return res.status(404).json({ success: false, errors: ['User is not exists!'] });
+
+      // Remove password from the response
       const { password, ...userData } = user;
 
       res.json({ success: true, data: userData });

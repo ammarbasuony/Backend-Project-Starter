@@ -49,7 +49,7 @@ const SidebarLogo = (props: PropsType) => {
 
   return (
     <div className='app-sidebar-logo px-6' id='kt_app_sidebar_logo'>
-      <Link to='/dashboard'>
+      <Link to='/home'>
         {config.layoutType === 'dark-sidebar' ? (
           <img
             alt='Logo'

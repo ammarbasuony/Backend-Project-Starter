@@ -1,7 +1,7 @@
 import api from '.'
 
-const genericCrudApi = (model: 'string') => ({
-  getAll: async (options: URLSearchParams) => {
+const genericCrudApi = (model: string) => ({
+  getAll: async (options?: URLSearchParams) => {
     const queries = new URLSearchParams(options).toString()
 
     try {

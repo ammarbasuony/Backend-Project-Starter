@@ -1,21 +1,41 @@
-import {FC} from 'react'
+import {FC, useState, useEffect} from 'react'
 import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom'
 import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
-import {Logout, AuthPage} from '../modules/auth'
+import {AuthPage} from '../modules/auth'
 import {App} from '../App'
 import {useSelector} from 'react-redux'
+
+// Hooks
+import useGetUser from '../hooks/useGetUser.hook'
+
+// Utils
+import {UserToken} from '../utils/constants.util'
+
+// Types
+import {IState} from '../types/reducer.types'
 
 const {PUBLIC_URL} = process.env
 
 const AppRoutes: FC = () => {
-  const {isAuthenticated} = useSelector((state: any) => state.appReducer)
+  useGetUser()
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!UserToken)
+  const appData = useSelector((state: IState) => state.appReducer)
+
+  useEffect(() => {
+    if (UserToken) return
+    setIsAuthenticated(appData.isAuthenticated)
+  }, [appData])
+
+  useEffect(() => {
+    if (appData.loggedOut) setIsAuthenticated(false)
+  }, [appData.loggedOut])
+
   return (
     <BrowserRouter basename={PUBLIC_URL}>
       <Routes>
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
-          <Route path='logout' element={<Logout />} />
           {isAuthenticated ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />

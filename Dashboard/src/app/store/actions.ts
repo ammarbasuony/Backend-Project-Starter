@@ -1,10 +1,15 @@
 import {
   // App Types
   SET_USER,
+  REMOVE_USER,
 } from './types'
 
 // App Actions
-export const setUser = (username: string) => ({
+export const setUser = (userData: any) => ({
   type: SET_USER,
-  payload: username,
+  payload: userData,
+})
+
+export const removeUser = () => ({
+  type: REMOVE_USER,
 })

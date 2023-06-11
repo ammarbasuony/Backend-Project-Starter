@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react'
+import {useMemo, useState, useEffect, useCallback} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {CustomHeaderColumn} from './columns/CustomHeaderColumn'
 import {CustomRow} from './columns/CustomRow'
@@ -7,6 +7,9 @@ import {User} from '../core/_models'
 import {UsersListLoading} from '../components/loading/UsersListLoading'
 import {UsersListPagination} from '../components/pagination/UsersListPagination'
 import {KTCardBody} from '../../../../_metronic/helpers'
+
+// API
+import genericCrudApi from '../../../api/generic-crud.api'
 
 const data = [
   {
@@ -151,6 +154,18 @@ const UsersTable = () => {
     columns,
     data,
   })
+
+  const fetchData = useCallback(async () => {
+    setIsLoading(true)
+    const data = await genericCrudApi('users').getAll()
+    console.log(data)
+
+    setIsLoading(false)
+  }, [])
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <KTCardBody className='py-4'>

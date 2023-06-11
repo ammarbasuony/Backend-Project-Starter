@@ -1,14 +1,39 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react'
+import {FC, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../helpers'
+import {useSelector, useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import Cookies from 'js-cookie'
+
+// Actions
+import {removeUser} from '../../../../app/store/actions'
+
+// Properties
+import properties from '../../../../app/properties.json'
+
+// Types
+import {IState} from '../../../../app/types/reducer.types'
 
 const HeaderUserMenu: FC = () => {
-  const currentUser = {
-    first_name: 'Max',
-    last_name: 'Smith',
-    email: 'ammaryaser@gmail.com',
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {user, loggedOut} = useSelector((state: IState) => state.appReducer)
+
+  const goToLogo = () => {
+    navigate('/auth')
   }
+
+  const logout = () => {
+    Cookies.remove(properties.AUTH_COOKIE_NAME)
+    dispatch(removeUser())
+  }
+
+  useEffect(() => {
+    if (loggedOut) {
+      goToLogo()
+    }
+  }, [loggedOut])
 
   return (
     <div
@@ -23,11 +48,13 @@ const HeaderUserMenu: FC = () => {
 
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>
-              {currentUser?.first_name} {currentUser?.first_name}
-              <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>Pro</span>
+              {user.name}
+              <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>
+                {user.role?.name}
+              </span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
-              {currentUser?.email}
+              {user.email}
             </a>
           </div>
         </div>
@@ -42,7 +69,7 @@ const HeaderUserMenu: FC = () => {
       </div>
 
       <div className='menu-item px-5'>
-        <a onClick={() => {}} className='menu-link px-5'>
+        <a onClick={() => logout()} className='menu-link px-5'>
           Sign Out
         </a>
       </div>

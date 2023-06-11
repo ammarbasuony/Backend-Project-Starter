@@ -17,3 +17,12 @@ export const register = async (email: string, name: string, password: string) =>
     return error.response.data
   }
 }
+
+export const getUserFromToken = async () => {
+  try {
+    const response = await api().get(`/auth/get-user`)
+    return response.data
+  } catch (error: any) {
+    return error.response.data
+  }
+}
