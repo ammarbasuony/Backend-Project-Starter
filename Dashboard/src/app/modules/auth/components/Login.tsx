@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import * as Yup from 'yup'
 import clsx from 'clsx'
 import {useFormik} from 'formik'
 import {toast} from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 // Actions
 import {setUser} from '../../../store/actions'
@@ -16,6 +16,9 @@ import {login} from '../../../api/auth.api'
 
 // Properties
 import properties from '../../../properties.json'
+
+// Types
+import {IState} from '../../../types/reducer.types'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -37,6 +40,7 @@ const initialValues = {
 export function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const {isAuthenticated} = useSelector((state: IState) => state.appReducer)
   const [loading, setLoading] = useState(false)
 
   const formik = useFormik({
@@ -54,9 +58,12 @@ export function Login() {
       Cookies.set(properties.AUTH_COOKIE_NAME, loginResponse.token)
       dispatch(setUser(loginResponse.data))
       toast.success('Login successful')
-      navigate('/home')
     },
   })
+
+  useEffect(() => {
+    isAuthenticated && navigate('/home')
+  }, [isAuthenticated])
 
   return (
     <form

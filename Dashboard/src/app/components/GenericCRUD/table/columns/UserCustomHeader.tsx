@@ -1,8 +1,6 @@
 import clsx from 'clsx'
-import {FC, PropsWithChildren, useMemo} from 'react'
+import {FC, PropsWithChildren, useState} from 'react'
 import {HeaderProps} from 'react-table'
-import {initialQueryState} from '../../../../../_metronic/helpers'
-import {useQueryRequest} from '../../core/QueryRequestProvider'
 import {User} from '../../core/_models'
 
 type Props = {
@@ -12,12 +10,9 @@ type Props = {
 }
 const UserCustomHeader: FC<Props> = ({className, title, tableProps}) => {
   const id = tableProps.column.id
-  const {state, updateState} = useQueryRequest()
 
-  const isSelectedForSorting = useMemo(() => {
-    return state.sort && state.sort === id
-  }, [state, id])
-  const order: 'asc' | 'desc' | undefined = useMemo(() => state.order, [state])
+  const [isSelectedForSorting, setIsSelectedForSorting] = useState<string | undefined>(undefined)
+  const [order, setOrder] = useState<'asc' | 'desc' | undefined>(undefined)
 
   const sortColumn = () => {
     // avoid sorting for these columns
@@ -27,19 +22,22 @@ const UserCustomHeader: FC<Props> = ({className, title, tableProps}) => {
 
     if (!isSelectedForSorting) {
       // enable sort asc
-      updateState({sort: id, order: 'asc', ...initialQueryState})
+      setOrder('asc')
+      setIsSelectedForSorting(id)
       return
     }
 
     if (isSelectedForSorting && order !== undefined) {
       if (order === 'asc') {
         // enable sort desc
-        updateState({sort: id, order: 'desc', ...initialQueryState})
+        setOrder('desc')
+        setIsSelectedForSorting(id)
         return
       }
 
       // disable sort
-      updateState({sort: undefined, order: undefined, ...initialQueryState})
+      setOrder(undefined)
+      setIsSelectedForSorting(undefined)
     }
   }
 

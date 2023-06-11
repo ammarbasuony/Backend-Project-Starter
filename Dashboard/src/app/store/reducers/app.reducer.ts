@@ -5,10 +5,10 @@ import {
 } from '../types'
 
 // Types
-import {IAction} from '../../types/reducer.types'
+import {IAction, IAppState} from '../../types/reducer.types'
 
-const initialState = {
-  user: {},
+const initialState: IAppState = {
+  user: null,
   isAuthenticated: false,
   loggedOut: false,
 }

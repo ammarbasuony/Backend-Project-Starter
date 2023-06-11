@@ -7,10 +7,17 @@ export interface IAction {
 
 export interface IState {
   appReducer: IAppState
+  crudReducer: ICrudState
 }
 
 export interface IAppState {
-  user: IUser
+  user: IUser | null
   isAuthenticated: boolean
   loggedOut: boolean
+}
+
+export interface ICrudState {
+  tableName: string
+  tableData: any[]
+  tableColumns: any[]
 }
