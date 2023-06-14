@@ -1,5 +1,5 @@
 {
-  "name": "horya-radio-backend",
+  "name": "backend-starter",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -15,15 +15,10 @@
     "db:browser": "npx prisma studio"
   },
   "keywords": [
-    "content-filteration",
-    "content-moderation",
-    "parents",
-    "children",
-    "kids",
-    "safe",
-    "safe-content",
-    "safe-content-filteration",
-    "safe-content-moderation"
+    "backend",
+    "starter",
+    "boilerplate",
+    "typescript"
   ],
   "author": "Ammar Yaser",
   "license": "ISC",

@@ -110,7 +110,7 @@ const GeneralCRUDService = (
     const bodyData = req.body;
 
     if (uploadInputName && req.file) {
-      bodyData[uploadInputName] = req.file.path;
+      bodyData[uploadInputName] = `/${req.file.path}`;
     }
 
     // Check if one of the attributes is ending with 'Id' and force it to be a number

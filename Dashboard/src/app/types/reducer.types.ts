@@ -8,6 +8,7 @@ export interface IAction {
 export interface IState {
   appReducer: IAppState
   crudReducer: ICrudState
+  operationModalReducer: IOperationModalState
 }
 
 export interface IAppState {
@@ -20,4 +21,9 @@ export interface ICrudState {
   tableName: string
   tableData: any[]
   tableColumns: any[]
+}
+
+export interface IOperationModalState {
+  id: null | number
+  isModalOpen: boolean
 }

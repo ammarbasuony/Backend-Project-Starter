@@ -7,6 +7,10 @@ import {
   SET_TABLE_DATA,
   SET_TABLE_COLUMNS,
   SET_TABLE_NAME,
+
+  // Operation Modal Types
+  OPEN_OPERATION_MODAL,
+  CLOSE_OPERATION_MODAL,
 } from './types'
 
 // App Actions
@@ -33,4 +37,13 @@ export const setTableColumns = (tableColumns: any) => ({
 export const setTableName = (tableName: string) => ({
   type: SET_TABLE_NAME,
   payload: tableName,
+})
+
+// Operation Modal Actions
+export const openOperationModal = () => ({
+  type: OPEN_OPERATION_MODAL,
+})
+
+export const closeOperationModal = () => ({
+  type: CLOSE_OPERATION_MODAL,
 })

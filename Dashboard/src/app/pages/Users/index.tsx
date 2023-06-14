@@ -1,47 +1,43 @@
 import {useCallback, useEffect} from 'react'
-import {UsersListWrapper} from '../../components/GenericCRUD/UsersList'
+import RecordsList from '../../components/GenericCRUD/RecordsList'
 import {useDispatch} from 'react-redux'
 
 // Actions
 import {setTableData, setTableColumns, setTableName} from '../../store/actions'
 
+// Data
+import {columns} from './data.users'
+
 // API
 import genericCrudApi from '../../api/generic-crud.api'
 
 const Users = () => {
-  const columns = [
-    {
-      name: 'Name',
-      accessor: 'name',
-    },
-    {
-      name: 'Email',
-      accessor: 'email',
-    },
-    {
-      name: 'Role',
-      accessor: 'role.name',
-      type: 'highlighted',
-    },
-    {
-      name: 'Created At',
-      accessor: 'createdAt',
-    },
-    {
-      name: 'Last Updated At',
-      accessor: 'updatedAt',
-      type: 'labeled',
-    },
-  ]
-
   const dispatch = useDispatch()
 
   const fetchData = useCallback(async () => {
     const response = await genericCrudApi('users').getAll()
+    const rolesResponse = await genericCrudApi('roles').getAll()
+
+    const roles = rolesResponse.data.map((role: any) => ({
+      value: role.id,
+      label: role.name,
+    }))
+
+    const newColumns = columns.map((column) => {
+      if (column.attr === 'roleId') {
+        return {
+          ...column,
+          options: roles,
+        }
+      }
+
+      return column
+    })
+    console.log(newColumns)
 
     dispatch(setTableData(response.data))
-    dispatch(setTableColumns(columns))
-    dispatch(setTableName('Users'))
+    dispatch(setTableColumns(newColumns))
+    dispatch(setTableName('users'))
   }, [])
 
   useEffect(() => {
@@ -50,7 +46,7 @@ const Users = () => {
 
   return (
     <div>
-      <UsersListWrapper />
+      <RecordsList />
     </div>
   )
 }

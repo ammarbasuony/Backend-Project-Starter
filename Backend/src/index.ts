@@ -11,6 +11,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve Static Files
+app.use('/assets', express.static('./src/assets'));
+app.use('/uploads', express.static('./uploads'));
+
 app.use('/api', routes);
 
 // Check Server Status

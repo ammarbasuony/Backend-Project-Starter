@@ -5,7 +5,7 @@ const genericCrudApi = (model: string) => ({
     const queries = new URLSearchParams(options).toString()
 
     try {
-      const response = await api().get(`/${model}?${queries}`)
+      const response = await api().get(`/api/${model}?${queries}`)
       return response.data
     } catch (error: any) {
       return error.response.data
@@ -13,7 +13,7 @@ const genericCrudApi = (model: string) => ({
   },
   getOne: async (id: string) => {
     try {
-      const response = await api().get(`/${model}/${id}`)
+      const response = await api().get(`/api/${model}/${id}`)
       return response.data
     } catch (error: any) {
       return error.response.data
@@ -21,7 +21,7 @@ const genericCrudApi = (model: string) => ({
   },
   createOne: async (data: any) => {
     try {
-      const response = await api().post(`/${model}`, data)
+      const response = await api().post(`/api/${model}`, data)
       return response.data
     } catch (error: any) {
       return error.response.data
@@ -29,7 +29,7 @@ const genericCrudApi = (model: string) => ({
   },
   updateOne: async (id: string, data: any) => {
     try {
-      const response = await api().put(`/${model}/${id}`, data)
+      const response = await api().put(`/api/${model}/${id}`, data)
       return response.data
     } catch (error: any) {
       return error.response.data
@@ -37,7 +37,7 @@ const genericCrudApi = (model: string) => ({
   },
   deleteOne: async (id: string) => {
     try {
-      const response = await api().delete(`/${model}/${id}`)
+      const response = await api().delete(`/api/${model}/${id}`)
       return response.data
     } catch (error: any) {
       return error.response.data

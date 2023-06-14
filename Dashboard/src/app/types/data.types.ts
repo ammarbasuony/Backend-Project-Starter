@@ -2,6 +2,7 @@ export interface IUser {
   id: number
   email: string
   name: string
+  profilePicture: string
   roleId: number
   createdAt: string
   updatedAt: string

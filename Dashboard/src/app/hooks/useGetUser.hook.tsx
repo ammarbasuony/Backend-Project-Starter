@@ -20,6 +20,8 @@ const useGetUser = () => {
     const user = await getUserFromToken()
     setUserData(userData)
 
+    console.log('user', user)
+
     dispatch(setUser(user.data))
   }
 
