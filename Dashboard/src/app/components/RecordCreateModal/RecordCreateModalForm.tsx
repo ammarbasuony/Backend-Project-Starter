@@ -3,6 +3,8 @@ import {RecordsListLoading} from '../GenericCRUD/components/loading/RecordsListL
 import {useDispatch, useSelector} from 'react-redux'
 import {toast} from 'react-toastify'
 
+import genericCrudApi from '../../api/generic-crud.api'
+
 // Actions
 import {closeOperationModal} from '../../store/actions'
 
@@ -10,7 +12,7 @@ import {closeOperationModal} from '../../store/actions'
 import {IState} from '../../types/reducer.types'
 
 // Utils
-import {capitalize} from '../../utils/functions.util'
+import {capitalize, singularize} from '../../utils/functions.util'
 
 // Components
 import FormInput from './components/FormInput.modal'
@@ -23,14 +25,16 @@ const excludedColumns = ['id', 'createdAt', 'updatedAt']
 
 const RecordCreateModalForm: FC = () => {
   const dispatch = useDispatch()
-  const {tableColumns} = useSelector((state: IState) => state.crudReducer)
+  const {tableColumns, isTableHasFiles, tableName} = useSelector(
+    (state: IState) => state.crudReducer
+  )
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState<any>({})
   const [formErrors, setFormErrors] = useState<any>({})
   const [imagesPreview, setImagesPreview] = useState<any>({})
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
 
@@ -45,6 +49,23 @@ const RecordCreateModalForm: FC = () => {
     if (Object.keys(errors).length) return setIsSubmitting(false)
 
     // Submit
+    const formDataWithFiles = new FormData()
+    Object.keys(formData).forEach((key) => {
+      formDataWithFiles.append(key, formData[key])
+    })
+
+    let response
+    if (isTableHasFiles) {
+      response = await genericCrudApi(tableName).createOne(formDataWithFiles)
+    } else {
+      response = await genericCrudApi(tableName).createOne(formData)
+    }
+
+    setIsSubmitting(false)
+
+    if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
+    toast.success(`${singularize(tableName)} created successfully`)
+    return dispatch(closeOperationModal())
   }
 
   const renderDynamicInputs = tableColumns.map((column) => {

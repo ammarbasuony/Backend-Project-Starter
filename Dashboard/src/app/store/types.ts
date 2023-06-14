@@ -6,6 +6,7 @@ export const REMOVE_USER = 'REMOVE_USER'
 export const SET_TABLE_DATA = 'SET_TABLE_DATA'
 export const SET_TABLE_COLUMNS = 'SET_TABLE_COLUMNS'
 export const SET_TABLE_NAME = 'SET_TABLE_NAME'
+export const SET_IS_TABLE_HAS_FILES = 'SET_IS_TABLE_HAS_FILES'
 
 // Operation Modal Types
 export const OPEN_OPERATION_MODAL = 'OPEN_OPERATION_MODAL'

@@ -1,4 +1,4 @@
-import {SET_TABLE_DATA, SET_TABLE_COLUMNS, SET_TABLE_NAME} from '../types'
+import {SET_TABLE_DATA, SET_TABLE_COLUMNS, SET_TABLE_NAME, SET_IS_TABLE_HAS_FILES} from '../types'
 
 // Functions
 import {formatDate} from '../../utils/functions.util'
@@ -8,6 +8,7 @@ import {IAction, ICrudState} from '../../types/reducer.types'
 
 const initialState: ICrudState = {
   tableName: '',
+  isTableHasFiles: false,
   tableData: [],
   tableColumns: [],
 }
@@ -33,6 +34,11 @@ const crudReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         tableName: action.payload,
+      }
+    case SET_IS_TABLE_HAS_FILES:
+      return {
+        ...state,
+        isTableHasFiles: action.payload,
       }
     default:
       return state

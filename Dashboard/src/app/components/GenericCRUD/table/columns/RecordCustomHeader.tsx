@@ -1,6 +1,13 @@
 import clsx from 'clsx'
 import {FC, PropsWithChildren, useState} from 'react'
 import {HeaderProps} from 'react-table'
+import {useSelector, useDispatch} from 'react-redux'
+
+// Types
+import {IState} from '../../../../types/reducer.types'
+
+// Actions
+import {setTableData} from '../../../../store/actions'
 
 type Props = {
   className?: string
@@ -8,6 +15,8 @@ type Props = {
   tableProps: PropsWithChildren<HeaderProps<any>>
 }
 const RecordCustomHeader: FC<Props> = ({className, title, tableProps}) => {
+  const dispatch = useDispatch()
+  const {tableData} = useSelector((state: IState) => state.crudReducer)
   const id = tableProps.column.id
 
   const [isSelectedForSorting, setIsSelectedForSorting] = useState<string | undefined>(undefined)
@@ -23,6 +32,13 @@ const RecordCustomHeader: FC<Props> = ({className, title, tableProps}) => {
       // enable sort asc
       setOrder('asc')
       setIsSelectedForSorting(id)
+      // sort data asc
+      const sortedData = tableData.sort((a: any, b: any) => {
+        if (a[id] < b[id]) return -1
+        if (a[id] > b[id]) return 1
+        return 0
+      })
+      dispatch(setTableData(sortedData))
       return
     }
 
@@ -31,6 +47,13 @@ const RecordCustomHeader: FC<Props> = ({className, title, tableProps}) => {
         // enable sort desc
         setOrder('desc')
         setIsSelectedForSorting(id)
+        // sort data desc
+        const sortedData = tableData.sort((a: any, b: any) => {
+          if (a[id] > b[id]) return -1
+          if (a[id] < b[id]) return 1
+          return 0
+        })
+        dispatch(setTableData(sortedData))
         return
       }
 

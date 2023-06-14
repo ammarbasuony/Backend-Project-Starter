@@ -19,6 +19,7 @@ export interface IAppState {
 
 export interface ICrudState {
   tableName: string
+  isTableHasFiles: boolean
   tableData: any[]
   tableColumns: any[]
 }

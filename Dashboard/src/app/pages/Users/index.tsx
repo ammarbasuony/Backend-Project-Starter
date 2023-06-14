@@ -3,7 +3,7 @@ import RecordsList from '../../components/GenericCRUD/RecordsList'
 import {useDispatch} from 'react-redux'
 
 // Actions
-import {setTableData, setTableColumns, setTableName} from '../../store/actions'
+import {setTableData, setTableColumns, setTableName, setIsTableHasFiles} from '../../store/actions'
 
 // Data
 import {columns} from './data.users'
@@ -33,11 +33,11 @@ const Users = () => {
 
       return column
     })
-    console.log(newColumns)
 
     dispatch(setTableData(response.data))
     dispatch(setTableColumns(newColumns))
     dispatch(setTableName('users'))
+    dispatch(setIsTableHasFiles(true))
   }, [])
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import {
   SET_TABLE_DATA,
   SET_TABLE_COLUMNS,
   SET_TABLE_NAME,
+  SET_IS_TABLE_HAS_FILES,
 
   // Operation Modal Types
   OPEN_OPERATION_MODAL,
@@ -37,6 +38,11 @@ export const setTableColumns = (tableColumns: any) => ({
 export const setTableName = (tableName: string) => ({
   type: SET_TABLE_NAME,
   payload: tableName,
+})
+
+export const setIsTableHasFiles = (isTableHasFiles: boolean) => ({
+  type: SET_IS_TABLE_HAS_FILES,
+  payload: isTableHasFiles,
 })
 
 // Operation Modal Actions
