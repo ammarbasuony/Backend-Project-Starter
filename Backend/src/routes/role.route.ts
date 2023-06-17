@@ -16,5 +16,6 @@ router.get('/:id', checkRole([Roles.ALLOW_ROLES_OPERATION]), roleController.getO
 router.post('/', checkRole([Roles.ALLOW_ROLES_OPERATION]), roleController.createOne);
 router.put('/:id', checkRole([Roles.ALLOW_ROLES_OPERATION]), roleController.updateOne);
 router.delete('/:id', checkRole([Roles.ALLOW_ROLES_OPERATION]), roleController.deleteOne);
+router.get('/data/export', checkRole([Roles.ALLOW_ROLES_OPERATION]), roleController.export);
 
 export default router;

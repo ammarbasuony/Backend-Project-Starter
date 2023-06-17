@@ -5,8 +5,8 @@ import {useSelector} from 'react-redux'
 import {IState} from '../../types/reducer.types'
 import {RecordCreateModalForm} from './RecordCreateModalForm'
 
-const RecordEditModal = () => {
-  const {isModalOpen} = useSelector((state: IState) => state.operationModalReducer)
+const RecordCreateModal = () => {
+  const {isModalOpen} = useSelector((state: IState) => state.modalReducer)
 
   return (
     <>
@@ -39,4 +39,4 @@ const RecordEditModal = () => {
   )
 }
 
-export {RecordEditModal}
+export {RecordCreateModal}

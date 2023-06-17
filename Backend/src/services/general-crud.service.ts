@@ -1,10 +1,13 @@
+import fs from 'fs';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+import excelJS from 'exceljs';
 
 // Utils
 import { responseError } from '../utils/error-handler.utils';
 import { isValidEmail } from '../utils/validators.util';
+import { camelToWords } from '../utils/functions';
 
 // Types
 import { Delegate, Model } from '../@types/general-crud.types';
@@ -218,15 +221,84 @@ const GeneralCRUDService = (
    */
   deleteOne: async (req: Request, res: Response) => {
     const { id } = req.params;
+    const itemsIds = id.includes(',') ? id.split(',') : [id];
 
     try {
-      await (prisma[model] as Delegate).delete({
-        where: { id: Number(id) },
+      await (prisma[model] as Delegate).deleteMany({
+        where: {
+          id: {
+            in: itemsIds.map((id) => Number(id)),
+          },
+        },
       });
 
       res.status(200).json({
         success: true,
         message: `${model[0].toUpperCase()}${model.slice(1)} deleted successfully`,
+      });
+    } catch (error: any) {
+      responseError(res, error);
+    }
+  },
+  /**
+   * (6) [Export Excel]
+   * Export all records to excel file
+   */
+  export: async (req: Request, res: Response) => {
+    try {
+      const workbook = new excelJS.Workbook();
+      const worksheet = workbook.addWorksheet(model);
+
+      const path = '/uploads/sheets';
+
+      if (!fs.existsSync(`.${path}`)) {
+        fs.mkdirSync(`.${path}`, { recursive: true });
+      }
+
+      // Column for data in excel. Key must match data key
+      const cols = [{ header: 'No.', key: 'no', width: 10 }];
+
+      const records: any = await (prisma[model] as Delegate).findMany({});
+
+      // ======= Remove sensitive data from response
+      if (hiddenAttributes.length) {
+        (records as any).forEach((record: any) => {
+          hiddenAttributes.forEach((attribute) => {
+            delete record[attribute];
+          });
+        });
+      }
+
+      // Add column for each key in data
+      Object.keys(records[0]).forEach((key) => {
+        cols.push({ header: key, key, width: 32 });
+      });
+
+      // Add data to excel
+      worksheet.columns = cols;
+
+      records.forEach((record: any, index: number) => {
+        worksheet.addRow({ no: index + 1, ...record });
+      });
+
+      // Making first line in excel bold
+      worksheet.getRow(1).eachCell((cell) => {
+        cell.font = { bold: true };
+      });
+
+      // Save excel file
+      const fileName = `${model}-${Date.now()}.xlsx`;
+      const filePath = `${path}/${fileName}`;
+
+      await workbook.xlsx.writeFile(`.${filePath}`);
+
+      res.json({
+        success: true,
+        data: {
+          success: true,
+          message: `${camelToWords(model)} exported successfully}`,
+          path: filePath,
+        },
       });
     } catch (error: any) {
       responseError(res, error);

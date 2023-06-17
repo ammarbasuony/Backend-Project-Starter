@@ -24,10 +24,6 @@ const AppRoutes: FC = () => {
 
   useEffect(() => {
     if (UserToken) return
-    console.log('appData.isAuthenticated', appData.isAuthenticated)
-    console.log('UserToken', UserToken);
-    
-
     setIsAuthenticated(appData.isAuthenticated)
   }, [appData])
 

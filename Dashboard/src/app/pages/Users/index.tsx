@@ -1,22 +1,32 @@
-import {useCallback, useEffect} from 'react'
+import {useEffect} from 'react'
 import RecordsList from '../../components/GenericCRUD/RecordsList'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 // Actions
-import {setTableData, setTableColumns, setTableName, setIsTableHasFiles} from '../../store/actions'
+import {
+  setTableData,
+  setTableColumns,
+  setTableName,
+  setIsTableHasFiles,
+  setIsOperationDone,
+} from '../../store/actions'
 
 // Data
 import {columns} from './data.users'
 
 // API
-import genericCrudApi from '../../api/generic-crud.api'
+import genericCrudAPI from '../../api/generic-crud.api'
+
+// Types
+import {IState} from '../../types/reducer.types'
 
 const Users = () => {
   const dispatch = useDispatch()
+  const {isOperationDone} = useSelector((state: IState) => state.crudReducer)
 
-  const fetchData = useCallback(async () => {
-    const response = await genericCrudApi('users').getAll()
-    const rolesResponse = await genericCrudApi('roles').getAll()
+  const fetchData = async () => {
+    const response = await genericCrudAPI('users').getAll()
+    const rolesResponse = await genericCrudAPI('roles').getAll()
 
     const roles = rolesResponse.data.map((role: any) => ({
       value: role.id,
@@ -38,11 +48,12 @@ const Users = () => {
     dispatch(setTableColumns(newColumns))
     dispatch(setTableName('users'))
     dispatch(setIsTableHasFiles(true))
-  }, [])
+    dispatch(setIsOperationDone(false))
+  }
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [isOperationDone])
 
   return (
     <div>

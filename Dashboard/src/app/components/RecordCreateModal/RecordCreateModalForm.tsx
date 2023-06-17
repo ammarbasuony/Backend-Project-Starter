@@ -3,10 +3,10 @@ import {RecordsListLoading} from '../GenericCRUD/components/loading/RecordsListL
 import {useDispatch, useSelector} from 'react-redux'
 import {toast} from 'react-toastify'
 
-import genericCrudApi from '../../api/generic-crud.api'
+import genericCrudAPI from '../../api/generic-crud.api'
 
 // Actions
-import {closeOperationModal} from '../../store/actions'
+import {closeOperationModal, setIsOperationDone} from '../../store/actions'
 
 // Types
 import {IState} from '../../types/reducer.types'
@@ -56,15 +56,16 @@ const RecordCreateModalForm: FC = () => {
 
     let response
     if (isTableHasFiles) {
-      response = await genericCrudApi(tableName).createOne(formDataWithFiles)
+      response = await genericCrudAPI(tableName).createOne(formDataWithFiles)
     } else {
-      response = await genericCrudApi(tableName).createOne(formData)
+      response = await genericCrudAPI(tableName).createOne(formData)
     }
 
     setIsSubmitting(false)
 
     if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
     toast.success(`${singularize(tableName)} created successfully`)
+    dispatch(setIsOperationDone(true))
     return dispatch(closeOperationModal())
   }
 
@@ -87,8 +88,8 @@ const RecordCreateModalForm: FC = () => {
           column={column}
           imagesPreview={imagesPreview}
           onInputChange={(e, attr) => {
-            setFormData({...formData, [attr]: e.target.value})
             if (e.target.files?.length) {
+              setFormData({...formData, [attr]: e.target.files[0]})
               setImagesPreview({
                 ...imagesPreview,
                 [attr]: URL.createObjectURL(e.target.files[0]),

@@ -1,4 +1,14 @@
-import {SET_TABLE_DATA, SET_TABLE_COLUMNS, SET_TABLE_NAME, SET_IS_TABLE_HAS_FILES} from '../types'
+import {
+  SET_TABLE_DATA,
+  SET_TABLE_COLUMNS,
+  SET_TABLE_NAME,
+  SET_IS_TABLE_HAS_FILES,
+  SET_IS_OPERATION_DONE,
+  SET_SELECT_ROW,
+  SET_UNSELECT_ROW,
+  SET_SELECT_ALL_ROWS,
+  SET_UNSELECT_ALL_ROWS,
+} from '../types'
 
 // Functions
 import {formatDate} from '../../utils/functions.util'
@@ -11,6 +21,8 @@ const initialState: ICrudState = {
   isTableHasFiles: false,
   tableData: [],
   tableColumns: [],
+  isOperationDone: false,
+  selectedRows: [],
 }
 
 const crudReducer = (state = initialState, action: IAction) => {
@@ -39,6 +51,31 @@ const crudReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         isTableHasFiles: action.payload,
+      }
+    case SET_IS_OPERATION_DONE:
+      return {
+        ...state,
+        isOperationDone: action.payload,
+      }
+    case SET_SELECT_ROW:
+      return {
+        ...state,
+        selectedRows: [...state.selectedRows, action.payload],
+      }
+    case SET_UNSELECT_ROW:
+      return {
+        ...state,
+        selectedRows: state.selectedRows.filter((row: number) => row !== action.payload),
+      }
+    case SET_SELECT_ALL_ROWS:
+      return {
+        ...state,
+        selectedRows: state.tableData.map((row: any) => row.id),
+      }
+    case SET_UNSELECT_ALL_ROWS:
+      return {
+        ...state,
+        selectedRows: [],
       }
     default:
       return state

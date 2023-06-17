@@ -48,7 +48,7 @@ const usersColumns = (modelColumns: any): ReadonlyArray<Column<any>> => {
     {
       Header: (props: any) => <RecordSelectionHeader tableProps={props} />,
       id: 'selection',
-      Cell: ({...props}) => <RecordSelectionCell />,
+      Cell: ({...props}) => <RecordSelectionCell id={props.data[props.row.index].id} />,
     },
     ...dynamicCols,
     {

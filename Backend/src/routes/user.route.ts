@@ -27,5 +27,6 @@ router.put(
   userController.updateOne,
 );
 router.delete('/:id', checkRole([Roles.ALLOW_USERS_OPERATION]), userController.deleteOne);
+router.get('/data/export', checkRole([Roles.ALLOW_USERS_OPERATION]), userController.export);
 
 export default router;

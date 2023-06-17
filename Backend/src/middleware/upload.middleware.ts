@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const today = new Date();
     const folderName = new Date(today.getFullYear(), today.getMonth(), 3).toISOString().slice(0, 7).replace('-', '');
-    const dir = `./uploads/${folderName}`;
+    const dir = `./uploads/files/${folderName}`;
 
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });

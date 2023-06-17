@@ -1,6 +1,6 @@
 import api from '.'
 
-const genericCrudApi = (model: string) => ({
+const genericCrudAPI = (model: string) => ({
   getAll: async (options?: URLSearchParams) => {
     const queries = new URLSearchParams(options).toString()
 
@@ -35,7 +35,7 @@ const genericCrudApi = (model: string) => ({
       return error.response.data
     }
   },
-  deleteOne: async (id: string) => {
+  deleteOne: async (id: number) => {
     try {
       const response = await api().delete(`/api/${model}/${id}`)
       return response.data
@@ -45,4 +45,4 @@ const genericCrudApi = (model: string) => ({
   },
 })
 
-export default genericCrudApi
+export default genericCrudAPI

@@ -17,5 +17,6 @@ router.get('/:id', checkRole([Roles.ALLOW_POSTS_OPERATION]), postController.getO
 router.post('/', checkRole([Roles.ALLOW_POSTS_OPERATION]), UploadFiles.single('thumbnail'), postController.createOne);
 router.put('/:id', checkRole([Roles.ALLOW_POSTS_OPERATION]), UploadFiles.single('thumbnail'), postController.updateOne);
 router.delete('/:id', checkRole([Roles.ALLOW_POSTS_OPERATION]), postController.deleteOne);
+router.get('/data/export', checkRole([Roles.ALLOW_POSTS_OPERATION]), postController.export);
 
 export default router;

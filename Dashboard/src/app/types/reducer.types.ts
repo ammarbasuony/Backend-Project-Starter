@@ -8,7 +8,7 @@ export interface IAction {
 export interface IState {
   appReducer: IAppState
   crudReducer: ICrudState
-  operationModalReducer: IOperationModalState
+  modalReducer: IModalState
 }
 
 export interface IAppState {
@@ -22,9 +22,14 @@ export interface ICrudState {
   isTableHasFiles: boolean
   tableData: any[]
   tableColumns: any[]
+  isOperationDone: boolean
+  selectedRows: number[]
 }
 
-export interface IOperationModalState {
+export interface IModalState {
   id: null | number
   isModalOpen: boolean
+  isConfirmationModalOpen: boolean
+  isConfirmed: boolean
+  selectedId: null | number
 }
