@@ -1,10 +1,13 @@
-import {useState} from 'react'
+import {useSelector} from 'react-redux'
 import {RecordListToolbar} from './RecordListToolbar'
 import {RecordsListGrouping} from './RecordsListGrouping'
 import {RecordsListSearchComponent} from './RecordsListSearchComponent'
 
+// Types
+import {IState} from '../../../../types/reducer.types'
+
 const RecordsListHeader = () => {
-  const [selected, setSelected] = useState<string[]>([])
+  const {selectedRows} = useSelector((state: IState) => state.crudReducer)
 
   return (
     <div className='card-header border-0 pt-6'>
@@ -12,7 +15,7 @@ const RecordsListHeader = () => {
       {/* begin::Card toolbar */}
       <div className='card-toolbar'>
         {/* begin::Group actions */}
-        {selected.length > 0 ? <RecordsListGrouping /> : <RecordListToolbar />}
+        {selectedRows.length > 0 ? <RecordsListGrouping /> : <RecordListToolbar />}
         {/* end::Group actions */}
       </div>
       {/* end::Card toolbar */}

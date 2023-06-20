@@ -44,7 +44,7 @@ const RecordActionsCell: FC<Props> = ({id}) => {
   }
 
   const deleteRecord = async () => {
-    const response = await genericCrudAPI(tableName).deleteOne(Number(selectedId))
+    const response = await genericCrudAPI(tableName).delete(Number(selectedId))
 
     if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
 
@@ -80,7 +80,7 @@ const RecordActionsCell: FC<Props> = ({id}) => {
           <span className='path5'></span>
         </i>
       </a>
-      <ConfirmationModal onConfirm={() => deleteRecord()} />
+      {selectedId === id && <ConfirmationModal onConfirm={() => deleteRecord()} />}
     </>
   )
 }

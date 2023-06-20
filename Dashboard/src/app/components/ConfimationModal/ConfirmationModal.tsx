@@ -37,7 +37,7 @@ const ConfirmationModal: FC<Props> = ({onConfirm}) => {
               <form id='kt_modal_add_user_form' className='form' onSubmit={handleConfirm}>
                 <div className='d-flex flex-column scroll-y ps-2 me-n7 pe-7'>
                   <div className='fs-1 fw-bold text-gray-800 text-center mb-11'>
-                    Are you sure you want to delete this record?
+                    Are you sure you want to delete this record/s?
                   </div>
                 </div>
 

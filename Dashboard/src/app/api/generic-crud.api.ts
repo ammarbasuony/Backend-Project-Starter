@@ -35,9 +35,19 @@ const genericCrudAPI = (model: string) => ({
       return error.response.data
     }
   },
-  deleteOne: async (id: number) => {
+  delete: async (id: number | number[]) => {
     try {
-      const response = await api().delete(`/api/${model}/${id}`)
+      const response = await api().delete(`/api/${model}/${Array.isArray(id) ? id.join(',') : id}`)
+      return response.data
+    } catch (error: any) {
+      return error.response.data
+    }
+  },
+  export: async (options?: URLSearchParams) => {
+    const queries = new URLSearchParams(options).toString()
+
+    try {
+      const response = await api().get(`/api/${model}/data/export?${queries}`)
       return response.data
     } catch (error: any) {
       return error.response.data
