@@ -11,7 +11,7 @@ const genericCrudAPI = (model: string) => ({
       return error.response.data
     }
   },
-  getOne: async (id: string) => {
+  getOne: async (id: number) => {
     try {
       const response = await api().get(`/api/${model}/${id}`)
       return response.data
@@ -27,7 +27,7 @@ const genericCrudAPI = (model: string) => ({
       return error.response.data
     }
   },
-  updateOne: async (id: string, data: any) => {
+  updateOne: async (id: number, data: any) => {
     try {
       const response = await api().put(`/api/${model}/${id}`, data)
       return response.data

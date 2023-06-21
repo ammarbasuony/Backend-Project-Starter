@@ -6,6 +6,8 @@ import {
   CLOSE_CONFIRMATION_MODAL,
   SET_IS_CONFIRMED,
   SET_SELECTED_ID,
+  OPEN_UPDATE_MODAL,
+  CLOSE_UPDATE_MODAL,
 } from '../types'
 
 // Types
@@ -14,9 +16,10 @@ import {IAction, IModalState} from '../../types/reducer.types'
 const initialState: IModalState = {
   id: null,
   isModalOpen: false,
+  isUpdateModalOpen: false,
   isConfirmationModalOpen: false,
   isConfirmed: false,
-  selectedId: null,
+  selectedId: 0,
 }
 
 const ModalReducer = (state = initialState, action: IAction) => {
@@ -40,6 +43,16 @@ const ModalReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         isConfirmationModalOpen: false,
+      }
+    case OPEN_UPDATE_MODAL:
+      return {
+        ...state,
+        isUpdateModalOpen: true,
+      }
+    case CLOSE_UPDATE_MODAL:
+      return {
+        ...state,
+        isUpdateModalOpen: false,
       }
     case SET_IS_CONFIRMED:
       return {

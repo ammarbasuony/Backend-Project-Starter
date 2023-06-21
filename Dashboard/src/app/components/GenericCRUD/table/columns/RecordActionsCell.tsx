@@ -4,9 +4,9 @@ import {toast} from 'react-toastify'
 
 // Actions
 import {
-  openOperationModal,
   setIsOperationDone,
   openConfirmationModal,
+  openUpdateModal,
   setIsConfirmed,
   setSelectedId,
 } from '../../../../store/actions'
@@ -34,7 +34,8 @@ const RecordActionsCell: FC<Props> = ({id}) => {
 
   const openEditModal = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
-    dispatch(openOperationModal())
+    dispatch(openUpdateModal())
+    dispatch(setSelectedId(id))
   }
 
   const handleDelete = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {

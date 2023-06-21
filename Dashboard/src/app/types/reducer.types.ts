@@ -29,7 +29,8 @@ export interface ICrudState {
 export interface IModalState {
   id: null | number
   isModalOpen: boolean
+  isUpdateModalOpen: boolean
   isConfirmationModalOpen: boolean
   isConfirmed: boolean
-  selectedId: null | number
+  selectedId: number
 }

@@ -12,12 +12,13 @@ import {setTableData} from '../../../../store/actions'
 type Props = {
   className?: string
   title?: string
+  attr: string
   tableProps: PropsWithChildren<HeaderProps<any>>
 }
-const RecordCustomHeader: FC<Props> = ({className, title, tableProps}) => {
+const RecordCustomHeader: FC<Props> = ({className, title, attr, tableProps}) => {
   const dispatch = useDispatch()
   const {tableData} = useSelector((state: IState) => state.crudReducer)
-  const id = tableProps.column.id
+  const id = attr
 
   const [isSelectedForSorting, setIsSelectedForSorting] = useState<string | undefined>(undefined)
   const [order, setOrder] = useState<'asc' | 'desc' | undefined>(undefined)

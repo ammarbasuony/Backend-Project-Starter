@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import {KTIcon} from '../../../../../_metronic/helpers'
 import {RecordsListFilter} from './RecordsListFilter'
 import {useDispatch, useSelector} from 'react-redux'
+import {toast} from 'react-toastify'
 
 // API
 import genericCrudAPI from '../../../../api/generic-crud.api'
@@ -10,27 +11,46 @@ import genericCrudAPI from '../../../../api/generic-crud.api'
 import {openOperationModal} from '../../../../store/actions'
 
 // Types
-import { IState } from '../../../../types/reducer.types'
+import {IState} from '../../../../types/reducer.types'
 
 // Utils
-import { singularize } from '../../../../utils/functions.util'
+import {singularize} from '../../../../utils/functions.util'
+
+// Properties
+import properties from '../../../../properties.json'
 
 const RecordListToolbar = () => {
   const dispatch = useDispatch()
   const [isExporting, setIsExporting] = useState(false)
   const {tableName} = useSelector((state: IState) => state.crudReducer)
 
-  const handleExport = async () => {}
+  const handleExport = async () => {
+    setIsExporting(true)
+    const response = await genericCrudAPI(tableName).export()
+    setIsExporting(false)
+
+    if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
+
+    window.open(`${properties.API_URL}${response.data.path}`)
+  }
 
   return (
     <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
       <RecordsListFilter />
 
       {/* begin::Export */}
-      <button type='button' className='btn btn-light-primary me-3'>
-        <KTIcon iconName='exit-up' className='fs-2' />
-        {/* <span className="spinner-border spinner-border-sm align-middle me-1" /> */}
-        Export
+      <button
+        type='button'
+        className='btn btn-light-primary me-3'
+        onClick={handleExport}
+        disabled={isExporting}
+      >
+        {isExporting ? (
+          <span className='spinner-border spinner-border-sm align-middle me-1' />
+        ) : (
+          <KTIcon iconName='exit-up' className='fs-2' />
+        )}
+        {isExporting ? 'Exporting...' : 'Export'}
       </button>
       {/* end::Export */}
 

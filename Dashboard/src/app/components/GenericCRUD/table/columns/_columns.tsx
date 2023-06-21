@@ -16,7 +16,7 @@ const usersColumns = (modelColumns: any): ReadonlyArray<Column<any>> => {
   const dynamicCols = cols.map((column: any) => {
     return {
       Header: (props: any) => {
-        return <RecordCustomHeader tableProps={props} title={column.name} />
+        return <RecordCustomHeader tableProps={props} attr={column.attr} title={column.name} />
       },
       accessor: column.accessor,
 
@@ -53,7 +53,7 @@ const usersColumns = (modelColumns: any): ReadonlyArray<Column<any>> => {
     ...dynamicCols,
     {
       Header: (props: any) => (
-        <RecordCustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
+        <RecordCustomHeader tableProps={props} attr='actions' title='Actions' className='text-end min-w-100px' />
       ),
       id: 'actions',
       Cell: ({...props}) => <RecordActionsCell id={props.data[props.row.index].id} />,

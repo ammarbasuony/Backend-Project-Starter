@@ -21,6 +21,8 @@ import {
   SET_SELECT_ALL_ROWS,
   SET_UNSELECT_ROW,
   SET_UNSELECT_ALL_ROWS,
+  OPEN_UPDATE_MODAL,
+  CLOSE_UPDATE_MODAL,
 } from './types'
 
 // App Actions
@@ -59,6 +61,24 @@ export const setIsOperationDone = (isOperationDone: boolean) => ({
   payload: isOperationDone,
 })
 
+export const setSelectRow = (selectedRow: number) => ({
+  type: SET_SELECT_ROW,
+  payload: selectedRow,
+})
+
+export const setSelectAllRows = () => ({
+  type: SET_SELECT_ALL_ROWS,
+})
+
+export const setUnselectRow = (unselectedRow: number) => ({
+  type: SET_UNSELECT_ROW,
+  payload: unselectedRow,
+})
+
+export const setUnselectAllRows = () => ({
+  type: SET_UNSELECT_ALL_ROWS,
+})
+
 // Operation Modal Actions
 export const openOperationModal = () => ({
   type: OPEN_OPERATION_MODAL,
@@ -76,6 +96,14 @@ export const closeConfirmationModal = () => ({
   type: CLOSE_CONFIRMATION_MODAL,
 })
 
+export const openUpdateModal = () => ({
+  type: OPEN_UPDATE_MODAL,
+})
+
+export const closeUpdateModal = () => ({
+  type: CLOSE_UPDATE_MODAL,
+})
+
 export const setIsConfirmed = (isConfirmed: boolean) => ({
   type: SET_IS_CONFIRMED,
   payload: isConfirmed,
@@ -84,22 +112,4 @@ export const setIsConfirmed = (isConfirmed: boolean) => ({
 export const setSelectedId = (selectedId: number | null) => ({
   type: SET_SELECTED_ID,
   payload: selectedId,
-})
-
-export const setSelectRow = (selectedRow: number) => ({
-  type: SET_SELECT_ROW,
-  payload: selectedRow,
-})
-
-export const setSelectAllRows = () => ({
-  type: SET_SELECT_ALL_ROWS,
-})
-
-export const setUnselectRow = (unselectedRow: number) => ({
-  type: SET_UNSELECT_ROW,
-  payload: unselectedRow,
-})
-
-export const setUnselectAllRows = () => ({
-  type: SET_UNSELECT_ALL_ROWS,
 })

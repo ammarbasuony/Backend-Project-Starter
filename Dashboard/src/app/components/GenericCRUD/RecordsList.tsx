@@ -4,6 +4,7 @@ import {KTCard} from '../../../_metronic/helpers'
 import {RecordsListHeader} from './components/header/RecordsListHeader'
 import {RecordsTable} from './table/RecordsTable'
 import {RecordCreateModal} from '../RecordCreateModal/RecordCreateModal'
+import { RecordUpdateModal } from '../RecordUpdateModal/RecordUpdateModal'
 
 const RecordsList = () => {
   return (
@@ -13,6 +14,7 @@ const RecordsList = () => {
         <RecordsTable />
       </KTCard>
       <RecordCreateModal />
+      <RecordUpdateModal />
     </>
   )
 }
