@@ -1,7 +1,7 @@
 import api from '.'
 
 const genericCrudAPI = (model: string) => ({
-  getAll: async (options?: URLSearchParams) => {
+  getAll: async (options?: any) => {
     const queries = new URLSearchParams(options).toString()
 
     try {
@@ -43,7 +43,7 @@ const genericCrudAPI = (model: string) => ({
       return error.response.data
     }
   },
-  export: async (options?: URLSearchParams) => {
+  export: async (options?: any) => {
     const queries = new URLSearchParams(options).toString()
 
     try {

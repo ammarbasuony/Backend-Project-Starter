@@ -23,7 +23,7 @@ const RecordSelectionHeader: FC<Props> = ({tableProps}) => {
           className='form-check-input'
           type='checkbox'
           data-kt-check-target='#kt_table_users .form-check-input'
-          checked={selectedRows.length === tableData.length}
+          checked={!!tableData.length && selectedRows.length === tableData.length}
           onChange={() => {
             if (selectedRows.length === tableData.length) dispatch(setUnselectAllRows())
             else dispatch(setSelectAllRows())

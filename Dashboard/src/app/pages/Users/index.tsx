@@ -9,6 +9,7 @@ import {
   setTableName,
   setIsTableHasFiles,
   setIsOperationDone,
+  setTotalRecords,
 } from '../../store/actions'
 
 // Data
@@ -45,6 +46,7 @@ const Users = () => {
     })
 
     dispatch(setTableData(response.data))
+    dispatch(setTotalRecords(response.totalRecords))
     dispatch(setTableColumns(newColumns))
     dispatch(setTableName('users'))
     dispatch(setIsTableHasFiles(true))

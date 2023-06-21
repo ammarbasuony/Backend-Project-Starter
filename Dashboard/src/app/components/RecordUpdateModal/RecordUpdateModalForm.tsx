@@ -46,9 +46,14 @@ const RecordUpdateModalForm: FC = () => {
     if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
 
     const filteredResponseData: any = {}
+    const actualAttrs = tableColumns.map(
+      (column) => !excludedColumns.includes(column.attr) && column.attr
+    )
+    
     Object.keys(response.data).forEach((key) => {
-      if (!excludedColumns.includes(key)) filteredResponseData[key] = response.data[key]
+      if (actualAttrs.includes(key)) filteredResponseData[key] = response.data[key]
     })
+
     setFormData(filteredResponseData)
   }
 
@@ -63,7 +68,7 @@ const RecordUpdateModalForm: FC = () => {
     // Validate
     const errors: any = {}
     tableColumns.forEach((column) => {
-      if (column.required && !formData[column.attr]) {
+      if (column.required && !formData[column.attr] && column.attr !== 'password') {
         errors[column.attr] = `${capitalize(column.attr)} is required`
       }
     })

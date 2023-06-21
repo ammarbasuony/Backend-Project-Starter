@@ -5,6 +5,7 @@ import {
 
   // CRUD Types
   SET_TABLE_DATA,
+  SET_TOTAL_RECORDS,
   SET_TABLE_COLUMNS,
   SET_TABLE_NAME,
   SET_IS_TABLE_HAS_FILES,
@@ -39,6 +40,11 @@ export const removeUser = () => ({
 export const setTableData = (tableData: any) => ({
   type: SET_TABLE_DATA,
   payload: tableData,
+})
+
+export const setTotalRecords = (totalRecords: number) => ({
+  type: SET_TOTAL_RECORDS,
+  payload: totalRecords,
 })
 
 export const setTableColumns = (tableColumns: any) => ({

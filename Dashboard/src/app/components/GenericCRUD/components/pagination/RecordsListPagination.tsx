@@ -1,92 +1,222 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
 import clsx from 'clsx'
 
-const mappedLabel = (label: string): string => {
-  if (label === '&laquo; Previous') {
-    return 'Previous'
-  }
+// Types
+import {IState} from '../../../../types/reducer.types'
 
-  if (label === 'Next &raquo;') {
-    return 'Next'
-  }
-
-  return label
-}
-
-interface IPagination {
-  page: number
-  items_per_page: number
-  total_items: number
-  total_pages: number
-  links?: Array<{label: string; url: string | null; active: boolean}>
-}
-
-interface IPaginationOptional {
-  page?: number
-  items_per_page?: number
-  total_items?: number
-  total_pages?: number
-  links?: Array<{label: string; url: string | null; active: boolean}>
-}
+// Actions
+import {setTableData} from '../../../../store/actions'
+import genericCrudAPI from '../../../../api/generic-crud.api'
 
 const RecordsListPagination = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [pagination, setPagination] = useState<IPagination>({
-    page: 1,
-    items_per_page: 10,
-    total_items: 0,
-    total_pages: 0,
-  })
+  const dispatch = useDispatch()
+  const {totalRecords} = useSelector((state: IState) => state.crudReducer)
 
-  const updateState = (newState: IPaginationOptional) => {
-    setPagination((prevState) => ({...prevState, ...newState}))
-  }
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageNumbers, setPageNumbers] = useState<number[]>([])
+  const [itemsPerPage] = useState(30)
+  const [totalPages, setTotalPages] = useState(0)
 
-  const updatePage = (page: number | null) => {
-    if (!page || isLoading || pagination.page === page) {
-      return
+  useEffect(() => {
+    const pageNumbers: number[] = []
+
+    for (let i = 1; i <= Math.ceil(totalRecords / itemsPerPage); i++) {
+      pageNumbers.push(i)
     }
 
-    updateState({page, items_per_page: pagination.items_per_page || 10})
+    setPageNumbers(pageNumbers)
+    setTotalPages(Math.ceil(totalRecords / itemsPerPage))
+  }, [totalRecords])
+
+  const onPageChange = async (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+
+    dispatch(setTableData([]))
+    const response = await genericCrudAPI('users').getAll({
+      page: pageNumber,
+      itemsPerPage,
+    })
+    dispatch(setTableData(response.data))
   }
 
+  const renderPageNumbers = () =>
+    pageNumbers.map((number) => {
+      if (totalPages <= 7) {
+        return (
+          <li
+            key={number}
+            className={clsx('page-item', {
+              active: currentPage === number,
+            })}
+          >
+            <a
+              href='/'
+              className='page-link'
+              onClick={(e) => {
+                e.preventDefault()
+                onPageChange(number)
+              }}
+            >
+              {number}
+            </a>
+          </li>
+        )
+      }
+
+      if (currentPage <= 4) {
+        if (number <= 5 || number === totalPages) {
+          return (
+            <li
+              key={number}
+              className={clsx('page-item', {
+                active: currentPage === number,
+              })}
+            >
+              <a
+                href='/'
+                className='page-link'
+                onClick={(e) => {
+                  e.preventDefault()
+                  onPageChange(number)
+                }}
+              >
+                {number}
+              </a>
+            </li>
+          )
+        }
+
+        if (number === 6) {
+          return (
+            <li key='ellipsis1' className='page-item'>
+              <span className='page-link'>...</span>
+            </li>
+          )
+        }
+      }
+
+      if (currentPage > 4 && currentPage <= totalPages - 4) {
+        if (
+          number === 1 ||
+          number === currentPage - 2 ||
+          number === currentPage - 1 ||
+          number === currentPage ||
+          number === currentPage + 1 ||
+          number === currentPage + 2 ||
+          number === totalPages
+        ) {
+          return (
+            <li
+              key={number}
+              className={clsx('page-item', {
+                active: currentPage === number,
+              })}
+            >
+              <a
+                href='/'
+                className='page-link'
+                onClick={(e) => {
+                  e.preventDefault()
+                  onPageChange(number)
+                }}
+              >
+                {number}
+              </a>
+            </li>
+          )
+        }
+
+        if (number === currentPage - 3 || number === currentPage + 3) {
+          return (
+            <li key={`ellipsis${number}`} className='page-item'>
+              <span className='page-link'>...</span>
+            </li>
+          )
+        }
+      }
+
+      if (currentPage > totalPages - 4) {
+        if (
+          number === 1 ||
+          number === totalPages - 5 ||
+          number === totalPages - 4 ||
+          number === totalPages - 3 ||
+          number === totalPages - 2 ||
+          number === totalPages - 1 ||
+          number === totalPages
+        ) {
+          return (
+            <li
+              key={number}
+              className={clsx('page-item', {
+                active: currentPage === number,
+              })}
+            >
+              <a
+                href='/'
+                className='page-link'
+                onClick={(e) => {
+                  e.preventDefault()
+                  onPageChange(number)
+                }}
+              >
+                {number}
+              </a>
+            </li>
+          )
+        }
+
+        if (number === totalPages - 6) {
+          return (
+            <li key='ellipsis2' className='page-item'>
+              <span className='page-link'>...</span>
+            </li>
+          )
+        }
+      }
+
+      return null
+    })
+
   return (
-    <div className='row'>
-      <div className='col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'></div>
-      <div className='col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'>
-        <div id='kt_table_users_paginate'>
-          <ul className='pagination'>
-            {pagination.links
-              ?.map((link) => {
-                return {...link, label: mappedLabel(link.label)}
-              })
-              .map((link) => (
-                <li
-                  key={link.label}
-                  className={clsx('page-item', {
-                    active: false,
-                    disabled: isLoading,
-                    previous: link.label === 'Previous',
-                    next: link.label === 'Next',
-                  })}
-                >
-                  <a
-                    href='/'
-                    className={clsx('page-link', {
-                      'page-text': link.label === 'Previous' || link.label === 'Next',
-                      'me-5': link.label === 'Previous',
-                    })}
-                    onClick={() => updatePage(link.url ? Number(link.url) : null)}
-                    style={{cursor: 'pointer'}}
-                  >
-                    {mappedLabel(link.label)}
-                  </a>
-                </li>
-              ))}
-          </ul>
-        </div>
-      </div>
-    </div>
+    <nav>
+      <ul className='pagination'>
+        <li
+          className={clsx('page-item', {
+            disabled: currentPage === 1,
+          })}
+        >
+          <a
+            href='/'
+            className='page-link'
+            onClick={(e) => {
+              e.preventDefault()
+              onPageChange(currentPage - 1)
+            }}
+          >
+            Previous
+          </a>
+        </li>
+        {renderPageNumbers()}
+        <li
+          className={clsx('page-item', {
+            disabled: currentPage === totalPages,
+          })}
+        >
+          <a
+            href='/'
+            className='page-link'
+            onClick={(e) => {
+              e.preventDefault()
+              onPageChange(currentPage + 1)
+            }}
+          >
+            Next
+          </a>
+        </li>
+      </ul>
+    </nav>
   )
 }
 

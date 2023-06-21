@@ -21,6 +21,7 @@ export interface ICrudState {
   tableName: string
   isTableHasFiles: boolean
   tableData: any[]
+  totalRecords: number
   tableColumns: any[]
   isOperationDone: boolean
   selectedRows: number[]

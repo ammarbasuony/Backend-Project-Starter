@@ -38,12 +38,15 @@ const GeneralCRUDService = (
    */
   getAll: async (req: Request, res: Response) => {
     const queries = req.query;
+    const totalRecords = await (prisma[model] as Delegate).count({});
+    const totalRecordsPerPage = queries.itemsPerPage ? Number(queries.itemsPerPage) : itemsPerPage;
+    const skippedRecords = (queries.page ? Number(queries.page) : page) - 1;
 
     try {
       const records = await (prisma[model] as Delegate).findMany({
         ...(Object.keys(include).length && { include }),
-        skip: queries.page || (page - 1) * itemsPerPage,
-        take: queries.itemsPerPage || itemsPerPage,
+        skip: skippedRecords * totalRecordsPerPage,
+        take: totalRecordsPerPage,
         orderBy: [
           {
             id: 'desc',
@@ -63,6 +66,7 @@ const GeneralCRUDService = (
       res.status(200).json({
         success: true,
         data: records,
+        totalRecords,
       });
     } catch (error: any) {
       responseError(res, error);
@@ -170,8 +174,15 @@ const GeneralCRUDService = (
     const { id } = req.params;
     const bodyData = req.body;
 
+    // Check if one of the attributes is ending with 'Id' and force it to be a number
+    for (const key in bodyData) {
+      if (key.endsWith('Id')) {
+        bodyData[key] = Number(bodyData[key]);
+      }
+    }
+
     if (uploadInputName && req.file) {
-      bodyData[uploadInputName] = req.file.path;
+      bodyData[uploadInputName] = `/${req.file.path}`;
     }
 
     // ======= Hashing sensitive data

@@ -47,22 +47,19 @@ const RecordsTable = () => {
             </tr>
           </thead>
           <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
-            {rows.length > 0 ? (
-              rows.map((row: Row<any>, i) => {
-                prepareRow(row)
-                return <CustomRow row={row} key={`row-${i}-${row.id}`} />
-              })
-            ) : (
-              <tr>
-                <td colSpan={7}>
-                  <div className='d-flex text-center w-100 align-content-center justify-content-center'>
-                    No matching records found
-                  </div>
-                </td>
-              </tr>
-            )}
+            {rows.length > 0
+              ? rows.map((row: Row<any>, i) => {
+                  prepareRow(row)
+                  return <CustomRow row={row} key={`row-${i}-${row.id}`} />
+                })
+              : null}
           </tbody>
         </table>
+        {rows.length === 0 && (
+          <div className='d-flex text-center w-100 align-content-center justify-content-center py-7 text-gray-600 fw-bold fs-6'>
+            No matching records found
+          </div>
+        )}
       </div>
       <RecordsListPagination />
       {isLoading && <RecordsListLoading />}

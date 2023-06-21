@@ -1,5 +1,6 @@
 import {
   SET_TABLE_DATA,
+  SET_TOTAL_RECORDS,
   SET_TABLE_COLUMNS,
   SET_TABLE_NAME,
   SET_IS_TABLE_HAS_FILES,
@@ -20,6 +21,7 @@ const initialState: ICrudState = {
   tableName: '',
   isTableHasFiles: false,
   tableData: [],
+  totalRecords: 0,
   tableColumns: [],
   isOperationDone: false,
   selectedRows: [],
@@ -36,6 +38,11 @@ const crudReducer = (state = initialState, action: IAction) => {
           newItem.updatedAt = formatDate(item.updatedAt)
           return newItem
         }),
+      }
+    case SET_TOTAL_RECORDS:
+      return {
+        ...state,
+        totalRecords: action.payload,
       }
     case SET_TABLE_COLUMNS:
       return {
