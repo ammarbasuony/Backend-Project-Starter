@@ -1,4 +1,5 @@
 import {useEffect} from 'react'
+import {useSearchParams} from 'react-router-dom'
 import RecordsList from '../../components/GenericCRUD/RecordsList'
 import {useDispatch, useSelector} from 'react-redux'
 
@@ -25,8 +26,13 @@ const Users = () => {
   const dispatch = useDispatch()
   const {isOperationDone} = useSelector((state: IState) => state.crudReducer)
 
+  const [searchParams] = useSearchParams()
+
   const fetchData = async () => {
-    const response = await genericCrudAPI('users').getAll()
+    const response = await genericCrudAPI('users').getAll({
+      ...(searchParams.get('page') && {page: Number(searchParams.get('page'))}),
+      itemsPerPage: 30,
+    })
     const rolesResponse = await genericCrudAPI('roles').getAll()
 
     const roles = rolesResponse.data.map((role: any) => ({

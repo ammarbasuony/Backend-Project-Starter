@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import {useSearchParams} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import clsx from 'clsx'
 
@@ -13,7 +14,9 @@ const RecordsListPagination = () => {
   const dispatch = useDispatch()
   const {totalRecords} = useSelector((state: IState) => state.crudReducer)
 
-  const [currentPage, setCurrentPage] = useState(1)
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1)
   const [pageNumbers, setPageNumbers] = useState<number[]>([])
   const [itemsPerPage] = useState(30)
   const [totalPages, setTotalPages] = useState(0)
@@ -38,6 +41,7 @@ const RecordsListPagination = () => {
       itemsPerPage,
     })
     dispatch(setTableData(response.data))
+    setSearchParams({...searchParams, page: String(pageNumber)})
   }
 
   const renderPageNumbers = () =>
