@@ -31,7 +31,7 @@ const Users = () => {
   const fetchData = async () => {
     const response = await genericCrudAPI('users').getAll({
       ...(searchParams.get('page') && {page: Number(searchParams.get('page'))}),
-      itemsPerPage: 30,
+      ...(searchParams.get('search') && {search: searchParams.get('search')}),
     })
     const rolesResponse = await genericCrudAPI('roles').getAll()
 

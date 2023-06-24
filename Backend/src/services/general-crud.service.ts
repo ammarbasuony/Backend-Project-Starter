@@ -52,6 +52,13 @@ const GeneralCRUDService = (
             id: 'desc',
           },
         ],
+        where: {
+          ...(queries.search && {
+            name: {
+              contains: queries.search as string,
+            },
+          }),
+        },
       });
 
       // ======= Remove sensitive data from response

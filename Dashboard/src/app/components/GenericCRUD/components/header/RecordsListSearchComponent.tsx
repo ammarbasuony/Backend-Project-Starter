@@ -1,35 +1,73 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import {useEffect, useState} from 'react'
-import {KTIcon, useDebounce} from '../../../../../_metronic/helpers'
+import {useState} from 'react'
+import {useSearchParams} from 'react-router-dom'
+import {KTIcon} from '../../../../../_metronic/helpers'
+import {useSelector, useDispatch} from 'react-redux'
+
+// API
+import genericCrudAPI from '../../../../api/generic-crud.api'
+
+// Types
+import {IState} from '../../../../types/reducer.types'
+
+// Utils
+import {singularize} from '../../../../utils/functions.util'
+
+// Actions
+import {setTableData} from '../../../../store/actions'
 
 const RecordsListSearchComponent = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('')
-  // Debounce search term so that it only gives us latest value ...
-  // ... if searchTerm has not been updated within last 500ms.
-  // The goal is to only have the API call fire when user stops typing ...
-  // ... so that we aren't hitting our API rapidly.
-  const debouncedSearchTerm = useDebounce(searchTerm, 150)
-  // Effect for API call
-  useEffect(
-    () => {},
-    [debouncedSearchTerm] // Only call effect if debounced search term changes
-    // More details about useDebounce: https://usehooks.com/useDebounce/
-  )
+  const dispatch = useDispatch()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchTerm, setSearchTerm] = useState<string>(searchParams.get('search') || '')
+  const {tableName} = useSelector((state: IState) => state.crudReducer)
+
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    dispatch(setTableData([]))
+    const response = await genericCrudAPI(tableName).getAll({
+      ...(searchParams.get('page') && {page: Number(searchParams.get('page'))}),
+      search: searchTerm,
+    })
+    dispatch(setTableData(response.data))
+
+    setSearchParams({...searchParams, search: searchTerm})
+  }
+
+  const handleClearSearch = async () => {
+    setSearchTerm('')
+    setSearchParams({...searchParams, search: ''})
+
+    dispatch(setTableData([]))
+    const response = await genericCrudAPI(tableName).getAll({
+      ...(searchParams.get('page') && {page: Number(searchParams.get('page'))}),
+    })
+    dispatch(setTableData(response.data))
+  }
 
   return (
     <div className='card-title'>
       {/* begin::Search */}
-      <div className='d-flex align-items-center position-relative my-1'>
-        <KTIcon iconName='magnifier' className='fs-1 position-absolute ms-6' />
+      <form className='d-flex align-items-center position-relative my-1' onSubmit={handleSearch}>
+        <button className='position-absolute ms-4 mt-1 search-button'>
+          <KTIcon iconName='magnifier' className='fs-1' />
+        </button>
+
         <input
           type='text'
           data-kt-user-table-filter='search'
           className='form-control form-control-solid w-250px ps-14'
-          placeholder='Search user'
+          placeholder={`Search ${singularize(tableName)}`}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </div>
+      </form>
+      
+      {searchTerm && (
+        <div className='clear-search' onClick={handleClearSearch}>
+          Clear
+        </div>
+      )}
       {/* end::Search */}
     </div>
   )

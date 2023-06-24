@@ -4,6 +4,9 @@ import {I18nProvider} from '../_metronic/i18n/i18nProvider'
 import {LayoutProvider, LayoutSplashScreen} from '../_metronic/layout/core'
 import {MasterInit} from '../_metronic/layout/MasterInit'
 
+// Styles
+import '../app/styles/global.css'
+
 const App = () => {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>

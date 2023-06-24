@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react'
 import {MenuComponent} from '../../../../../_metronic/assets/ts/components'
 import {KTIcon} from '../../../../../_metronic/helpers'
+import {useSelector} from 'react-redux'
 
 const RecordsListFilter = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [role, setRole] = useState<string | undefined>()
   const [lastLogin, setLastLogin] = useState<string | undefined>()
 
@@ -19,7 +19,6 @@ const RecordsListFilter = () => {
     <>
       {/* begin::Filter Button */}
       <button
-        disabled={isLoading}
         type='button'
         className='btn btn-light-primary me-3'
         data-kt-menu-trigger='click'
@@ -92,7 +91,6 @@ const RecordsListFilter = () => {
           <div className='d-flex justify-content-end'>
             <button
               type='button'
-              disabled={isLoading}
               onClick={filterData}
               className='btn btn-light btn-active-light-primary fw-bold me-2 px-6'
               data-kt-menu-dismiss='true'
@@ -101,7 +99,6 @@ const RecordsListFilter = () => {
               Reset
             </button>
             <button
-              disabled={isLoading}
               type='button'
               onClick={resetData}
               className='btn btn-primary fw-bold px-6'

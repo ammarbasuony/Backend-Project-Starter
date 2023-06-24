@@ -34,18 +34,18 @@ const FormImageUploader: FC<IFormImageUploaderProps> = ({
         className='image-input image-input-outline image-input-empty image-input-outline symbol symbol-circle'
         data-kt-image-input='true'
       >
-        <div
-          className='image-input-wrapper symbol'
-          style={{
-            backgroundImage: `url(${
+        <div className='image-input-wrapper symbol'>
+          <img
+            src={
               imagesPreview[column.attr]
                 ? imagesPreview[column.attr]
                 : value
                 ? `${properties.API_URL}${value}`
                 : placeHolderImage
-            })`,
-          }}
-        >
+            }
+            className='image-uploader'
+            alt={column.attr}
+          />
           <label
             className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow'
             data-kt-image-input-action='change'
