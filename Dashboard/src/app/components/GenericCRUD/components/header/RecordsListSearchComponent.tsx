@@ -36,7 +36,8 @@ const RecordsListSearchComponent = () => {
 
   const handleClearSearch = async () => {
     setSearchTerm('')
-    setSearchParams({...searchParams, search: ''})
+    searchParams.delete('search')
+    setSearchParams(searchParams)
 
     dispatch(setTableData([]))
     const response = await genericCrudAPI(tableName).getAll({

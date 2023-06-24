@@ -41,11 +41,13 @@ export const columns = [
     name: 'Created At',
     accessor: 'createdAt',
     attr: 'createdAt',
+    type: 'date',
   },
   {
     name: 'Last Updated At',
     accessor: 'updatedAt',
     attr: 'updatedAt',
     mode: 'labeled',
+    type: 'date',
   },
 ]

@@ -7,7 +7,7 @@ import excelJS from 'exceljs';
 // Utils
 import { responseError } from '../utils/error-handler.utils';
 import { isValidEmail } from '../utils/validators.util';
-import { camelToWords } from '../utils/functions';
+import { camelToWords, isDate } from '../utils/functions';
 
 // Types
 import { Delegate, Model } from '../@types/general-crud.types';
@@ -29,18 +29,19 @@ const GeneralCRUDService = (
   include = {},
   uploadInputName = '',
   hiddenAttributes: string[] = [],
-  page = 1,
-  itemsPerPage = 30,
+  currentPage = 1,
+  recordsPerPage = 30,
 ) => ({
   /**
    * (1) [GET]
    * Get all records
    */
   getAll: async (req: Request, res: Response) => {
-    const queries = req.query;
+    const { search, itemsPerPage, page, ...queries } = req.query;
+
     const totalRecords = await (prisma[model] as Delegate).count({});
-    const totalRecordsPerPage = queries.itemsPerPage ? Number(queries.itemsPerPage) : itemsPerPage;
-    const skippedRecords = (queries.page ? Number(queries.page) : page) - 1;
+    const totalRecordsPerPage = itemsPerPage ? Number(itemsPerPage) : recordsPerPage;
+    const skippedRecords = (page ? Number(page) : currentPage) - 1;
 
     try {
       const records = await (prisma[model] as Delegate).findMany({
@@ -53,11 +54,39 @@ const GeneralCRUDService = (
           },
         ],
         where: {
-          ...(queries.search && {
-            name: {
-              contains: queries.search as string,
-            },
-          }),
+          AND: [
+            // ======= Get records by name
+            ...(search
+              ? [
+                  {
+                    name: {
+                      contains: search as string,
+                    },
+                  },
+                ]
+              : []),
+
+            // ======= Get records by queries e.g { roleId: 1, email: 'test@mail.com' }
+            ...Object.keys(queries).map((key) =>
+              Number(queries[key])
+                ? {
+                    [key]: {
+                      equals: Number(queries[key]),
+                    },
+                  }
+                : isDate(queries[key] as string)
+                ? {
+                    [key]: {
+                      gte: new Date(queries[key] as string),
+                    },
+                  }
+                : {
+                    [key]: {
+                      contains: queries[key] as string,
+                    },
+                  },
+            ),
+          ],
         },
       });
 
