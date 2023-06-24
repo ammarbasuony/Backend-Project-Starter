@@ -28,11 +28,10 @@ import {excludeColumns} from '../../utils/constants.util'
 const Users = () => {
   const dispatch = useDispatch()
   const {isOperationDone} = useSelector((state: IState) => state.crudReducer)
+  const [searchParams] = useSearchParams()
 
   const [params, setParams] = useState<any>({})
   const [isParamsChanged, setIsParamsChanged] = useState<boolean>(false)
-
-  const [searchParams] = useSearchParams()
 
   const getSearchParams = () => {
     const filterFields = columns.filter(
