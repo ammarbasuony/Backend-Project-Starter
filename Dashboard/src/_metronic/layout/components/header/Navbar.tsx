@@ -21,10 +21,6 @@ const Navbar = () => {
 
   return (
     <div className='app-navbar flex-shrink-0'>
-      <div className={clsx('app-navbar-item align-items-stretch', itemClass)}>
-        <Search />
-      </div>
-
       <div className={clsx('app-navbar-item', itemClass)}>
         <ThemeModeSwitcher toggleBtnClass={clsx('btn-active-light-primary btn-custom')} />
       </div>

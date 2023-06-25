@@ -32,6 +32,8 @@ const RecordsListFilter = () => {
   }, [])
 
   useEffect(() => {
+    console.log(searchParams.get('search'))
+
     const filterFields = tableColumns.filter(
       (field) => !excludeColumns.includes(field.attr) && field.type !== 'image'
     )
@@ -78,7 +80,11 @@ const RecordsListFilter = () => {
     })
     dispatch(setTableData(response.data))
 
-    setSearchParams({...searchParams, ...filters})
+    // Append filters to search params
+    Object.keys(filters).forEach((key) => {
+      searchParams.set(key, filters[key])
+    })
+    setSearchParams(searchParams)
   }
 
   const renderedFields = fields.map((field) => {

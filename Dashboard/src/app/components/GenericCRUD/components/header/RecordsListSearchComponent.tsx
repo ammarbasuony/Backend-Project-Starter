@@ -31,7 +31,8 @@ const RecordsListSearchComponent = () => {
     })
     dispatch(setTableData(response.data))
 
-    setSearchParams({...searchParams, search: searchTerm})
+    searchParams.set('search', searchTerm)
+    setSearchParams(searchParams)
   }
 
   const handleClearSearch = async () => {
@@ -63,7 +64,7 @@ const RecordsListSearchComponent = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
-      
+
       {searchTerm && (
         <div className='clear-search' onClick={handleClearSearch}>
           Clear

@@ -41,7 +41,9 @@ const RecordsListPagination = () => {
       itemsPerPage,
     })
     dispatch(setTableData(response.data))
-    setSearchParams({...searchParams, page: String(pageNumber)})
+
+    searchParams.set('page', String(pageNumber))
+    setSearchParams(searchParams)
   }
 
   const renderPageNumbers = () =>

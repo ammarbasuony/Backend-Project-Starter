@@ -1,13 +1,24 @@
-import {useIntl} from 'react-intl'
+import {useSelector} from 'react-redux'
+
+// Components
 import {MenuItem} from './MenuItem'
 
+// Data
+import AppMainMenu from '../../../../../app/data/menu.app'
+
+// Types
+import {IMenuItem} from '../../../../../app/types/menu.types'
+import {IState} from '../../../../../app/types/reducer.types'
+
 export function MenuInner() {
-  const intl = useIntl()
+  const menu = AppMainMenu()
+  const {user} = useSelector((state: IState) => state.appReducer)
+
   return (
     <>
-      <MenuItem title={intl.formatMessage({id: 'MENU.HOME'})} to='/home' />
-      <MenuItem title={intl.formatMessage({id: 'MENU.POSTS'})} to='/posts' />
-      <MenuItem title={intl.formatMessage({id: 'MENU.USERS'})} to='/users' />
+      {menu.map(
+        (item: IMenuItem) => user?.role[item.role] && <MenuItem title={item.title} to={item.to} />
+      )}
     </>
   )
 }

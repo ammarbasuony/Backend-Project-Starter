@@ -1,12 +1,35 @@
-/* eslint-disable react/jsx-no-target-blank */
-import React from 'react'
-import {useIntl} from 'react-intl'
-import {KTIcon} from '../../../../helpers'
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
 import {SidebarMenuItem} from './SidebarMenuItem'
+import AppMainMenu from '../../../../../app/data/menu.app'
+
+// Types
+import {IMenuItem} from '../../../../../app/types/menu.types'
 
 const SidebarMenuMain = () => {
-  const intl = useIntl()
+  const menu = AppMainMenu()
+
+  const renderedMenu = menu.map((item: IMenuItem) => {
+    if (item.subMenu) {
+      const renderedSubMenu = item.subMenu.map((subItem: IMenuItem) => {
+        return (
+          <SidebarMenuItem
+            to={subItem.to}
+            icon={subItem.icon}
+            title={subItem.title}
+            key={subItem.title}
+          />
+        )
+      })
+
+      return (
+        <SidebarMenuItemWithSub to='' icon={item.icon} title={item.title} key={item.title}>
+          {renderedSubMenu}
+        </SidebarMenuItemWithSub>
+      )
+    } else {
+      return <SidebarMenuItem to={item.to} icon={item.icon} title={item.title} key={item.title} />
+    }
+  })
 
   return (
     <>
@@ -16,29 +39,7 @@ const SidebarMenuMain = () => {
         </div>
       </div>
 
-      <SidebarMenuItem to='/home' icon='home' title={intl.formatMessage({id: 'MENU.HOME'})} />
-
-      <SidebarMenuItemWithSub to='' title={intl.formatMessage({id: 'MENU.USERS'})} icon='user'>
-        <SidebarMenuItem
-          to='/users'
-          icon='user'
-          title={intl.formatMessage({id: 'MENU.ALL_USERS'})}
-        />
-        <SidebarMenuItem to='/roles' icon='lock' title={intl.formatMessage({id: 'MENU.ROLES'})} />
-      </SidebarMenuItemWithSub>
-
-      <SidebarMenuItemWithSub to='' title={intl.formatMessage({id: 'MENU.POSTS'})} icon='clipboard'>
-        <SidebarMenuItem
-          to='/posts'
-          icon='clipboard'
-          title={intl.formatMessage({id: 'MENU.ALL_POSTS'})}
-        />
-        <SidebarMenuItem
-          to='/categories'
-          icon='bookmark'
-          title={intl.formatMessage({id: 'MENU.CATEGORIES'})}
-        />
-      </SidebarMenuItemWithSub>
+      {renderedMenu}
     </>
   )
 }
