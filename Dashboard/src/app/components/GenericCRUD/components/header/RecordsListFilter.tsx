@@ -181,7 +181,7 @@ const RecordsListFilter = () => {
       {/* begin::Filter Button */}
       <button
         type='button'
-        className='btn btn-light-primary me-3'
+        className='btn btn-light-primary'
         data-kt-menu-trigger='click'
         data-kt-menu-placement='bottom-end'
       >

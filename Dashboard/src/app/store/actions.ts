@@ -10,6 +10,7 @@ import {
   SET_TABLE_NAME,
   SET_IS_TABLE_HAS_FILES,
   SET_IS_OPERATION_DONE,
+  SET_OPERATIONS_PERMISIIONS,
 
   // Operation Modal Types
   OPEN_OPERATION_MODAL,
@@ -65,6 +66,11 @@ export const setIsTableHasFiles = (isTableHasFiles: boolean) => ({
 export const setIsOperationDone = (isOperationDone: boolean) => ({
   type: SET_IS_OPERATION_DONE,
   payload: isOperationDone,
+})
+
+export const setOperationsPermissions = (operationsPermissions: any) => ({
+  type: SET_OPERATIONS_PERMISIIONS,
+  payload: operationsPermissions,
 })
 
 export const setSelectRow = (selectedRow: number) => ({

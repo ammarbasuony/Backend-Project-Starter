@@ -24,6 +24,7 @@ export interface ICrudState {
   totalRecords: number
   tableColumns: any[]
   isOperationDone: boolean
+  operationsPermission: string
   selectedRows: number[]
 }
 

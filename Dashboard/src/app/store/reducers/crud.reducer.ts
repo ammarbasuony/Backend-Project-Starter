@@ -5,6 +5,7 @@ import {
   SET_TABLE_NAME,
   SET_IS_TABLE_HAS_FILES,
   SET_IS_OPERATION_DONE,
+  SET_OPERATIONS_PERMISIIONS,
   SET_SELECT_ROW,
   SET_UNSELECT_ROW,
   SET_SELECT_ALL_ROWS,
@@ -24,6 +25,7 @@ const initialState: ICrudState = {
   totalRecords: 0,
   tableColumns: [],
   isOperationDone: false,
+  operationsPermission: '',
   selectedRows: [],
 }
 
@@ -63,6 +65,11 @@ const crudReducer = (state = initialState, action: IAction) => {
       return {
         ...state,
         isOperationDone: action.payload,
+      }
+    case SET_OPERATIONS_PERMISIIONS:
+      return {
+        ...state,
+        operationsPermission: action.payload,
       }
     case SET_SELECT_ROW:
       return {

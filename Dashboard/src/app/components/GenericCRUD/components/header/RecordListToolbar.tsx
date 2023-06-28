@@ -22,7 +22,8 @@ import properties from '../../../../properties.json'
 const RecordListToolbar = () => {
   const dispatch = useDispatch()
   const [isExporting, setIsExporting] = useState(false)
-  const {tableName} = useSelector((state: IState) => state.crudReducer)
+  const {tableName, operationsPermission} = useSelector((state: IState) => state.crudReducer)
+  const {user} = useSelector((state: IState) => state.appReducer)
 
   const handleExport = async () => {
     setIsExporting(true)
@@ -38,32 +39,36 @@ const RecordListToolbar = () => {
     <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
       <RecordsListFilter />
 
-      {/* begin::Export */}
-      <button
-        type='button'
-        className='btn btn-light-primary me-3'
-        onClick={handleExport}
-        disabled={isExporting}
-      >
-        {isExporting ? (
-          <span className='spinner-border spinner-border-sm align-middle me-1' />
-        ) : (
-          <KTIcon iconName='exit-up' className='fs-2' />
-        )}
-        {isExporting ? 'Exporting...' : 'Export'}
-      </button>
-      {/* end::Export */}
+      {user?.role[operationsPermission as keyof typeof user.role] && (
+        <>
+          {/* begin::Export */}
+          <button
+            type='button'
+            className='btn btn-light-primary me-3 ms-3'
+            onClick={handleExport}
+            disabled={isExporting}
+          >
+            {isExporting ? (
+              <span className='spinner-border spinner-border-sm align-middle me-1' />
+            ) : (
+              <KTIcon iconName='exit-up' className='fs-2' />
+            )}
+            {isExporting ? 'Exporting...' : 'Export'}
+          </button>
+          {/* end::Export */}
 
-      {/* begin::Add user */}
-      <button
-        type='button'
-        className='btn btn-primary'
-        onClick={() => dispatch(openOperationModal())}
-      >
-        <KTIcon iconName='plus' className='fs-2' />
-        Add {singularize(tableName)}
-      </button>
-      {/* end::Add user */}
+          {/* begin::Add Record */}
+          <button
+            type='button'
+            className='btn btn-primary'
+            onClick={() => dispatch(openOperationModal())}
+          >
+            <KTIcon iconName='plus' className='fs-2' />
+            Add {singularize(tableName)}
+          </button>
+          {/* end::Add Record */}
+        </>
+      )}
     </div>
   )
 }

@@ -3,6 +3,9 @@ import {useSearchParams} from 'react-router-dom'
 import RecordsList from '../../components/GenericCRUD/RecordsList'
 import {useDispatch, useSelector} from 'react-redux'
 
+// Utils
+import {Roles} from '../../utils/constants.util'
+
 // Actions
 import {
   setTableData,
@@ -10,6 +13,7 @@ import {
   setTableName,
   setIsTableHasFiles,
   setIsOperationDone,
+  setOperationsPermissions,
   setTotalRecords,
 } from '../../store/actions'
 
@@ -84,6 +88,7 @@ const Users = () => {
     dispatch(setTableName('users'))
     dispatch(setIsTableHasFiles(true))
     dispatch(setIsOperationDone(false))
+    dispatch(setOperationsPermissions(Roles.ALLOW_USERS_OPERATION))
   }
 
   useEffect(() => {
@@ -92,7 +97,7 @@ const Users = () => {
 
   useEffect(() => {
     if (!isParamsChanged) return
-    
+
     fetchData()
   }, [isOperationDone, isParamsChanged])
 

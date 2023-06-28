@@ -8,11 +8,6 @@ const AppMainMenu = () => {
 
   return [
     {
-      title: intl.formatMessage({id: 'MENU.HOME'}),
-      icon: 'home',
-      to: '/home',
-    },
-    {
       title: intl.formatMessage({id: 'MENU.USERS'}),
       icon: 'user',
       to: '/users',
