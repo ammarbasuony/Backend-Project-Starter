@@ -5,7 +5,7 @@ import {LayoutProvider, LayoutSplashScreen} from '../_metronic/layout/core'
 import {MasterInit} from '../_metronic/layout/MasterInit'
 
 // Styles
-import '../app/styles/global.css'
+import '../app/styles/global.scss'
 
 const App = () => {
   return (

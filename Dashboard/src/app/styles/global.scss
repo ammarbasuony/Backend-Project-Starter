@@ -1,0 +1,70 @@
+@import 'custom-fonts';
+
+body {
+  font-family: Inter, 'Cairo-Regular';
+}
+
+.image-uploader {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px !important;
+}
+
+.search-button {
+  background: unset;
+  border: unset;
+  cursor: pointer;
+}
+
+.clear-search {
+  margin-left: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #929292;
+}
+
+.filterMenu {
+  max-height: 450px;
+  overflow: auto;
+}
+
+.pagination {
+  margin-top: 15px;
+}
+
+.cell-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+  text-align: left;
+}
+
+.cell-popover {
+  position: absolute;
+  background-color: #f1f1f1;
+  top: 53px;
+  white-space: nowrap;
+  padding: 7px;
+  border-radius: 7px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.08);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -18px;
+    left: 10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #f1f1f1 transparent;
+  }
+}
+
+.action-btns {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}

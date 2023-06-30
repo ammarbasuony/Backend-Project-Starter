@@ -56,7 +56,7 @@ const RecordActionsCell: FC<Props> = ({id}) => {
   }
 
   return (
-    <>
+    <div className='action-btns'>
       <a
         href='/'
         className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
@@ -82,7 +82,7 @@ const RecordActionsCell: FC<Props> = ({id}) => {
         </i>
       </a>
       {selectedId === id && <ConfirmationModal onConfirm={() => deleteRecord()} />}
-    </>
+    </div>
   )
 }
 

@@ -3,6 +3,9 @@ import React, {FC} from 'react'
 // Properties
 import properties from '../../../properties.json'
 
+// Assets
+import placeHolderImage from '../../../assets/media/jpg/blank.jpg'
+
 interface IFormImageUploaderProps {
   column: any
   value: string
@@ -18,8 +21,6 @@ const FormImageUploader: FC<IFormImageUploaderProps> = ({
   onInputChange,
   onReset,
 }) => {
-  const placeHolderImage = './media/avatars/blank.png'
-
   return (
     <div
       className='fv-row mb-7'
@@ -43,6 +44,9 @@ const FormImageUploader: FC<IFormImageUploaderProps> = ({
                 ? `${properties.API_URL}${value}`
                 : placeHolderImage
             }
+            onError={(e: any) => {
+              e.target.src = placeHolderImage
+            }}
             className='image-uploader'
             alt={column.attr}
           />

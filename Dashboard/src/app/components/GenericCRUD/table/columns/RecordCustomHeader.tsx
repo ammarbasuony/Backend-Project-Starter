@@ -22,6 +22,7 @@ const RecordCustomHeader: FC<Props> = ({className, title, attr, tableProps}) => 
 
   const [isSelectedForSorting, setIsSelectedForSorting] = useState<string | undefined>(undefined)
   const [order, setOrder] = useState<'asc' | 'desc' | undefined>(undefined)
+  const [showPopover, setShowPopover] = useState(false)
 
   const sortColumn = () => {
     // avoid sorting for these columns
@@ -71,11 +72,17 @@ const RecordCustomHeader: FC<Props> = ({className, title, attr, tableProps}) => 
         className,
         isSelectedForSorting && order !== undefined && `table-sort-${order}`
       )}
-      style={{cursor: 'pointer'}}
+      style={{cursor: 'pointer', position: 'relative'}}
       onClick={sortColumn}
-      title={title}
     >
-      <div className='cell-content'>{title}</div>
+      <div
+        className='cell-content'
+        onMouseEnter={() => setShowPopover(true)}
+        onMouseLeave={() => setShowPopover(false)}
+      >
+        {title}
+      </div>
+      {showPopover && <div className='cell-popover'>{title}</div>}
     </th>
   )
 }

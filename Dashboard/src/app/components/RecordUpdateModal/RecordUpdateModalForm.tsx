@@ -49,7 +49,7 @@ const RecordUpdateModalForm: FC = () => {
     const actualAttrs = tableColumns.map(
       (column) => !excludedColumns.includes(column.attr) && column.attr
     )
-    
+
     Object.keys(response.data).forEach((key) => {
       if (actualAttrs.includes(key)) filteredResponseData[key] = response.data[key]
     })
@@ -111,6 +111,7 @@ const RecordUpdateModalForm: FC = () => {
           isDisabled={isLoading}
           key={column.attr}
           onInputChange={(e, attr) => setFormData({...formData, [attr]: e.target.value})}
+          type={column.type}
         />
       )
 

@@ -40,9 +40,9 @@ model User {
 
 model Post {
   id                          Int      @id @default(autoincrement())
-  name                       String
+  name                        String
   description                 String
-  thumbnail                   String
+  thumbnail                   String   @default("/assets/jpg/blank.jpg")
   category                    Category @relation(fields: [categoryId], references: [id])
   categoryId                  Int
   createdAt                   DateTime @default(now())

@@ -12,7 +12,7 @@ import genericCrudAPI from '../../../../api/generic-crud.api'
 
 const RecordsListPagination = () => {
   const dispatch = useDispatch()
-  const {totalRecords} = useSelector((state: IState) => state.crudReducer)
+  const {totalRecords, tableName} = useSelector((state: IState) => state.crudReducer)
 
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -36,7 +36,7 @@ const RecordsListPagination = () => {
     setCurrentPage(pageNumber)
 
     dispatch(setTableData([]))
-    const response = await genericCrudAPI('users').getAll({
+    const response = await genericCrudAPI(tableName).getAll({
       page: pageNumber,
       itemsPerPage,
     })

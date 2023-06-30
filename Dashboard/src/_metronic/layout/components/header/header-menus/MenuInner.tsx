@@ -20,7 +20,10 @@ export function MenuInner() {
     <>
       <MenuItem title={intl.formatMessage({id: 'MENU.HOME'})} to='/home' />
       {menu.map(
-        (item: IMenuItem) => user?.role[item.role as keyof typeof user.role] && <MenuItem title={item.title} to={item.to} />
+        (item: IMenuItem) =>
+          user?.role[item.role as keyof typeof user.role] && (
+            <MenuItem title={item.title} to={item.to} key={item.title} />
+          )
       )}
     </>
   )

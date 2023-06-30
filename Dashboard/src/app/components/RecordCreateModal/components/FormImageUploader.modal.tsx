@@ -1,5 +1,8 @@
 import React, {FC} from 'react'
 
+// Assets
+import placeHolderImage from '../../../assets/media/jpg/blank.jpg'
+
 interface IFormImageUploaderProps {
   column: any
   imagesPreview: any
@@ -13,8 +16,6 @@ const FormImageUploader: FC<IFormImageUploaderProps> = ({
   onInputChange,
   onReset,
 }) => {
-  const placeHolderImage = './media/avatars/blank.png'
-
   return (
     <div
       className='fv-row mb-7'
@@ -31,10 +32,12 @@ const FormImageUploader: FC<IFormImageUploaderProps> = ({
       >
         <div
           className='image-input-wrapper symbol'
-          style={{
-            backgroundImage: `url(${imagesPreview[column.attr] || placeHolderImage})`,
-          }}
         >
+          <img
+            src={imagesPreview[column.attr] || placeHolderImage}
+            className='image-uploader'
+            alt={column.attr}
+          />
           <label
             className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow'
             data-kt-image-input-action='change'

@@ -78,6 +78,7 @@ const RecordCreateModalForm: FC = () => {
           isDisabled={isSubmitting}
           key={column.attr}
           onInputChange={(e, attr) => setFormData({...formData, [attr]: e.target.value})}
+          type={column.type}
         />
       )
 

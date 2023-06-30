@@ -29,7 +29,7 @@ import {IState} from '../../models/reducer.types'
 // Utils
 import {excludeColumns} from '../../utils/constants.util'
 
-const Users = () => {
+const Categories = () => {
   const dispatch = useDispatch()
   const {isOperationDone} = useSelector((state: IState) => state.crudReducer)
   const [searchParams] = useSearchParams()
@@ -63,15 +63,15 @@ const Users = () => {
   }
 
   const fetchData = async () => {
-    const response = await genericCrudAPI('roles').getAll(params)
+    const response = await genericCrudAPI('categories').getAll(params)
 
     dispatch(setTableData(response.data))
     dispatch(setTotalRecords(response.totalRecords))
     dispatch(setTableColumns(columns))
-    dispatch(setTableName('roles'))
+    dispatch(setTableName('categories'))
     dispatch(setIsTableHasFiles(false))
     dispatch(setIsOperationDone(false))
-    dispatch(setOperationsPermissions(Roles.ALLOW_ROLES_VIEW))
+    dispatch(setOperationsPermissions(Roles.ALLOW_CATEGORIES_VIEW))
   }
 
   useEffect(() => {
@@ -91,4 +91,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default Categories
