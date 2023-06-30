@@ -18,7 +18,7 @@ import {
 } from '../../store/actions'
 
 // Data
-import {columns} from './data.users'
+import {columns} from './data.categories'
 
 // API
 import genericCrudAPI from '../../api/generic-crud.api'
@@ -63,32 +63,15 @@ const Users = () => {
   }
 
   const fetchData = async () => {
-    const response = await genericCrudAPI('users').getAll(params)
-    const rolesResponse = await genericCrudAPI('roles').getAll()
-
-    const roles = rolesResponse.data.map((role: any) => ({
-      value: role.id,
-      label: role.name,
-    }))
-
-    const newColumns = columns.map((column) => {
-      if (column.attr === 'roleId') {
-        return {
-          ...column,
-          options: roles,
-        }
-      }
-
-      return column
-    })
+    const response = await genericCrudAPI('roles').getAll(params)
 
     dispatch(setTableData(response.data))
     dispatch(setTotalRecords(response.totalRecords))
-    dispatch(setTableColumns(newColumns))
-    dispatch(setTableName('users'))
-    dispatch(setIsTableHasFiles(true))
+    dispatch(setTableColumns(columns))
+    dispatch(setTableName('roles'))
+    dispatch(setIsTableHasFiles(false))
     dispatch(setIsOperationDone(false))
-    dispatch(setOperationsPermissions(Roles.ALLOW_USERS_OPERATION))
+    dispatch(setOperationsPermissions(Roles.ALLOW_ROLES_VIEW))
   }
 
   useEffect(() => {

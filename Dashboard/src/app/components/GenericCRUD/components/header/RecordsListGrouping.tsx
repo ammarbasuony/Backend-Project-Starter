@@ -2,7 +2,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {toast} from 'react-toastify'
 
 // Types
-import {IState} from '../../../../types/reducer.types'
+import {IState} from '../../../../models/reducer.types'
 
 // Actions
 import {openConfirmationModal, setIsOperationDone, setUnselectAllRows} from '../../../../store/actions'

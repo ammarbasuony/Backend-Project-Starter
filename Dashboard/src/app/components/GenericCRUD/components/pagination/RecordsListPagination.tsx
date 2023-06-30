@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import clsx from 'clsx'
 
 // Types
-import {IState} from '../../../../types/reducer.types'
+import {IState} from '../../../../models/reducer.types'
 
 // Actions
 import {setTableData} from '../../../../store/actions'

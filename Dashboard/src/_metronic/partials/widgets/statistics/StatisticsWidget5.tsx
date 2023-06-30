@@ -39,7 +39,7 @@ const StatisticsWidget5: React.FC<Props> = ({
             color: titleColor,
           }}
         >
-          {title}
+          {!title ? <span className='spinner-border spinner-border-sm align-middle me-1' /> : title}
         </div>
 
         <div

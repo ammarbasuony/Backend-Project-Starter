@@ -6,7 +6,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {setSelectAllRows, setUnselectAllRows} from '../../../../store/actions'
 
 // Types
-import {IState} from '../../../../types/reducer.types'
+import {IState} from '../../../../models/reducer.types'
 
 type Props = {
   tableProps: PropsWithChildren<HeaderProps<any>>

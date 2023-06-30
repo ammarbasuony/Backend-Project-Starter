@@ -49,7 +49,7 @@ const ChartsWidget3: React.FC<Props> = ({
         chart.destroy()
       }
     }
-  }, [chartRef, mode])
+  }, [chartRef, mode, xAxis, data])
 
   return (
     <div className={`card ${className}`}>
@@ -76,7 +76,11 @@ const ChartsWidget3: React.FC<Props> = ({
 
 export {ChartsWidget3}
 
-function getChartOptions(height: number, data: ApexAxisChartSeries, xAxis: number[] | string[]): ApexOptions {
+function getChartOptions(
+  height: number,
+  data: ApexAxisChartSeries,
+  xAxis: number[] | string[]
+): ApexOptions {
   const labelColor = getCSSVariableValue('--bs-gray-500')
   const borderColor = getCSSVariableValue('--bs-gray-200')
   const baseColor = getCSSVariableValue('--bs-info')
@@ -175,7 +179,7 @@ function getChartOptions(height: number, data: ApexAxisChartSeries, xAxis: numbe
       },
       y: {
         formatter: function (val) {
-          return '$' + val + ' thousands'
+          return String(val)
         },
       },
     },

@@ -10,7 +10,7 @@ import {MenuComponent} from '../../../../../_metronic/assets/ts/components'
 import {KTIcon} from '../../../../../_metronic/helpers'
 
 // Types
-import {IState} from '../../../../types/reducer.types'
+import {IState} from '../../../../models/reducer.types'
 
 // Actions
 import {setTableData} from '../../../../store/actions'
@@ -190,7 +190,10 @@ const RecordsListFilter = () => {
       </button>
       {/* end::Filter Button */}
       {/* begin::SubMenu */}
-      <div className='menu menu-sub menu-sub-dropdown w-300px w-md-325px' data-kt-menu='true'>
+      <div
+        className='menu menu-sub menu-sub-dropdown w-300px w-md-325px filterMenu'
+        data-kt-menu='true'
+      >
         {/* begin::Header */}
         <div className='px-7 py-5'>
           <div className='fs-5 text-dark fw-bolder'>Filter Options</div>

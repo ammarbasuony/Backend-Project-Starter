@@ -9,7 +9,7 @@ import genericCrudAPI from '../../api/generic-crud.api'
 import {closeOperationModal, setIsOperationDone} from '../../store/actions'
 
 // Types
-import {IState} from '../../types/reducer.types'
+import {IState} from '../../models/reducer.types'
 
 // Utils
 import {capitalize, singularize} from '../../utils/functions.util'

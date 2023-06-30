@@ -16,7 +16,7 @@ import {
 import {formatDate} from '../../utils/functions.util'
 
 // Types
-import {IAction, ICrudState} from '../../types/reducer.types'
+import {IAction, ICrudState} from '../../models/reducer.types'
 
 const initialState: ICrudState = {
   tableName: '',

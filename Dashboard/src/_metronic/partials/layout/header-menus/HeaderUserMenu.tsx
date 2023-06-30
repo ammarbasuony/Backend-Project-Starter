@@ -13,7 +13,7 @@ import {removeUser} from '../../../../app/store/actions'
 import properties from '../../../../app/properties.json'
 
 // Types
-import {IState} from '../../../../app/types/reducer.types'
+import {IState} from '../../../../app/models/reducer.types'
 
 const HeaderUserMenu: FC = () => {
   const navigate = useNavigate()

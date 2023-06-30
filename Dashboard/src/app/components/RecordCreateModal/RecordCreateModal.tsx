@@ -2,7 +2,7 @@ import {RecordCreateModalHeader} from './RecordCreateModalHeader'
 import {useSelector} from 'react-redux'
 
 // Types
-import {IState} from '../../types/reducer.types'
+import {IState} from '../../models/reducer.types'
 import {RecordCreateModalForm} from './RecordCreateModalForm'
 
 const RecordCreateModal = () => {

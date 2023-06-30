@@ -13,7 +13,7 @@ import useGetUser from '../hooks/useGetUser.hook'
 import {UserToken} from '../utils/constants.util'
 
 // Types
-import {IState} from '../types/reducer.types'
+import {IState} from '../models/reducer.types'
 
 const {PUBLIC_URL} = process.env
 

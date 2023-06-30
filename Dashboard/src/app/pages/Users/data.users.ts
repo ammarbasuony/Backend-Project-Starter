@@ -41,6 +41,7 @@ export const columns = [
     name: 'Created At',
     accessor: 'createdAt',
     attr: 'createdAt',
+    mode: 'labeled',
     type: 'date',
   },
   {

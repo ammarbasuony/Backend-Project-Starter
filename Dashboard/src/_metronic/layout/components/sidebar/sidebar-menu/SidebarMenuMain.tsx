@@ -6,8 +6,8 @@ import {SidebarMenuItem} from './SidebarMenuItem'
 import AppMainMenu from '../../../../../app/data/menu.app'
 
 // Types
-import {IMenuItem} from '../../../../../app/types/menu.types'
-import {IState} from '../../../../../app/types/reducer.types'
+import {IMenuItem} from '../../../../../app/models/menu.types'
+import {IState} from '../../../../../app/models/reducer.types'
 
 const SidebarMenuMain = () => {
   const menu = AppMainMenu()

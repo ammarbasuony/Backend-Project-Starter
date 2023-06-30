@@ -18,3 +18,19 @@
   cursor: pointer;
   color: #929292;
 }
+
+.filterMenu {
+  max-height: 450px;
+  overflow: auto;
+}
+
+.cell-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+
+.pagination {
+  margin-top: 15px;
+}

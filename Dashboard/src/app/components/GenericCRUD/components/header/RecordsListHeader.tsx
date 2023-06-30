@@ -4,7 +4,7 @@ import {RecordsListGrouping} from './RecordsListGrouping'
 import {RecordsListSearchComponent} from './RecordsListSearchComponent'
 
 // Types
-import {IState} from '../../../../types/reducer.types'
+import {IState} from '../../../../models/reducer.types'
 
 const RecordsListHeader = () => {
   const {selectedRows} = useSelector((state: IState) => state.crudReducer)

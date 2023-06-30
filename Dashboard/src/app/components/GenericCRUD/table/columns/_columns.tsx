@@ -1,8 +1,9 @@
 import {Column} from 'react-table'
 
 // Components
-import {RecordLastLoginCell} from './RecordLastLoginCell'
-import {RecordTwoStepsCell} from './RecordTwoStepsCell'
+import {RecordLabeledCell} from './RecordLabeledCell'
+import {RecordHighlightedCell} from './RecordHighlightedCell'
+import {RecordBooleanCell} from './RecordBooleanCell'
 import {RecordActionsCell} from './RecordActionsCell'
 import {RecordSelectionCell} from './RecordSelectionCell'
 import {RecordCustomHeader} from './RecordCustomHeader'
@@ -32,11 +33,13 @@ const usersColumns = (modelColumns: any): ReadonlyArray<Column<any>> => {
                 : props.data[props.row.index][column.accessor]
 
               return column.mode === 'highlighted' ? (
-                <RecordTwoStepsCell value={cellValue} />
+                <RecordHighlightedCell value={cellValue} />
               ) : column.mode === 'image' ? (
                 <RecordInfoCell image={cellValue} />
+              ) : column.mode === 'boolean' ? (
+                <RecordBooleanCell value={cellValue} />
               ) : (
-                <RecordLastLoginCell last_login={cellValue} />
+                <RecordLabeledCell last_login={cellValue} />
               )
             },
           }
@@ -53,7 +56,12 @@ const usersColumns = (modelColumns: any): ReadonlyArray<Column<any>> => {
     ...dynamicCols,
     {
       Header: (props: any) => (
-        <RecordCustomHeader tableProps={props} attr='actions' title='Actions' className='text-end min-w-100px' />
+        <RecordCustomHeader
+          tableProps={props}
+          attr='actions'
+          title='Actions'
+          className='text-end min-w-100px'
+        />
       ),
       id: 'actions',
       Cell: ({...props}) => <RecordActionsCell id={props.data[props.row.index].id} />,

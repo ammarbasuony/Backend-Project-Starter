@@ -18,7 +18,7 @@ import {login} from '../../../api/auth.api'
 import properties from '../../../properties.json'
 
 // Types
-import {IState} from '../../../types/reducer.types'
+import {IState} from '../../../models/reducer.types'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()

@@ -1,0 +1,83 @@
+export const columns = [
+  {
+    name: 'Name',
+    accessor: 'name',
+    attr: 'name',
+    type: 'text',
+    required: true,
+  },
+  {
+    name: 'Allow Posts View',
+    accessor: 'allow_posts_view',
+    attr: 'allow_posts_view',
+    mode: 'boolean',
+    type: 'select',
+    options: [
+      {label: 'True', value: true},
+      {label: 'False', value: false},
+    ],
+    required: true,
+  },
+  {
+    name: 'Allow Posts Operations',
+    accessor: 'allow_posts_operations',
+    attr: 'allow_posts_operations',
+    mode: 'boolean',
+    type: 'select',
+    options: [
+      {label: 'True', value: true},
+      {label: 'False', value: false},
+    ],
+    required: true,
+  },
+  {
+    name: 'Allow Users View',
+    accessor: 'allow_users_view',
+    attr: 'allow_users_view',
+    mode: 'boolean',
+    type: 'select',
+    options: [
+      {label: 'True', value: true},
+      {label: 'False', value: false},
+    ],
+    required: true,
+  },
+  {
+    name: 'Allow Users Operations',
+    accessor: 'allow_users_operations',
+    attr: 'allow_users_operations',
+    mode: 'boolean',
+    type: 'select',
+    options: [
+      {label: 'True', value: true},
+      {label: 'False', value: false},
+    ],
+    required: true,
+  },
+  {
+    name: 'Allow Roles View',
+    accessor: 'allow_roles_view',
+    attr: 'allow_roles_view',
+    mode: 'boolean',
+    type: 'select',
+    options: [
+      {label: 'True', value: true},
+      {label: 'False', value: false},
+    ],
+    required: true,
+  },
+  {
+    name: 'Created At',
+    accessor: 'createdAt',
+    attr: 'createdAt',
+    mode: 'labeled',
+    type: 'date',
+  },
+  {
+    name: 'Last Updated At',
+    accessor: 'updatedAt',
+    attr: 'updatedAt',
+    mode: 'labeled',
+    type: 'date',
+  },
+]

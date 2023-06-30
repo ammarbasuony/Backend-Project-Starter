@@ -7,7 +7,7 @@ import excelJS from 'exceljs';
 // Utils
 import { responseError } from '../utils/error-handler.utils';
 import { isValidEmail } from '../utils/validators.util';
-import { camelToWords, isDate } from '../utils/functions';
+import { camelToWords, isBoolean, isDate } from '../utils/functions';
 
 // Types
 import { Delegate, Model } from '../@types/general-crud.types';
@@ -78,6 +78,12 @@ const GeneralCRUDService = (
                 ? {
                     [key]: {
                       gte: new Date(queries[key] as string),
+                    },
+                  }
+                : isBoolean(queries[key] as string)
+                ? {
+                    [key]: {
+                      equals: queries[key] === 'true',
                     },
                   }
                 : {

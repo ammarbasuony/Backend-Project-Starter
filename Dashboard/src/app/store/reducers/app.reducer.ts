@@ -5,7 +5,7 @@ import {
 } from '../types'
 
 // Types
-import {IAction, IAppState} from '../../types/reducer.types'
+import {IAction, IAppState} from '../../models/reducer.types'
 
 const initialState: IAppState = {
   user: null,

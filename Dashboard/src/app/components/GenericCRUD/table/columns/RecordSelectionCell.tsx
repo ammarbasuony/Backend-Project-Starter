@@ -5,7 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {setSelectRow, setUnselectRow} from '../../../../store/actions'
 
 // Types
-import {IState} from '../../../../types/reducer.types'
+import {IState} from '../../../../models/reducer.types'
 
 interface IRecordSelectionCellProps {
   id: number

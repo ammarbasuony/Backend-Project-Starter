@@ -9,7 +9,7 @@ import {RecordsListPagination} from '../components/pagination/RecordsListPaginat
 import {KTCardBody} from '../../../../_metronic/helpers'
 
 // Types
-import {IState} from '../../../types/reducer.types'
+import {IState} from '../../../models/reducer.types'
 
 const RecordsTable = () => {
   const [isLoading, setIsLoading] = useState(false)

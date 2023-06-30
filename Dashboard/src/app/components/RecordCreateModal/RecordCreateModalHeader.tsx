@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux'
 import {closeOperationModal} from '../../store/actions'
 
 // Types
-import {IState} from '../../types/reducer.types'
+import {IState} from '../../models/reducer.types'
 
 // Utils
 import {singularize} from '../../utils/functions.util'

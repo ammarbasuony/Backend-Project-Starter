@@ -4,7 +4,7 @@ import {HeaderProps} from 'react-table'
 import {useSelector, useDispatch} from 'react-redux'
 
 // Types
-import {IState} from '../../../../types/reducer.types'
+import {IState} from '../../../../models/reducer.types'
 
 // Actions
 import {setTableData} from '../../../../store/actions'
@@ -73,8 +73,9 @@ const RecordCustomHeader: FC<Props> = ({className, title, attr, tableProps}) => 
       )}
       style={{cursor: 'pointer'}}
       onClick={sortColumn}
+      title={title}
     >
-      {title}
+      <div className='cell-content'>{title}</div>
     </th>
   )
 }

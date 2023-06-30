@@ -11,7 +11,7 @@ import {
 } from '../types'
 
 // Types
-import {IAction, IModalState} from '../../types/reducer.types'
+import {IAction, IModalState} from '../../models/reducer.types'
 
 const initialState: IModalState = {
   id: null,
