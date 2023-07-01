@@ -2,6 +2,9 @@
 import {useEffect} from 'react'
 import {ILayout, useLayout} from '../../core'
 
+// Properties
+import properties from '../../../../app/properties.json'
+
 const Footer = () => {
   const {config} = useLayout()
   useEffect(() => {
@@ -14,24 +17,23 @@ const Footer = () => {
           {new Date().getFullYear().toString()}&copy;
         </span>
         <a
-          href='http://ammaryaser.com/'
+          href={properties.LINKS.COPYRIGHTS_LINK}
           target='_blank'
           className='text-gray-800 text-hover-primary'
         >
           Ammar Yaser
         </a>
-
         &nbsp;&nbsp;|
       </div>
       <ul className='menu menu-gray-600 menu-hover-primary fw-semibold order-1'>
         <li className='menu-item'>
-          <a href='http://ammaryaser.com/about' target='_blank' className='menu-link px-2'>
+          <a href={properties.LINKS.ABOUT_LINK} target='_blank' className='menu-link px-2'>
             About
           </a>
         </li>
 
         <li className='menu-item'>
-          <a href='https://devs.keenthemes.com/contact' target='_blank' className='menu-link px-2'>
+          <a href={properties.LINKS.CONTACT_US_LINK} target='_blank' className='menu-link px-2'>
             Support
           </a>
         </li>

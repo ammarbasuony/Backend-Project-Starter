@@ -1,4 +1,15 @@
 {
   "API_URL": "http://localhost:5050",
-  "AUTH_COOKIE_NAME": "starter_auth_token"
+  "AUTH_COOKIE_NAME": "starter_auth_token",
+  "LOGOS": {
+    "ICON_ONLY_DARK": "/media/logos/icon-only-dark.svg",
+    "Full_LOGO_DARK": "/media/logos/Logo-Dark-Horizintal.svg",
+    "ICON_ONLY_LIGHT": "/media/logos/icon-only-light.svg",
+    "Full_LOGO_LIGHT": "/media/logos/Logo-Light-Horizintal.svg"
+  },
+  "LINKS": {
+    "COPYRIGHTS_LINK": "http://ammaryaser.com/",
+    "ABOUT_LINK": "http://ammaryaser.com/about",
+    "CONTACT_US_LINK": "http://ammaryaser.com/contact"
+  }
 }

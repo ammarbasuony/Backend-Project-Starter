@@ -4,6 +4,9 @@ import {Outlet, Route, Routes} from 'react-router-dom'
 import {Login} from './components/Login'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 
+// Properties
+import properties from '../../../app/properties.json'
+
 const AuthLayout = () => {
   useEffect(() => {
     document.body.classList.add('bg-body')
@@ -25,7 +28,7 @@ const AuthLayout = () => {
         <a href='#' className='mb-12'>
           <img
             alt='Logo'
-            src={toAbsoluteUrl('/media/logos/Logo-Light-Horizintal.svg')}
+            src={toAbsoluteUrl(properties.LOGOS.Full_LOGO_LIGHT)}
             className='h-45px'
           />
         </a>

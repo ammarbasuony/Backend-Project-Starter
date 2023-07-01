@@ -5,6 +5,9 @@ import {useLayout} from '../../core'
 import {MutableRefObject, useEffect, useRef} from 'react'
 import {ToggleComponent} from '../../../assets/ts/components'
 
+// Properties
+import properties from '../../../../app/properties.json'
+
 type PropsType = {
   sidebarRef: MutableRefObject<HTMLDivElement | null>
 }
@@ -53,19 +56,19 @@ const SidebarLogo = (props: PropsType) => {
         {config.layoutType === 'dark-sidebar' ? (
           <img
             alt='Logo'
-            src={toAbsoluteUrl('/media/logos/Logo-Dark-Horizintal.svg')}
+            src={toAbsoluteUrl(properties.LOGOS.Full_LOGO_DARK)}
             className='h-40px app-sidebar-logo-default'
           />
         ) : (
           <>
             <img
               alt='Logo'
-              src={toAbsoluteUrl('/media/logos/icon-only-dark.svg')}
+              src={toAbsoluteUrl(properties.LOGOS.ICON_ONLY_DARK)}
               className='h-25px app-sidebar-logo-default theme-light-show'
             />
             <img
               alt='Logo'
-              src={toAbsoluteUrl('/media/logos/Logo-Dark-Horizintal.svg')}
+              src={toAbsoluteUrl(properties.LOGOS.Full_LOGO_DARK)}
               className='h-25px app-sidebar-logo-default theme-dark-show'
             />
           </>
@@ -73,7 +76,7 @@ const SidebarLogo = (props: PropsType) => {
 
         <img
           alt='Logo'
-          src={toAbsoluteUrl('/media/logos/icon-only-dark.svg')}
+          src={toAbsoluteUrl(properties.LOGOS.ICON_ONLY_DARK)}
           className='h-35px app-sidebar-logo-minimize'
         />
       </Link>

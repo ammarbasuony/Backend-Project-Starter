@@ -39,7 +39,11 @@ const StatisticsWidget5: React.FC<Props> = ({
             color: titleColor,
           }}
         >
-          {!title ? <span className='spinner-border spinner-border-sm align-middle me-1' /> : title}
+          {title === null ? (
+            <span className='spinner-border spinner-border-sm align-middle me-1' />
+          ) : (
+            title
+          )}
         </div>
 
         <div

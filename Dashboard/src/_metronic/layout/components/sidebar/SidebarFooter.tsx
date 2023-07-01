@@ -1,12 +1,15 @@
-/* eslint-disable react/jsx-no-target-blank */
 import {KTIcon} from '../../../helpers'
+
+// Properties
+import properties from '../../../../app/properties.json'
 
 const SidebarFooter = () => {
   return (
     <div className='app-sidebar-footer flex-column-auto pt-2 pb-6 px-6' id='kt_app_sidebar_footer'>
       <a
-        href={process.env.REACT_APP_CONTACT_US_URL}
+        href={properties.LINKS.CONTACT_US_LINK}
         target='_blank'
+        rel='noreferrer'
         className='btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100'
         data-bs-toggle='tooltip'
         data-bs-trigger='hover'
