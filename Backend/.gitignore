@@ -2,3 +2,5 @@
 /node_modules
 /build
 /uploads
+
+/prisma/migrations
