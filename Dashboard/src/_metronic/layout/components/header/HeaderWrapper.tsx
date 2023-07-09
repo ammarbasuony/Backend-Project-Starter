@@ -6,6 +6,9 @@ import {useLayout} from '../../core'
 import {Header} from './Header'
 import {Navbar} from './Navbar'
 
+// Properties
+import properties from '../../../../app/properties.json'
+
 export function HeaderWrapper() {
   const {config, classes} = useLayout()
   if (!config.app?.header?.display) {
@@ -38,7 +41,7 @@ export function HeaderWrapper() {
                 <Link to='/home' className='d-lg-none'>
                   <img
                     alt='Logo'
-                    src={toAbsoluteUrl('/media/logos/default-small.svg')}
+                    src={toAbsoluteUrl(`${properties.LOGOS.Full_LOGO_LIGHT}`)}
                     className='h-30px'
                   />
                 </Link>
@@ -53,19 +56,19 @@ export function HeaderWrapper() {
               {config.layoutType !== 'dark-header' ? (
                 <img
                   alt='Logo'
-                  src={toAbsoluteUrl('/media/logos/default.svg')}
+                  src={toAbsoluteUrl(`${properties.LOGOS.Full_LOGO_DARK}`)}
                   className='h-20px h-lg-30px app-sidebar-logo-default'
                 />
               ) : (
                 <>
                   <img
                     alt='Logo'
-                    src={toAbsoluteUrl('/media/logos/default-dark.svg')}
+                    src={toAbsoluteUrl(`${properties.LOGOS.Full_LOGO_LIGHT}`)}
                     className='h-20px h-lg-30px app-sidebar-logo-default theme-light-show'
                   />
                   <img
                     alt='Logo'
-                    src={toAbsoluteUrl('/media/logos/default-small-dark.svg')}
+                    src={toAbsoluteUrl(`${properties.LOGOS.ICON_ONLY_DARK}`)}
                     className='h-20px h-lg-30px app-sidebar-logo-default theme-dark-show'
                   />
                 </>

@@ -75,3 +75,10 @@ body {
     top: -4px;
   }
 }
+
+@media (max-width: 992px) {
+  .app-container {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+}
