@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect} from 'react'
 import {Link} from 'react-router-dom'
-import {toAbsoluteUrl} from '../../../helpers'
 import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import Cookies from 'js-cookie'
@@ -14,6 +13,9 @@ import properties from '../../../../app/properties.json'
 
 // Types
 import {IState} from '../../../../app/models/reducer.types'
+
+// Assets
+import placeHolderImage from '../../../../app/assets/media/jpg/blank.jpg'
 
 const HeaderUserMenu: FC = () => {
   const navigate = useNavigate()
@@ -43,7 +45,13 @@ const HeaderUserMenu: FC = () => {
       <div className='menu-item px-3'>
         <div className='menu-content d-flex align-items-center px-3'>
           <div className='symbol symbol-50px me-5'>
-            <img alt='Logo' src={`${properties.API_URL}${user?.profilePicture}`} />
+            <img
+              alt='Logo'
+              src={`${properties.API_URL}${user?.profilePicture}`}
+              onError={(e: any) => {
+                e.target.src = placeHolderImage
+              }}
+            />
           </div>
 
           <div className='d-flex flex-column'>

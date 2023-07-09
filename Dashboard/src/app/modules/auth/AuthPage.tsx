@@ -5,7 +5,7 @@ import {Login} from './components/Login'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 
 // Properties
-import properties from '../../../app/properties.json'
+import properties from '../../properties.json'
 
 const AuthLayout = () => {
   useEffect(() => {
