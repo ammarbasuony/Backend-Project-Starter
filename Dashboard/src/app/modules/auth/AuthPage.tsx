@@ -28,7 +28,7 @@ const AuthLayout = () => {
         <a href='#' className='mb-12'>
           <img
             alt='Logo'
-            src={toAbsoluteUrl(properties.LOGOS.Full_LOGO_LIGHT)}
+            src={toAbsoluteUrl(properties.LOGOS.FULL_LOGO_LIGHT)}
             className='h-45px'
           />
         </a>

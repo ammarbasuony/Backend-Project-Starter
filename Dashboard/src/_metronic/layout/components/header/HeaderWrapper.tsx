@@ -41,8 +41,13 @@ export function HeaderWrapper() {
                 <Link to='/home' className='d-lg-none'>
                   <img
                     alt='Logo'
-                    src={toAbsoluteUrl(`${properties.LOGOS.Full_LOGO_LIGHT}`)}
-                    className='h-30px'
+                    src={toAbsoluteUrl(`${properties.LOGOS.FULL_LOGO_LIGHT}`)}
+                    className='h-30px theme-light-show'
+                  />
+                  <img
+                    alt='Logo'
+                    src={toAbsoluteUrl(`${properties.LOGOS.FULL_LOGO_DARK}`)}
+                    className='h-30px theme-dark-show'
                   />
                 </Link>
               </div>
@@ -56,14 +61,14 @@ export function HeaderWrapper() {
               {config.layoutType !== 'dark-header' ? (
                 <img
                   alt='Logo'
-                  src={toAbsoluteUrl(`${properties.LOGOS.Full_LOGO_DARK}`)}
+                  src={toAbsoluteUrl(`${properties.LOGOS.FULL_LOGO_DARK}`)}
                   className='h-20px h-lg-30px app-sidebar-logo-default'
                 />
               ) : (
                 <>
                   <img
                     alt='Logo'
-                    src={toAbsoluteUrl(`${properties.LOGOS.Full_LOGO_LIGHT}`)}
+                    src={toAbsoluteUrl(`${properties.LOGOS.FULL_LOGO_LIGHT}`)}
                     className='h-20px h-lg-30px app-sidebar-logo-default theme-light-show'
                   />
                   <img
