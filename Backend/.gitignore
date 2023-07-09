@@ -3,4 +3,4 @@
 /build
 /uploads
 
-/prisma/migrations
+/prisma/migrations/
