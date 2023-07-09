@@ -70,7 +70,8 @@ const RecordCustomHeader: FC<Props> = ({className, title, attr, tableProps}) => 
       {...tableProps.column.getHeaderProps()}
       className={clsx(
         className,
-        isSelectedForSorting && order !== undefined && `table-sort-${order}`
+        isSelectedForSorting && order !== undefined && `table-sort-${order}`,
+        'custom-header'
       )}
       style={{cursor: 'pointer', position: 'relative'}}
       onClick={sortColumn}

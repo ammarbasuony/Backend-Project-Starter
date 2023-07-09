@@ -2,7 +2,6 @@
 import clsx from 'clsx'
 import {useState} from 'react'
 import {KTIcon} from '../../../../helpers'
-import {CreateAppModal, Dropdown1} from '../../../../partials'
 import {useLayout} from '../../../core'
 
 const ToolbarClassic = () => {
@@ -25,7 +24,6 @@ const ToolbarClassic = () => {
             <KTIcon iconName='filter' className='fs-6 text-muted me-1' />
             Filter
           </a>
-          <Dropdown1 />
         </div>
       )}
 
@@ -58,7 +56,6 @@ const ToolbarClassic = () => {
           Create
         </a>
       )}
-      <CreateAppModal show={showCreateAppModal} handleClose={() => setShowCreateAppModal(false)} />
     </div>
   )
 }

@@ -5,13 +5,7 @@ import {ScrollTop} from './components/scroll-top'
 import {Content} from './components/content'
 import {FooterWrapper} from './components/footer'
 import {Sidebar} from './components/sidebar'
-import {
-  DrawerMessenger,
-  ActivityDrawer,
-  InviteUsers,
-  UpgradePlan,
-  ThemeModeProvider,
-} from '../partials'
+import {DrawerMessenger, ActivityDrawer, ThemeModeProvider} from '../partials'
 import {PageDataProvider} from './core'
 import {reInitMenu} from '../helpers'
 import {ToolbarWrapper} from './components/toolbar'
@@ -48,10 +42,6 @@ const MasterLayout = () => {
         <DrawerMessenger />
         {/* end:: Drawers */}
 
-        {/* begin:: Modals */}
-        <InviteUsers />
-        <UpgradePlan />
-        {/* end:: Modals */}
         <ScrollTop />
       </ThemeModeProvider>
     </PageDataProvider>

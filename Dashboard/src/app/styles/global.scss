@@ -34,14 +34,6 @@ body {
   margin-top: 15px;
 }
 
-.cell-content {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 80px;
-  text-align: left;
-}
-
 .cell-popover {
   position: absolute;
   background-color: #f1f1f1;
@@ -67,4 +59,19 @@ body {
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
+}
+
+.custom-header {
+  .cell-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+    text-align: left;
+    display: inline-block;
+  }
+
+  &::after {
+    top: -4px;
+  }
 }
