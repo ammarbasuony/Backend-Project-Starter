@@ -4,14 +4,14 @@ import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
 
 // Types
-import { AuthRequest } from '../@types/auth.types';
+import { AuthRequest } from '../@types/auth.types.js';
 
 const prisma = new PrismaClient();
 
 // Utils
-import { responseError } from '../utils/error-handler.utils';
-import createToken from '../utils/create-token.util';
-import { isRecordExists } from '../utils/validators.util';
+import { responseError } from '../utils/error-handler.util.js';
+import createToken from '../utils/create-token.util.js';
+import { isRecordExists } from '../utils/validators.util.js';
 
 export default {
   UserLogin: async (req: Request, res: Response) => {

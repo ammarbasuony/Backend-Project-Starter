@@ -2,10 +2,10 @@ import { Router } from 'express';
 const router = Router();
 
 // Controllers
-import authController from '../controllers/auth.controller';
+import authController from '../controllers/auth.controller.js';
 
 // Middlewares
-import auth from '../middleware/auth.middleware';
+import auth from '../middleware/auth.middleware.js';
 
 // Routes
 router.post('/login', authController.UserLogin);

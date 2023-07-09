@@ -2,13 +2,13 @@ import { Router } from 'express';
 const router = Router();
 
 // Utils
-import { Roles } from '../utils/constants.util';
+import { Roles } from '../utils/constants.util.js';
 
 // Middlewares
-import checkRole from '../middleware/check-role.middleware';
+import checkRole from '../middleware/check-role.middleware.js';
 
 // Controllers
-import categoryController from '../controllers/category.controller';
+import categoryController from '../controllers/category.controller.js';
 
 // Routes
 router.get('/', checkRole([Roles.ALLOW_CATEGORIES_VIEW]), categoryController.getAll);

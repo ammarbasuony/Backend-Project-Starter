@@ -2,15 +2,15 @@ import { Router } from 'express';
 const router = Router();
 
 // Middlewares
-import auth from '../middleware/auth.middleware';
+import auth from '../middleware/auth.middleware.js';
 
 // Routes
-import dashboardRoutes from './dashboard.route';
-import authRoutes from './auth.route';
-import userRoutes from './user.route';
-import roleRoutes from './role.route';
-import categoryRoutes from './category.route';
-import postRoutes from './post.route';
+import dashboardRoutes from './dashboard.route.js';
+import authRoutes from './auth.route.js';
+import userRoutes from './user.route.js';
+import roleRoutes from './role.route.js';
+import categoryRoutes from './category.route.js';
+import postRoutes from './post.route.js';
 
 // Routes
 router.use('/dashboard', auth, dashboardRoutes);

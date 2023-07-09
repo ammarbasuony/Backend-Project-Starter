@@ -2,14 +2,14 @@ import { Router } from 'express';
 const router = Router();
 
 // Utils
-import { Roles } from '../utils/constants.util';
+import { Roles } from '../utils/constants.util.js';
 
 // Middlewares
-import checkRole from '../middleware/check-role.middleware';
-import UploadFiles from '../middleware/upload.middleware';
+import checkRole from '../middleware/check-role.middleware.js';
+import UploadFiles from '../middleware/upload.middleware.js';
 
 // Controllers
-import userController from '../controllers/user.controller';
+import userController from '../controllers/user.controller.js';
 
 // Routes
 router.get('/', checkRole([Roles.ALLOW_USERS_VIEW]), userController.getAll);

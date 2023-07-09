@@ -2,7 +2,7 @@ import { NextFunction, Response } from 'express';
 import jwt, { GetPublicKeyOrSecret, Secret } from 'jsonwebtoken';
 
 // Types
-import { AuthRequest } from '../@types/auth.types';
+import { AuthRequest } from '../@types/auth.types.js';
 
 const auth = (req: AuthRequest, res: Response, next: NextFunction) => {
   const auth = req.header('Authorization');

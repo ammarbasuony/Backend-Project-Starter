@@ -5,12 +5,12 @@ import bcrypt from 'bcrypt';
 import excelJS from 'exceljs';
 
 // Utils
-import { responseError } from '../utils/error-handler.utils';
-import { isValidEmail } from '../utils/validators.util';
-import { camelToWords, isBoolean, isDate } from '../utils/functions';
+import { responseError } from '../utils/error-handler.util.js';
+import { isValidEmail } from '../utils/validators.util.js';
+import { camelToWords, isBoolean, isDate } from '../utils/functions.util.js';
 
 // Types
-import { Delegate, Model } from '../@types/general-crud.types';
+import { Delegate, Model } from '../@types/general-crud.types.js';
 
 // Database Instance
 export const prisma = new PrismaClient();
