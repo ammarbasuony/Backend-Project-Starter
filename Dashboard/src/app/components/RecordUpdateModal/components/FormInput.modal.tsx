@@ -26,7 +26,7 @@ const FormInput: FC<IFormInputProps> = ({
         {column.name}
       </label>
 
-      {type === 'text' ? (
+      {type !== 'textarea' ? (
         <input
           placeholder={column.name}
           type={column.type}
@@ -39,7 +39,7 @@ const FormInput: FC<IFormInputProps> = ({
           disabled={isDisabled}
           onChange={(e) => onInputChange(e, column.attr)}
         />
-      ) : type === 'textarea' ? (
+      ) : (
         <textarea
           placeholder={column.name}
           name={column.attr}
@@ -52,7 +52,7 @@ const FormInput: FC<IFormInputProps> = ({
           onChange={(e) => onInputChange(e, column.attr)}
           rows={5}
         />
-      ) : null}
+      )}
       {formErrors[column.attr] && (
         <div className='fv-plugins-message-container'>
           <div className='fv-help-block'>

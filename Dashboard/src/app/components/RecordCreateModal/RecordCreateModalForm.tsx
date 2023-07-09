@@ -69,7 +69,7 @@ const RecordCreateModalForm: FC = () => {
     return dispatch(closeOperationModal())
   }
 
-  const renderDynamicInputs = tableColumns.map((column) => {
+  const renderDynamicInputs = tableColumns.map((column) => { 
     if (!notTextInput.includes(column.type) && !excludedColumns.includes(column.attr))
       return (
         <FormInput
