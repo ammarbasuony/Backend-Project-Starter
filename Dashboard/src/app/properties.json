@@ -1,5 +1,5 @@
 {
-  "API_URL": "http://localhost:5050",
+  "API_URL": "https://ammaryaser.com/apps/backend-starter/data",
   "AUTH_COOKIE_NAME": "starter_auth_token",
   "LOGOS": {
     "ICON_ONLY_DARK": "/media/logos/icon-only-dark.svg",
