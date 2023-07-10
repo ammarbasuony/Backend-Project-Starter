@@ -1,2 +1,3 @@
 # Backend-Project-Starter
-Template for starting a new backend project. It includes a basic project structure and configuration files
+📜 Boilerplate template for starting a new backend project. It includes a well-crafted project structure and configuration files
+
