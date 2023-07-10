@@ -44,7 +44,7 @@ const Home: FC = () => {
 
         <div className='col-xl-6'>
           <StatisticsWidget5
-            className='card-xl-stretch mb-xl-8'
+            className='card-xl-stretch mb-8'
             svgIcon='user'
             color='#334A52'
             iconColor='white'
@@ -58,8 +58,8 @@ const Home: FC = () => {
       {/* end::Row */}
 
       {/* begin::Row */}
-      <div className='row g-5 g-xl-8'>
-        <div className='col-xl-12'>
+      <div className='row g-5 g-xl-8 mt-0'>
+        <div className='col-xl-12 mt-0'>
           <ChartsWidget3
             className='card-xl-stretch mb-xl-8'
             title='Recent Posts'

@@ -1,7 +1,7 @@
 import { NextFunction, Response } from 'express';
 
 // Types
-import { AuthRequest } from '../@types/auth.types.js';
+import { AuthRequest } from '../models/auth.types.js';
 
 const checkRole = (roles: string[]) => {
   return async (req: AuthRequest, res: Response, next: NextFunction) => {

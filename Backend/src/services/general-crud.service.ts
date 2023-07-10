@@ -10,7 +10,7 @@ import { isValidEmail } from '../utils/validators.util.js';
 import { camelToWords, isBoolean, isDate } from '../utils/functions.util.js';
 
 // Types
-import { Delegate, Model } from '../@types/general-crud.types.js';
+import { Delegate, Model } from '../models/general-crud.types.js';
 
 // Database Instance
 export const prisma = new PrismaClient();
@@ -22,6 +22,7 @@ export const prisma = new PrismaClient();
  * @param hiddenAttributes - Hidden attributes
  * @param page - Page number
  * @param itemsPerPage - Items per page
+ * @returns CRUD Service Object { getAll, getOne, createOne, updateOne, deleteOne, deleteMany, exportToExcel }
  */
 
 const GeneralCRUDService = (

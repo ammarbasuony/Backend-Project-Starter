@@ -3,9 +3,9 @@
   "AUTH_COOKIE_NAME": "starter_auth_token",
   "LOGOS": {
     "ICON_ONLY_DARK": "/media/logos/icon-only-dark.svg",
-    "Full_LOGO_DARK": "/media/logos/Logo-Dark-Horizintal.svg",
+    "FULL_LOGO_DARK": "/media/logos/Logo-Dark-Horizintal.svg",
     "ICON_ONLY_LIGHT": "/media/logos/icon-only-light.svg",
-    "Full_LOGO_LIGHT": "/media/logos/Logo-Light-Horizintal.svg"
+    "FULL_LOGO_LIGHT": "/media/logos/Logo-Light-Horizintal.svg"
   },
   "LINKS": {
     "COPYRIGHTS_LINK": "http://ammaryaser.com/",

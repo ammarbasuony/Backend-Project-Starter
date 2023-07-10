@@ -56,7 +56,7 @@ const SidebarLogo = (props: PropsType) => {
         {config.layoutType === 'dark-sidebar' ? (
           <img
             alt='Logo'
-            src={toAbsoluteUrl(properties.LOGOS.Full_LOGO_DARK)}
+            src={toAbsoluteUrl(properties.LOGOS.FULL_LOGO_DARK)}
             className='h-40px app-sidebar-logo-default'
           />
         ) : (
@@ -68,7 +68,7 @@ const SidebarLogo = (props: PropsType) => {
             />
             <img
               alt='Logo'
-              src={toAbsoluteUrl(properties.LOGOS.Full_LOGO_DARK)}
+              src={toAbsoluteUrl(properties.LOGOS.FULL_LOGO_DARK)}
               className='h-25px app-sidebar-logo-default theme-dark-show'
             />
           </>

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
 
 // Types
-import { AuthRequest } from '../@types/auth.types.js';
+import { AuthRequest } from '../models/auth.types.js';
 
 const prisma = new PrismaClient();
 
