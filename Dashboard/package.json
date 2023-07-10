@@ -1,6 +1,6 @@
 {
   "name": "backend-starter-dashboard",
-  "description": "💥 🛍️ 💻 👉🏼🧑‍💼 BoomPOS is a 💯 simple and 💪 robust Point of Sale system that helps you 🤝 manage your business 👌 easily and straightforwardly. With a 🔝 modern and 🧼 clean design, BoomPOS was specifically made to be simple to use yet at the same time provide 💪 powerful features to manage your business's 🤝 every need",
+  "description": "Backend Starter Dashboard - Open-Source Full-Stack Seed Project",
   "version": "8.1.8",
   "private": true,
   "dependencies": {
