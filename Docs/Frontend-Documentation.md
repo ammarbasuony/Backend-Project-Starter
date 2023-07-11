@@ -233,3 +233,32 @@ export default Categories
 ```
 
 Our main focus here on the 7 dispatches we did
+| Action | Payload | Description |
+| --- | --- | --- |
+| `setTableData` | `response.data` | Set the data of the table |
+| `setTotalRecords` | `response.totalRecords` | Set the total records of the table |
+| `setTableColumns` | `columns` | Set the columns of the table |
+| `setTableName` | `'categories'` | Set the name of the table |
+| `setIsTableHasFiles` | `false` | Set if the table has files or not |
+| `setIsOperationDone` | `false` | Set if the operation is done or not |
+| `setOperationsPermissions` | `Roles.ALLOW_CATEGORIES_VIEW` | Set the permissions of the table |
+
+‎
+
+## 🏗️ Build Stage
+After finishing the development stage, you'll need to build the project.\
+\
+You can build the project using the following command:
+
+```bash
+npm run build
+```
+
+This command will generate a `build` folder that contains the compiled code.\
+
+
+‎
+
+---
+
+## 👋🏼 Farewell for now! Take care and keep coding ! 💫
