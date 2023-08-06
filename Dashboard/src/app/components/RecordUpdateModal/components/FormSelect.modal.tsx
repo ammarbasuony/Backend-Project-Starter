@@ -22,6 +22,7 @@ const FormSelect: FC<IFormSelectProps> = ({
       </label>
 
       <select
+        value={value}
         name={column.attr}
         id={column.attr}
         className={`form-control form-control-solid mb-3 mb-lg-0 ${
@@ -32,7 +33,7 @@ const FormSelect: FC<IFormSelectProps> = ({
       >
         <option value=''>Select Option</option>
         {column.options.map((option: any) => (
-          <option key={option.value} value={option.value} selected={option.value === value}>
+          <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}

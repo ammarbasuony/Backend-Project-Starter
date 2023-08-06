@@ -1,5 +1,4 @@
-import {useEffect, useState} from 'react'
-import {useSearchParams} from 'react-router-dom'
+import {useEffect} from 'react'
 import RecordsList from '../../components/GenericCRUD/RecordsList'
 import {useDispatch, useSelector} from 'react-redux'
 
@@ -29,38 +28,13 @@ import {IState} from '../../models/reducer.types'
 // Utils
 import {excludeColumns} from '../../utils/constants.util'
 
+// Hooks
+import useSearchHandler from '../../hooks/useSearchHandler'
+
 const Users = () => {
   const dispatch = useDispatch()
+  const { params, isParamsChanged } = useSearchHandler(columns, excludeColumns)
   const {isOperationDone} = useSelector((state: IState) => state.crudReducer)
-  const [searchParams] = useSearchParams()
-
-  const [params, setParams] = useState<any>({})
-  const [isParamsChanged, setIsParamsChanged] = useState<boolean>(false)
-
-  const getSearchParams = () => {
-    const filterFields = columns.filter(
-      (field) => !excludeColumns.includes(field.attr) && field.type !== 'image'
-    )
-
-    // get filters from search params if exist
-    const searchParamsObj: any = {}
-
-    if (searchParams.get('page')) {
-      searchParamsObj['page'] = searchParams.get('page')
-    }
-
-    if (searchParams.get('search')) {
-      searchParamsObj['search'] = searchParams.get('search')
-    }
-
-    filterFields.forEach((field) => {
-      if (searchParams.get(field.attr)) {
-        searchParamsObj[field.attr] = searchParams.get(field.attr)
-      }
-    })
-    setParams(searchParamsObj)
-    setIsParamsChanged(true)
-  }
 
   const fetchData = async () => {
     const response = await genericCrudAPI('users').getAll(params)
@@ -90,10 +64,6 @@ const Users = () => {
     dispatch(setIsOperationDone(false))
     dispatch(setOperationsPermissions(Roles.ALLOW_USERS_OPERATION))
   }
-
-  useEffect(() => {
-    getSearchParams()
-  }, [])
 
   useEffect(() => {
     if (!isParamsChanged) return

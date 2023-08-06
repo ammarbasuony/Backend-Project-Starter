@@ -32,8 +32,6 @@ const RecordsListFilter = () => {
   }, [])
 
   useEffect(() => {
-    console.log(searchParams.get('search'))
-
     const filterFields = tableColumns.filter(
       (field) => !excludeColumns.includes(field.attr) && field.type !== 'image'
     )
@@ -93,6 +91,7 @@ const RecordsListFilter = () => {
         <div className='mb-10' key={field.attr}>
           <label className='form-label fs-6 fw-bold'>{field.name}:</label>
           <select
+            value={String(filters[field.attr])}
             className='form-select form-select-solid fw-bolder'
             data-kt-select2='true'
             data-placeholder='Select option'
@@ -103,14 +102,13 @@ const RecordsListFilter = () => {
               setFilters({...filters, [field.attr]: e.target.value})
             }}
           >
-            <option value='' selected={!filters[field.attr]}>
+            <option value=''>
               Select Option
             </option>
             {field.options.map((option: any) => (
               <option
                 value={option.value}
                 key={option.value}
-                selected={String(option.value) === String(filters[field.attr])}
               >
                 {option.label}
               </option>
