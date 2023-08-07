@@ -69,7 +69,7 @@ const RecordCreateModalForm: FC = () => {
     return dispatch(closeOperationModal())
   }
 
-  const renderDynamicInputs = tableColumns.map((column) => { 
+  const renderDynamicInputs = tableColumns.map((column) => {
     if (!notTextInput.includes(column.type) && !excludedColumns.includes(column.attr))
       return (
         <FormInput
@@ -77,7 +77,12 @@ const RecordCreateModalForm: FC = () => {
           formErrors={formErrors}
           isDisabled={isSubmitting}
           key={column.attr}
-          onInputChange={(e, attr) => setFormData({...formData, [attr]: e.target.value})}
+          onInputChange={(e, attr) =>
+            setFormData({
+              ...formData,
+              [attr]: column.type === 'date' ? new Date(e.target.value) : e.target.value,
+            })
+          }
           type={column.type}
         />
       )
