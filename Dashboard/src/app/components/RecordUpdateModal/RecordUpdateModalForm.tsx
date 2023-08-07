@@ -110,7 +110,12 @@ const RecordUpdateModalForm: FC = () => {
           formErrors={formErrors}
           isDisabled={isLoading}
           key={column.attr}
-          onInputChange={(e, attr) => setFormData({...formData, [attr]: e.target.value})}
+          onInputChange={(e, attr) =>
+            setFormData({
+              ...formData,
+              [attr]: column.type === 'date' ? new Date(e.target.value) : e.target.value,
+            })
+          }
           type={column.type}
         />
       )
