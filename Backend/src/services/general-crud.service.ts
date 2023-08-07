@@ -163,9 +163,13 @@ const GeneralCRUDService = (
       bodyData[uploadInputName] = `/${req.file.path}`;
     }
 
-    // Check if one of the attributes is ending with 'Id' and force it to be a number
+    // Check if one of the attributes is ending with 'Id' or it's a number in string and force it to be a number
     for (const key in bodyData) {
       if (key.endsWith('Id')) {
+        bodyData[key] = Number(bodyData[key]);
+      }
+
+      if (Number(bodyData[key])) {
         bodyData[key] = Number(bodyData[key]);
       }
     }
@@ -187,7 +191,7 @@ const GeneralCRUDService = (
     }
 
     try {
-      const record = await (prisma[model] as Delegate).create({
+      const record = await(prisma[model] as Delegate).create({
         data: {
           ...bodyData,
         },
@@ -217,9 +221,13 @@ const GeneralCRUDService = (
     const { id } = req.params;
     const bodyData = req.body;
 
-    // Check if one of the attributes is ending with 'Id' and force it to be a number
+    // Check if one of the attributes is ending with 'Id' or it's a number in string and force it to be a number
     for (const key in bodyData) {
       if (key.endsWith('Id')) {
+        bodyData[key] = Number(bodyData[key]);
+      }
+
+      if (Number(bodyData[key])) {
         bodyData[key] = Number(bodyData[key]);
       }
     }
@@ -247,7 +255,7 @@ const GeneralCRUDService = (
     }
 
     try {
-      const record = await (prisma[model] as Delegate).update({
+      const record = await(prisma[model] as Delegate).update({
         where: { id: Number(id) },
         data: {
           ...bodyData,
