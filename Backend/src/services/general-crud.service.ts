@@ -22,6 +22,7 @@ export const prisma = new PrismaClient();
  * @param hiddenAttributes - Hidden attributes
  * @param page - Page number
  * @param itemsPerPage - Items per page
+ * @param orderBy - Order by
  * @returns CRUD Service Object { getAll, getOne, createOne, updateOne, deleteOne, deleteMany, exportToExcel }
  */
 

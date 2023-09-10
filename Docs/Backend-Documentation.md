@@ -103,6 +103,7 @@ export default {
 | `hiddenAttributes` | `string[]` | The attributes that you want to hide from the response. | `['password']` | `false` | `[]` |
 | `currentPage` | `number` | The current page number. | `1` | `false` | `1` |
 | `recordsPerPage` | `number` | The number of items per page. | `10` | `false` | `30` |
+| `orderBy` | `object[]` | The attribute that you want to order by. | `[{ id: 'desc' }]` | `false` | `[]` |
 
 ‎
 
