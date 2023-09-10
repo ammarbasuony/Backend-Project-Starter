@@ -66,6 +66,7 @@ const RecordCreateModalForm: FC = () => {
     if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
     toast.success(`${singularize(tableName)} created successfully`)
     dispatch(setIsOperationDone(true))
+    setFormData({})
     return dispatch(closeOperationModal())
   }
 
@@ -77,6 +78,7 @@ const RecordCreateModalForm: FC = () => {
           formErrors={formErrors}
           isDisabled={isSubmitting}
           key={column.attr}
+          value={formData[column.attr]}
           onInputChange={(e, attr) =>
             setFormData({
               ...formData,
@@ -120,6 +122,7 @@ const RecordCreateModalForm: FC = () => {
           key={column.attr}
           column={column}
           formErrors={formErrors}
+          value={formData[column.attr]}
           isDisabled={isSubmitting}
           onInputChange={(e, attr) => setFormData({...formData, [attr]: e.target.value})}
         />

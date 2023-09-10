@@ -5,9 +5,16 @@ interface IFormSelectProps {
   formErrors: any
   onInputChange: (e: React.ChangeEvent<HTMLSelectElement>, attr: string) => void
   isDisabled: boolean
+  value: string
 }
 
-const FormSelect: FC<IFormSelectProps> = ({column, formErrors, onInputChange, isDisabled}) => {
+const FormSelect: FC<IFormSelectProps> = ({
+  column,
+  formErrors,
+  onInputChange,
+  isDisabled,
+  value,
+}) => {
   return (
     <div className='fv-row mb-7'>
       <label className={`fw-bold fs-6 mb-2 ${column.required ? 'required' : ''}`}>
@@ -21,6 +28,7 @@ const FormSelect: FC<IFormSelectProps> = ({column, formErrors, onInputChange, is
           formErrors[column.attr] ? 'is-invalid' : ''
         }`}
         disabled={isDisabled}
+        value={value || ''}
         onChange={(e) => onInputChange(e, column.attr)}
       >
         <option value=''>Select Option</option>

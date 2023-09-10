@@ -32,6 +32,11 @@ const GeneralCRUDService = (
   hiddenAttributes: string[] = [],
   currentPage = 1,
   recordsPerPage = 30,
+  orderBy = [
+    {
+      id: 'desc',
+    },
+  ],
 ) => ({
   /**
    * (1) [GET]
@@ -49,11 +54,7 @@ const GeneralCRUDService = (
         ...(Object.keys(include).length && { include }),
         skip: skippedRecords * totalRecordsPerPage,
         take: totalRecordsPerPage,
-        orderBy: [
-          {
-            id: 'desc',
-          },
-        ],
+        orderBy: orderBy,
         where: {
           AND: [
             // ======= Get records by name
@@ -69,7 +70,9 @@ const GeneralCRUDService = (
 
             // ======= Get records by queries e.g { roleId: 1, email: 'test@mail.com' }
             ...Object.keys(queries).map((key) =>
-              Number(queries[key])
+              Number(queries[key]) &&
+              !(queries[key] as string).startsWith('0') &&
+              !(queries[key] as string).startsWith('+')
                 ? {
                     [key]: {
                       equals: Number(queries[key]),
@@ -163,15 +166,13 @@ const GeneralCRUDService = (
       bodyData[uploadInputName] = `/${req.file.path}`;
     }
 
-    // Check if one of the attributes is ending with 'Id' or it's a number in string and force it to be a number
+    // Sanitize Data
     for (const key in bodyData) {
-      if (key.endsWith('Id')) {
-        bodyData[key] = Number(bodyData[key]);
-      }
+      if (key.endsWith('Id')) bodyData[key] = Number(bodyData[key]);
+      if (Number(bodyData[key])) bodyData[key] = Number(bodyData[key]);
 
-      if (Number(bodyData[key])) {
-        bodyData[key] = Number(bodyData[key]);
-      }
+      if (bodyData[key] === 'true') bodyData[key] = true;
+      if (bodyData[key] === 'false') bodyData[key] = false;
     }
 
     // ======= Hashing sensitive data
@@ -191,7 +192,7 @@ const GeneralCRUDService = (
     }
 
     try {
-      const record = await(prisma[model] as Delegate).create({
+      const record = await (prisma[model] as Delegate).create({
         data: {
           ...bodyData,
         },
@@ -221,15 +222,13 @@ const GeneralCRUDService = (
     const { id } = req.params;
     const bodyData = req.body;
 
-    // Check if one of the attributes is ending with 'Id' or it's a number in string and force it to be a number
+    // Sanitize Data
     for (const key in bodyData) {
-      if (key.endsWith('Id')) {
-        bodyData[key] = Number(bodyData[key]);
-      }
+      if (key.endsWith('Id')) bodyData[key] = Number(bodyData[key]);
+      if (Number(bodyData[key])) bodyData[key] = Number(bodyData[key]);
 
-      if (Number(bodyData[key])) {
-        bodyData[key] = Number(bodyData[key]);
-      }
+      if (bodyData[key] === 'true') bodyData[key] = true;
+      if (bodyData[key] === 'false') bodyData[key] = false;
     }
 
     if (uploadInputName && req.file) {
@@ -255,7 +254,7 @@ const GeneralCRUDService = (
     }
 
     try {
-      const record = await(prisma[model] as Delegate).update({
+      const record = await (prisma[model] as Delegate).update({
         where: { id: Number(id) },
         data: {
           ...bodyData,

@@ -5,6 +5,7 @@ interface IFormInputProps {
   formErrors: any
   isDisabled: boolean
   type: 'text' | 'textarea'
+  value: string
   onInputChange: (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
     attr: string
@@ -17,6 +18,7 @@ const FormInput: FC<IFormInputProps> = ({
   isDisabled,
   onInputChange,
   type = 'text',
+  value,
 }) => {
   return (
     <div className='fv-row mb-7'>
@@ -34,6 +36,7 @@ const FormInput: FC<IFormInputProps> = ({
           }`}
           autoComplete='off'
           disabled={isDisabled}
+          value={value || ''}
           onChange={(e) => onInputChange(e, column.attr)}
         />
       ) : (
@@ -45,6 +48,7 @@ const FormInput: FC<IFormInputProps> = ({
           }`}
           autoComplete='off'
           disabled={isDisabled}
+          value={value || ''}
           onChange={(e) => onInputChange(e, column.attr)}
           rows={5}
         />

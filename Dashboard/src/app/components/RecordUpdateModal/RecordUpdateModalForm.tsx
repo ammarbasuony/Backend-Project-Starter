@@ -96,7 +96,7 @@ const RecordUpdateModalForm: FC = () => {
     setIsLoading(false)
 
     if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
-    toast.success(`${singularize(tableName)} created successfully`)
+    toast.success(`${singularize(tableName)} updated successfully`)
     dispatch(setIsOperationDone(true))
     return dispatch(closeUpdateModal())
   }
