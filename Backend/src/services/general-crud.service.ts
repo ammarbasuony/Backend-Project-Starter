@@ -11,6 +11,7 @@ import { camelToWords, isBoolean, isDate } from '../utils/functions.util.js';
 
 // Types
 import { Delegate, Model } from '../models/general-crud.types.js';
+import { exportExcelFile } from './export-excel.service.js';
 
 // Database Instance
 export const prisma = new PrismaClient();
@@ -308,51 +309,7 @@ const GeneralCRUDService = (
    */
   export: async (req: Request, res: Response) => {
     try {
-      const workbook = new excelJS.Workbook();
-      const worksheet = workbook.addWorksheet(model);
-
-      const path = '/uploads/sheets';
-
-      if (!fs.existsSync(`.${path}`)) {
-        fs.mkdirSync(`.${path}`, { recursive: true });
-      }
-
-      // Column for data in excel. Key must match data key
-      const cols = [{ header: 'No.', key: 'no', width: 10 }];
-
-      const records: any = await (prisma[model] as Delegate).findMany({});
-
-      // ======= Remove sensitive data from response
-      if (hiddenAttributes.length) {
-        (records as any).forEach((record: any) => {
-          hiddenAttributes.forEach((attribute) => {
-            delete record[attribute];
-          });
-        });
-      }
-
-      // Add column for each key in data
-      Object.keys(records[0]).forEach((key) => {
-        cols.push({ header: key, key, width: 32 });
-      });
-
-      // Add data to excel
-      worksheet.columns = cols;
-
-      records.forEach((record: any, index: number) => {
-        worksheet.addRow({ no: index + 1, ...record });
-      });
-
-      // Making first line in excel bold
-      worksheet.getRow(1).eachCell((cell) => {
-        cell.font = { bold: true };
-      });
-
-      // Save excel file
-      const fileName = `${model}-${Date.now()}.xlsx`;
-      const filePath = `${path}/${fileName}`;
-
-      await workbook.xlsx.writeFile(`.${filePath}`);
+      const filePath = await exportExcelFile(model, hiddenAttributes);
 
       res.json({
         success: true,
