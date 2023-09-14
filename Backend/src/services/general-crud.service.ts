@@ -171,7 +171,8 @@ const GeneralCRUDService = (
     // Sanitize Data
     for (const key in bodyData) {
       if (key.endsWith('Id')) bodyData[key] = Number(bodyData[key]);
-      if (Number(bodyData[key])) bodyData[key] = Number(bodyData[key]);
+      if (Number(bodyData[key]) && !String(bodyData[key]).startsWith('0') && !String(bodyData[key]).startsWith('+'))
+        bodyData[key] = Number(bodyData[key]);
 
       if (bodyData[key] === 'true') bodyData[key] = true;
       if (bodyData[key] === 'false') bodyData[key] = false;
@@ -227,7 +228,8 @@ const GeneralCRUDService = (
     // Sanitize Data
     for (const key in bodyData) {
       if (key.endsWith('Id')) bodyData[key] = Number(bodyData[key]);
-      if (Number(bodyData[key])) bodyData[key] = Number(bodyData[key]);
+      if (Number(bodyData[key]) && !String(bodyData[key]).startsWith('0') && !String(bodyData[key]).startsWith('+'))
+        bodyData[key] = Number(bodyData[key]);
 
       if (bodyData[key] === 'true') bodyData[key] = true;
       if (bodyData[key] === 'false') bodyData[key] = false;
