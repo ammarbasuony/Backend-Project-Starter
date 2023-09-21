@@ -67,7 +67,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 80px;
+    max-width: 400px;
     text-align: left;
     display: inline-block;
   }
@@ -75,6 +75,13 @@ body {
   &::after {
     top: -4px;
   }
+}
+
+.no-wrap-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
 }
 
 @media (max-width: 992px) {
