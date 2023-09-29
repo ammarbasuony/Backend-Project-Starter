@@ -20,10 +20,11 @@ export const prisma = new PrismaClient();
  * General CRUD Service
  * @param model - Model name
  * @param include - Include relations
+ * @param uploadInputName - Upload input name e.g. 'image'
  * @param hiddenAttributes - Hidden attributes
- * @param page - Page number
- * @param itemsPerPage - Items per page
- * @param orderBy - Order by
+ * @param currentPage - Page number
+ * @param recordsPerPage - Items per page
+ * @param orderBy - Order by (array of objects) e.g. [{ id: 'desc' }]
  * @returns CRUD Service Object { getAll, getOne, createOne, updateOne, deleteOne, deleteMany, exportToExcel }
  */
 
