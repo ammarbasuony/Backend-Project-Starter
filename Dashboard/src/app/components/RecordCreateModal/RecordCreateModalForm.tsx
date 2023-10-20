@@ -18,6 +18,7 @@ import {capitalize, singularize} from '../../utils/functions.util'
 import FormInput from './components/FormInput.modal'
 import FormImageUploader from './components/FormImageUploader.modal'
 import FormSelect from './components/FormSelect.modal'
+import FormEditor from './components/FormEditor.modal'
 
 // Filters
 const notTextInput = ['image', 'select']
@@ -71,6 +72,23 @@ const RecordCreateModalForm: FC = () => {
   }
 
   const renderDynamicInputs = tableColumns.map((column) => {
+    if (column.type === 'editor' && !excludedColumns.includes(column.attr))
+      return (
+        <FormEditor
+          column={column}
+          formErrors={formErrors}
+          isDisabled={isSubmitting}
+          key={column.attr}
+          value={formData[column.attr]}
+          onInputChange={(value, attr) =>
+            setFormData({
+              ...formData,
+              [attr]: value,
+            })
+          }
+        />
+      )
+
     if (!notTextInput.includes(column.type) && !excludedColumns.includes(column.attr))
       return (
         <FormInput

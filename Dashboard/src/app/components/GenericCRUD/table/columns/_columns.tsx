@@ -9,6 +9,7 @@ import {RecordSelectionCell} from './RecordSelectionCell'
 import {RecordCustomHeader} from './RecordCustomHeader'
 import {RecordSelectionHeader} from './RecordSelectionHeader'
 import {RecordInfoCell} from './RecordInfoCell'
+import {RecordDefaultCell} from './RecordDefaultCell'
 
 const usersColumns = (modelColumns: any): ReadonlyArray<Column<any>> => {
   // Skip password column
@@ -22,28 +23,28 @@ const usersColumns = (modelColumns: any): ReadonlyArray<Column<any>> => {
       accessor: column.accessor,
 
       // handle custom cells
-      ...(column.mode
-        ? {
-            Cell: ({...props}) => {
-              // handle accessors with nested properties (e.g. 'user.name')
-              const cellValue = column.accessor.includes('.')
-                ? props.data[props.row.index][column.accessor.split('.')[0]][
-                    column.accessor.split('.')[1]
-                  ]
-                : props.data[props.row.index][column.accessor]
 
-              return column.mode === 'highlighted' ? (
-                <RecordHighlightedCell value={cellValue} />
-              ) : column.mode === 'image' ? (
-                <RecordInfoCell image={cellValue} />
-              ) : column.mode === 'boolean' ? (
-                <RecordBooleanCell value={cellValue} />
-              ) : (
-                <RecordLabeledCell last_login={cellValue} />
-              )
-            },
+      Cell: ({...props}) => {
+        // handle accessors with nested properties (e.g. 'user.name')
+        const cellValue = column.accessor.includes('.')
+          ? props.data[props.row.index][column.accessor.split('.')[0]][
+              column.accessor.split('.')[1]
+            ]
+          : props.data[props.row.index][column.accessor]
+
+        if (column.mode)
+          switch (column.mode) {
+            case 'highlighted':
+              return <RecordHighlightedCell value={cellValue} />
+            case 'image':
+              return <RecordInfoCell image={cellValue} />
+            case 'boolean':
+              return <RecordBooleanCell value={cellValue} />
+            default:
+              return <RecordLabeledCell value={cellValue} />
           }
-        : {}),
+        else return <RecordDefaultCell value={cellValue} />
+      },
     }
   })
 

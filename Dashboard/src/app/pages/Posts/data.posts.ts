@@ -1,4 +1,6 @@
-export const columns = [
+import {IModuleData} from '../../models/data.types'
+
+export const columns: IModuleData[] = [
   {
     name: 'Thumbnail',
     accessor: 'thumbnail',
@@ -18,7 +20,7 @@ export const columns = [
     name: 'Description',
     accessor: 'description',
     attr: 'description',
-    type: 'textarea',
+    type: 'editor',
     required: true,
   },
   {

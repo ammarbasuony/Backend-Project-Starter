@@ -1,4 +1,6 @@
-export const columns = [
+import {IModuleData} from '../../models/data.types'
+
+export const columns: IModuleData[] = [
   {
     name: 'Profile Image',
     accessor: 'profilePicture',

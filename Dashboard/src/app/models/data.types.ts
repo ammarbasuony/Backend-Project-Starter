@@ -23,3 +23,18 @@ export interface IRole {
   createdAt: string
   updatedAt: string
 }
+
+export interface IModuleData {
+  name: string
+  accessor: string
+  attr: string
+  mode?: string
+  type: 'text' | 'image' | 'editor' | 'select' | 'date' | 'email' | 'password'
+  options?: IOption[]
+  required?: boolean
+}
+
+export interface IOption {
+  label: string
+  value: string | number | boolean
+}
