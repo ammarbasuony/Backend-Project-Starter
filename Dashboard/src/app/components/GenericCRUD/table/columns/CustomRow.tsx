@@ -11,8 +11,6 @@ type Props = {
 const CustomRow: FC<Props> = ({row}) => (
   <tr {...row.getRowProps()}>
     {row.cells.map((cell) => {
-      console.log(cell.render('Cell'))
-
       return (
         <td
           {...cell.getCellProps()}

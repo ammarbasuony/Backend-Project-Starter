@@ -8,7 +8,9 @@ import routes from './routes/index.js';
 const app = express();
 const port = process.env.PORT || 2020;
 app.use(cors());
-app.use(express.json());
+app.use(express.json({
+  limit: '25mb'
+}));
 app.use(express.urlencoded({ extended: true }));
 
 // Serve Static Files

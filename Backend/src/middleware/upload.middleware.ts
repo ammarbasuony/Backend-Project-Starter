@@ -36,6 +36,6 @@ const checkFileType = (req: Request, file: Express.Multer.File, cb: multer.FileF
   }
 };
 
-const UploadFiles = multer({ storage: storage, fileFilter: checkFileType });
+const UploadFiles = multer({ storage: storage, fileFilter: checkFileType, limits: { fieldSize: 25 * 1024 * 1024 } });
 
 export default UploadFiles;
