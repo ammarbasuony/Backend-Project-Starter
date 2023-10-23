@@ -29,7 +29,7 @@ export const prisma = new PrismaClient();
 const GeneralCRUDService = (
   model: Model,
   include = {},
-  uploadInputName: string[] = [],
+  uploadInputName: { name: string; type: 'single' | 'multiple' }[] = [],
   hiddenAttributes: string[] = [],
   currentPage = 1,
   recordsPerPage = 30,
@@ -164,23 +164,24 @@ const GeneralCRUDService = (
     const bodyData = req.body;
 
     if (req.file) {
-      bodyData[uploadInputName[0]] = `/${req.file.path}`;
+      bodyData[uploadInputName[0].name] = `/${req.file.path}`;
     }
 
     if (req.files) {
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
-      uploadInputName.forEach((inputName) => {
-        if (files[inputName].length > 1) {
-          const uplodedFiles = files[inputName].map((file) => ({
-            filename: file.filename,
-            path: `/${file.path}`,
-          }));
+      uploadInputName.forEach((input) => {
+        if (files[input.name])
+          if (input.type === 'multiple') {
+            const uplodedFiles = files[input.name].map((file) => ({
+              filename: file.originalname,
+              path: `/${file.path}`,
+            }));
 
-          bodyData[inputName] = JSON.stringify(uplodedFiles);
-        } else {
-          bodyData[inputName] = `/${files[inputName][0].path}`;
-        }
+            bodyData[input.name] = JSON.stringify(uplodedFiles);
+          } else {
+            bodyData[input.name] = `/${files[input.name]?.[0].path}`;
+          }
       });
     }
 
@@ -241,6 +242,10 @@ const GeneralCRUDService = (
     const { id } = req.params;
     const bodyData = req.body;
 
+    const fetchRecord = await (prisma[model] as Delegate).findUnique({
+      where: { id: Number(id) },
+    });
+
     // Sanitize Data
     for (const key in bodyData) {
       if (key.endsWith('Id')) bodyData[key] = Number(bodyData[key]);
@@ -252,23 +257,26 @@ const GeneralCRUDService = (
     }
 
     if (req.file) {
-      bodyData[uploadInputName[0]] = `/${req.file.path}`;
+      bodyData[uploadInputName[0].name] = `/${req.file.path}`;
     }
 
     if (req.files) {
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
-      uploadInputName.forEach((inputName) => {
-        if (files[inputName].length > 1) {
-          const uplodedFiles = files[inputName].map((file) => ({
-            filename: file.filename,
-            path: `/${file.path}`,
-          }));
+      uploadInputName.forEach(async (input) => {
+        if (files[input.name])
+          if (input.type === 'multiple') {
+            const currentFiles = JSON.parse((fetchRecord as any)[input.name]);
 
-          bodyData[inputName] = JSON.stringify(uplodedFiles);
-        } else {
-          bodyData[inputName] = `/${files[inputName][0].path}`;
-        }
+            const uplodedFiles = files[input.name].map((file) => ({
+              filename: file.originalname,
+              path: `/${file.path}`,
+            }));
+
+            bodyData[input.name] = JSON.stringify([...currentFiles, ...uplodedFiles]);
+          } else {
+            bodyData[input.name] = `/${files[input.name]?.[0].path}`;
+          }
       });
     }
 
