@@ -43,6 +43,7 @@ model Post {
   name                        String
   description                 String   @db.LongText
   thumbnail                   String   @default("/assets/jpg/blank.jpg")
+  images                      String   @default("[]")
   category                    Category @relation(fields: [categoryId], references: [id])
   categoryId                  Int
   createdAt                   DateTime @default(now())

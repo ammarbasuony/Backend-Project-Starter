@@ -8,7 +8,7 @@ export default {
     {
       role: true,
     },
-    'profilePicture',
+    ['profilePicture'],
     ['password'],
   ),
 };

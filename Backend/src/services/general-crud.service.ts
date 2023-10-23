@@ -1,8 +1,6 @@
-import fs from 'fs';
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import excelJS from 'exceljs';
 
 // Utils
 import { responseError } from '../utils/error-handler.util.js';
@@ -20,7 +18,7 @@ export const prisma = new PrismaClient();
  * General CRUD Service
  * @param model - Model name
  * @param include - Include relations
- * @param uploadInputName - Upload input name e.g. 'image'
+ * @param uploadInputName - Upload input names (array of strings) e.g. ['thumbnail']
  * @param hiddenAttributes - Hidden attributes
  * @param currentPage - Page number
  * @param recordsPerPage - Items per page
@@ -31,7 +29,7 @@ export const prisma = new PrismaClient();
 const GeneralCRUDService = (
   model: Model,
   include = {},
-  uploadInputName = '',
+  uploadInputName: string[] = [],
   hiddenAttributes: string[] = [],
   currentPage = 1,
   recordsPerPage = 30,
@@ -165,8 +163,25 @@ const GeneralCRUDService = (
   createOne: async (req: Request, res: Response) => {
     const bodyData = req.body;
 
-    if (uploadInputName && req.file) {
-      bodyData[uploadInputName] = `/${req.file.path}`;
+    if (req.file) {
+      bodyData[uploadInputName[0]] = `/${req.file.path}`;
+    }
+
+    if (req.files) {
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+      uploadInputName.forEach((inputName) => {
+        if (files[inputName].length > 1) {
+          const uplodedFiles = files[inputName].map((file) => ({
+            filename: file.filename,
+            path: `/${file.path}`,
+          }));
+
+          bodyData[inputName] = JSON.stringify(uplodedFiles);
+        } else {
+          bodyData[inputName] = `/${files[inputName][0].path}`;
+        }
+      });
     }
 
     // Sanitize Data
@@ -236,8 +251,25 @@ const GeneralCRUDService = (
       if (bodyData[key] === 'false') bodyData[key] = false;
     }
 
-    if (uploadInputName && req.file) {
-      bodyData[uploadInputName] = `/${req.file.path}`;
+    if (req.file) {
+      bodyData[uploadInputName[0]] = `/${req.file.path}`;
+    }
+
+    if (req.files) {
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+      uploadInputName.forEach((inputName) => {
+        if (files[inputName].length > 1) {
+          const uplodedFiles = files[inputName].map((file) => ({
+            filename: file.filename,
+            path: `/${file.path}`,
+          }));
+
+          bodyData[inputName] = JSON.stringify(uplodedFiles);
+        } else {
+          bodyData[inputName] = `/${files[inputName][0].path}`;
+        }
+      });
     }
 
     // ======= Hashing sensitive data

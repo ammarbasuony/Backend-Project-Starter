@@ -66,3 +66,5 @@ If you'd like to get in touch, feel free to reach out to me at\
 📧 [ammaryaser.dev@gmail.com](mailto:ammaryaser.dev@gmail.com) | ☎️ [+201092485755](tel:+201092485755).
 
 Thanks for stopping by! 😄
+
+<a href="https://www.buymeacoffee.com/ammaryaserh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
