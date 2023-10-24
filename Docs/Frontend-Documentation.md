@@ -88,15 +88,30 @@ Inside the `Categories` folder, we will create two files:
 ### 📌 `data.categories.ts`
 This file will contain the columns (fields) of the table.\
 \
+
+```ts
+export interface IModuleData {
+  name: string
+  accessor: string
+  attr: string
+  mode?: string
+  type: 'text' | 'image' | 'editor' | 'select' | 'date' | 'email' | 'password' | 'images'
+  options?: IOption[]
+  required?: boolean
+  showInTable: boolean
+}
+```
+
 For example:
 ```ts
-export const columns = [
+export const columns: IModuleData[] = [
   {
     name: 'Name',
     accessor: 'name',
     attr: 'name',
     type: 'text',
     required: true,
+    showInTable: true,
   },
   {
     name: 'Created At',
@@ -104,6 +119,7 @@ export const columns = [
     attr: 'createdAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
   {
     name: 'Last Updated At',
@@ -111,13 +127,14 @@ export const columns = [
     attr: 'updatedAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: false,
   },
 ]
 ```
 
-For `CreatedAt` and `UpdatedAt` fields, keep them in all the tables, because they are required by the generic CRUD module.\
+For `CreatedAt` and `UpdatedAt` fields, keep them in all the tables, because they are required by the generic CRUD module.
 
-We get the fields from the backend `prisma/schema.prisma` file.\
+We get the fields from the backend `prisma/schema.prisma` file.
 
 ```
 model Category {

@@ -18,7 +18,7 @@ export const prisma = new PrismaClient();
  * General CRUD Service
  * @param model - Model name
  * @param include - Include relations
- * @param uploadInputName - Upload input names (array of strings) e.g. ['thumbnail']
+ * @param uploadInputName - Upload input names (array of strings) e.g. [{ name: 'image', type: 'single' }}]
  * @param hiddenAttributes - Hidden attributes
  * @param currentPage - Page number
  * @param recordsPerPage - Items per page

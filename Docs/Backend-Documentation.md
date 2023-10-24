@@ -99,7 +99,7 @@ export default {
 | --- | --- | --- | --- | --- | --- |
 | `model` | `string` | The name of the model. | `'category'` | `true` | - |
 | `include` | `object` | The relations that you want to include. | `{ products: true }` | `false` | `{}` |
-| `uploadInputName` | `string` | The name of the input that you want to upload with, in case you have files in the model. | `'image'` | `false` | `''` |
+| `uploadInputName` | `object[]` | The names of the inputs that you want to upload with, in case you have files in the model. | `[{ name: 'image', type: 'single' }}]` | `false` | `[]` |
 | `hiddenAttributes` | `string[]` | The attributes that you want to hide from the response. | `['password']` | `false` | `[]` |
 | `currentPage` | `number` | The current page number. | `1` | `false` | `1` |
 | `recordsPerPage` | `number` | The number of items per page. | `10` | `false` | `30` |
