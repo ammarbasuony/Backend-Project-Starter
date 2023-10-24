@@ -23,3 +23,7 @@ export const singularize = (s: string) => {
   const singular = s.replace(/s$/, '')
   return capitalize(singular)
 }
+
+export const limitText = (text: string, limit: number) => {
+  return text?.length > limit ? text.slice(0, limit) + '...' : text
+}

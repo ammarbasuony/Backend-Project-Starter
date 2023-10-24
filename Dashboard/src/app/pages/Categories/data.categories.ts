@@ -7,6 +7,7 @@ export const columns: IModuleData[] = [
     attr: 'name',
     type: 'text',
     required: true,
+    showInTable: true,
   },
   {
     name: 'Created At',
@@ -14,6 +15,7 @@ export const columns: IModuleData[] = [
     attr: 'createdAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
   {
     name: 'Last Updated At',
@@ -21,5 +23,6 @@ export const columns: IModuleData[] = [
     attr: 'updatedAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
 ]

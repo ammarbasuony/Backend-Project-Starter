@@ -27,7 +27,7 @@ const RecordsTable = () => {
   useEffect(() => {
     setIsLoading(true)
     setItems(tableData)
-    setModelColumns(tableColumns)
+    setModelColumns(tableColumns.filter((column) => column.showInTable))
     setIsLoading(false)
   }, [tableData, tableColumns])
 

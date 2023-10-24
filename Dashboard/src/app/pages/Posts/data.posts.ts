@@ -8,6 +8,7 @@ export const columns: IModuleData[] = [
     type: 'image',
     mode: 'image',
     required: false,
+    showInTable: true,
   },
   {
     name: 'Name',
@@ -15,6 +16,7 @@ export const columns: IModuleData[] = [
     attr: 'name',
     type: 'text',
     required: true,
+    showInTable: true,
   },
   {
     name: 'Description',
@@ -22,6 +24,15 @@ export const columns: IModuleData[] = [
     attr: 'description',
     type: 'editor',
     required: true,
+    showInTable: true,
+  },
+  {
+    name: 'Images',
+    accessor: 'images',
+    attr: 'images',
+    type: 'images',
+    required: false,
+    showInTable: false,
   },
   {
     name: 'Category',
@@ -31,6 +42,7 @@ export const columns: IModuleData[] = [
     type: 'select',
     options: [],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Created At',
@@ -38,6 +50,7 @@ export const columns: IModuleData[] = [
     attr: 'createdAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
   {
     name: 'Last Updated At',
@@ -45,5 +58,6 @@ export const columns: IModuleData[] = [
     attr: 'updatedAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
 ]

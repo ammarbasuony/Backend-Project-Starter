@@ -1,5 +1,9 @@
 @import 'custom-fonts';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   font-family: Inter, 'Cairo-Regular';
 }

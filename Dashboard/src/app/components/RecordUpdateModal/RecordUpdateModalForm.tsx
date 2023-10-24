@@ -20,9 +20,10 @@ import FormInput from './components/FormInput.modal'
 import FormImageUploader from './components/FormImageUploader.modal'
 import FormSelect from './components/FormSelect.modal'
 import FormEditor from './components/FormEditor.modal'
+import FormMultiImageUploader from './components/FormMultiImageUploader'
 
 // Filters
-const notTextInput = ['image', 'select']
+const textInput = ['text', 'textarea']
 const excludedColumns = ['id', 'createdAt', 'updatedAt']
 
 const RecordUpdateModalForm: FC = () => {
@@ -56,6 +57,19 @@ const RecordUpdateModalForm: FC = () => {
     })
 
     setFormData(filteredResponseData)
+  }
+
+  const handleUpload = async (e: any, attr: string) => {
+    const files = e.target.files
+    const formData = new FormData()
+
+    Array.from(files).forEach((file: any) => {
+      formData.append(attr, file)
+    })
+
+    const response = await genericCrudAPI(tableName).updateOne(selectedId, formData)
+    if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
+    getRecordData()
   }
 
   useEffect(() => {
@@ -120,7 +134,7 @@ const RecordUpdateModalForm: FC = () => {
         />
       )
 
-    if (!notTextInput.includes(column.type) && !excludedColumns.includes(column.attr))
+    if (textInput.includes(column.type) && !excludedColumns.includes(column.attr))
       return (
         <FormInput
           value={formData[column.attr]}
@@ -163,6 +177,25 @@ const RecordUpdateModalForm: FC = () => {
             delete newFormData[column.attr]
             setFormData(newFormData)
           }}
+        />
+      )
+
+    if (column.type === 'images' && !excludedColumns.includes(column.attr))
+      return (
+        <FormMultiImageUploader
+          key={column.attr}
+          column={column}
+          formErrors={formErrors}
+          value={formData[column.attr]}
+          isDisabled={isLoading}
+          onRemove={(index) => {
+            const newFormData = {...formData}
+            const images = JSON.parse(newFormData[column.attr])
+            images.splice(index, 1)
+            newFormData[column.attr] = JSON.stringify(images)
+            setFormData(newFormData)
+          }}
+          handleUpload={handleUpload}
         />
       )
 

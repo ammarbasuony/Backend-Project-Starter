@@ -8,6 +8,7 @@ export const columns: IModuleData[] = [
     type: 'image',
     mode: 'image',
     required: false,
+    showInTable: true,
   },
   {
     name: 'Name',
@@ -15,6 +16,7 @@ export const columns: IModuleData[] = [
     attr: 'name',
     type: 'text',
     required: true,
+    showInTable: true,
   },
   {
     name: 'Email',
@@ -22,6 +24,7 @@ export const columns: IModuleData[] = [
     attr: 'email',
     type: 'email',
     required: true,
+    showInTable: true,
   },
   {
     name: 'Role',
@@ -31,6 +34,7 @@ export const columns: IModuleData[] = [
     type: 'select',
     options: [],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Password',
@@ -38,6 +42,7 @@ export const columns: IModuleData[] = [
     attr: 'password',
     type: 'password',
     required: true,
+    showInTable: true,
   },
   {
     name: 'Created At',
@@ -45,6 +50,7 @@ export const columns: IModuleData[] = [
     attr: 'createdAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
   {
     name: 'Last Updated At',
@@ -52,5 +58,6 @@ export const columns: IModuleData[] = [
     attr: 'updatedAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
 ]

@@ -7,6 +7,7 @@ export const columns: IModuleData[] = [
     attr: 'name',
     type: 'text',
     required: true,
+    showInTable: true,
   },
   {
     name: 'Allow Posts View',
@@ -19,6 +20,7 @@ export const columns: IModuleData[] = [
       {label: 'False', value: false},
     ],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Allow Posts Operations',
@@ -31,6 +33,7 @@ export const columns: IModuleData[] = [
       {label: 'False', value: false},
     ],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Allow Users View',
@@ -43,6 +46,7 @@ export const columns: IModuleData[] = [
       {label: 'False', value: false},
     ],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Allow Users Operations',
@@ -55,6 +59,7 @@ export const columns: IModuleData[] = [
       {label: 'False', value: false},
     ],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Allow Roles View',
@@ -67,6 +72,7 @@ export const columns: IModuleData[] = [
       {label: 'False', value: false},
     ],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Allow Roles Operations',
@@ -79,6 +85,7 @@ export const columns: IModuleData[] = [
       {label: 'False', value: false},
     ],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Allow Categories View',
@@ -91,6 +98,7 @@ export const columns: IModuleData[] = [
       {label: 'False', value: false},
     ],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Allow Categories Operations',
@@ -103,6 +111,7 @@ export const columns: IModuleData[] = [
       {label: 'False', value: false},
     ],
     required: true,
+    showInTable: true,
   },
   {
     name: 'Created At',
@@ -110,6 +119,7 @@ export const columns: IModuleData[] = [
     attr: 'createdAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
   {
     name: 'Last Updated At',
@@ -117,5 +127,6 @@ export const columns: IModuleData[] = [
     attr: 'updatedAt',
     mode: 'labeled',
     type: 'date',
+    showInTable: true,
   },
 ]

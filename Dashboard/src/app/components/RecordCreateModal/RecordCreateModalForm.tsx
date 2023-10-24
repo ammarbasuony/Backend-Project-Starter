@@ -19,9 +19,10 @@ import FormInput from './components/FormInput.modal'
 import FormImageUploader from './components/FormImageUploader.modal'
 import FormSelect from './components/FormSelect.modal'
 import FormEditor from './components/FormEditor.modal'
+import FormMultiImageUploader from './components/FormMultiImageUploader'
 
 // Filters
-const notTextInput = ['image', 'select']
+const textInput = ['text', 'textarea']
 const excludedColumns = ['id', 'createdAt', 'updatedAt']
 
 const RecordCreateModalForm: FC = () => {
@@ -51,8 +52,15 @@ const RecordCreateModalForm: FC = () => {
 
     // Submit
     const formDataWithFiles = new FormData()
+
     Object.keys(formData).forEach((key) => {
-      formDataWithFiles.append(key, formData[key])
+      if (Array.isArray(formData[key]) && formData[key][0] instanceof File) {
+        formData[key].forEach((file: File) => {
+          formDataWithFiles.append(key, file)
+        })
+      } else {
+        formDataWithFiles.append(key, formData[key])
+      }
     })
 
     let response
@@ -67,7 +75,19 @@ const RecordCreateModalForm: FC = () => {
     if (!response.success) return response.errors.forEach((error: string) => toast.error(error))
     toast.success(`${singularize(tableName)} created successfully`)
     dispatch(setIsOperationDone(true))
-    setFormData({})
+
+    // Empty form data
+    Object.keys(formData).forEach((key) => {
+      delete formData[key]
+    })
+
+    // Empty images preview
+    Object.keys(imagesPreview).forEach((key) => {
+      delete imagesPreview[key]
+    })
+
+    setFormData(formData)
+
     return dispatch(closeOperationModal())
   }
 
@@ -89,7 +109,7 @@ const RecordCreateModalForm: FC = () => {
         />
       )
 
-    if (!notTextInput.includes(column.type) && !excludedColumns.includes(column.attr))
+    if (textInput.includes(column.type) && !excludedColumns.includes(column.attr))
       return (
         <FormInput
           column={column}
@@ -129,6 +149,30 @@ const RecordCreateModalForm: FC = () => {
 
             const newFormData = {...formData}
             delete newFormData[column.attr]
+            setFormData(newFormData)
+          }}
+        />
+      )
+
+    if (column.type === 'images' && !excludedColumns.includes(column.attr))
+      return (
+        <FormMultiImageUploader
+          key={column.attr}
+          column={column}
+          formErrors={formErrors}
+          value={formData[column.attr]}
+          isDisabled={isSubmitting}
+          onInputChange={(e, attr) => {
+            if (e.target.files?.length) {
+              setFormData({
+                ...formData,
+                [attr]: [...(formData[attr] || []), ...e.target.files],
+              })
+            }
+          }}
+          onRemove={(index) => {
+            const newFormData = {...formData}
+            newFormData[column.attr].splice(index, 1)
             setFormData(newFormData)
           }}
         />

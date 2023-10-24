@@ -29,9 +29,10 @@ export interface IModuleData {
   accessor: string
   attr: string
   mode?: string
-  type: 'text' | 'image' | 'editor' | 'select' | 'date' | 'email' | 'password'
+  type: 'text' | 'image' | 'editor' | 'select' | 'date' | 'email' | 'password' | 'images'
   options?: IOption[]
   required?: boolean
+  showInTable: boolean
 }
 
 export interface IOption {
